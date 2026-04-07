@@ -1,1 +1,2551 @@
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETV · Estudo de Tráfego Veicular — VIVA Assessoria Ambiental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   ETV · VIVA BRAND SYSTEM
+   Fiel a vivaassessoria.com
+   Paleta: Navy #0d1422 · Dourado #c8973a · Verde #2a7d52 · Branco
+   Tipografia: Barlow Condensed (títulos) · Barlow (corpo) · DM Mono
+   ═══════════════════════════════════════════════════════════════════ */
+ 
+:root {
+  /* ── VIVA Palette – extraída do site vivaassessoria.com ── */
+  --navy-900:  #080e1a;   /* fundo base */
+  --navy-800:  #0d1422;   /* background principal */
+  --navy-700:  #111827;   /* superfície cards */
+  --navy-600:  #1a2435;   /* elevação cards */
+  --navy-500:  #243047;   /* bordas */
+  --navy-400:  #334260;   /* elementos inativos */
+ 
+  --gold-500:  #c8973a;   /* acento primário — [V] dourado VIVA */
+  --gold-400:  #daa84c;   /* hover */
+  --gold-300:  #eabb66;   /* brilho */
+  --gold-600:  #a67a28;   /* sombra */
+  --gold-glass:rgba(200,151,58,0.14);
+  --gold-glow: rgba(200,151,58,0.30);
+ 
+  --green-600: #1e5e3a;   /* verde escuro */
+  --green-500: #2a7d52;   /* verde médio VIVA */
+  --green-400: #34a36a;   /* verde claro */
+  --green-glass:rgba(42,125,82,0.12);
+ 
+  --white-100: #f5f7fa;   /* texto principal */
+  --white-200: #d4dce8;   /* texto secundário */
+  --white-300: #8a9bb4;   /* texto muted */
+  --white-400: #4a5e7a;   /* texto faint */
+  --white-500: #2a3850;   /* texto ghost */
+ 
+  /* ── Semantic ── */
+  --accent:     var(--gold-500);
+  --accent2:    var(--green-500);
+  --text:       var(--white-100);
+  --text2:      var(--white-200);
+  --text3:      var(--white-300);
+  --danger:     #e05252;
+  --warn:       #d97f35;
+ 
+  /* NS */
+  --ns-a:#2ec47a; --ns-b:#52c41a; --ns-c:#daa84c;
+  --ns-d:#d97f35; --ns-e:#d95530; --ns-f:#e04040;
+ 
+  /* Radii */
+  --r-xs: 4px; --r-sm:7px; --r-md:12px; --r-lg:18px; --r-xl:22px;
+ 
+  /* Shadows */
+  --sh-sm:  0 2px 8px rgba(0,0,0,0.45);
+  --sh-md:  0 4px 20px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.35);
+  --sh-lg:  0 12px 40px rgba(0,0,0,0.65);
+  --sh-gold:0 4px 20px rgba(200,151,58,0.22);
+ 
+  /* Blur */
+  --blur-sm: blur(12px) saturate(1.4);
+  --blur-md: blur(20px) saturate(1.5);
+  --blur-lg: blur(28px) saturate(1.5);
+}
+ 
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+ 
+/* ── Body — navy profundo como vivaassessoria.com ── */
+body {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400; line-height: 1.55;
+  color: var(--white-100);
+  background: var(--navy-800);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+ 
+/* Fundo com gradientes atmosféricos — como o site VIVA */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -2;
+  background:
+    radial-gradient(ellipse 80% 50% at 5%   5%,  rgba(200,151,58,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 95% 95%,  rgba(42,125,82,0.06)  0%, transparent 55%),
+    radial-gradient(ellipse 100% 80% at 50% 120%, rgba(8,14,26,0.9)    0%, transparent 80%),
+    linear-gradient(175deg, #0b1120 0%, #0d1422 45%, #091019 100%);
+}
+ 
+/* Linha dourada no topo — signature da VIVA */
+body::after {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 9999;
+  background: linear-gradient(
+    90deg,
+    transparent          0%,
+    transparent         12%,
+    rgba(200,151,58,0.0)15%,
+    rgba(200,151,58,0.7)38%,
+    rgba(218,168,76,1.0)50%,
+    rgba(200,151,58,0.7)62%,
+    rgba(200,151,58,0.0)85%,
+    transparent         88%,
+    transparent        100%
+  );
+}
+ 
+/* Noise grain sutil */
+.noise-overlay {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px;
+}
+ 
+/* ── Layout ── */
+.app-layout { display: flex; min-height: 100vh; }
+ 
+/* ══════════════════════════════════════
+   SIDEBAR — Idêntica ao nav VIVA
+   ══════════════════════════════════════ */
+.sidebar {
+  width: 258px; min-width: 258px;
+  background: rgba(8,13,22,0.92);
+  backdrop-filter: var(--blur-lg);
+  -webkit-backdrop-filter: var(--blur-lg);
+  border-right: 1px solid rgba(200,151,58,0.13);
+  display: flex; flex-direction: column;
+  position: sticky; top: 0; height: 100vh; overflow-y: auto;
+  z-index: 100;
+  box-shadow: 4px 0 40px rgba(0,0,0,0.6), 1px 0 0 rgba(200,151,58,0.06);
+}
+ 
+/* Logo block */
+.sidebar-logo {
+  padding: 22px 20px 18px;
+  border-bottom: 1px solid rgba(200,151,58,0.12);
+  position: relative; overflow: hidden;
+}
+/* Reflexo dourado sutil no canto superior */
+.sidebar-logo::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 150px; height: 150px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,151,58,0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+/* Linha dourada inferior */
+.sidebar-logo::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,151,58,0.45), transparent);
+}
+ 
+/* Logo VIVA — imagem real do site */
+.viva-logo-img {
+  display: block;
+  width: 166px; height: auto;
+  margin-bottom: 14px;
+  filter: brightness(1.05) drop-shadow(0 1px 6px rgba(0,0,0,0.4));
+  transition: opacity 0.2s, filter 0.2s;
+}
+.viva-logo-img:hover {
+  opacity: 0.88;
+  filter: brightness(1.10) drop-shadow(0 2px 10px rgba(200,151,58,0.2));
+}
+ 
+/* Fallback se imagem não carregar */
+#logo-fallback {
+  display: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 28px; font-weight: 900; letter-spacing: 3px;
+  background: linear-gradient(135deg, #c8973a 0%, #e0aa4a 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 14px; text-transform: uppercase;
+}
+ 
+/* ETV Badge — dourado, condensado */
+.etv-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(200,151,58,0.08);
+  border: 1px solid rgba(200,151,58,0.28);
+  border-radius: var(--r-xs); padding: 5px 10px;
+}
+.etv-badge-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--gold-500);
+  box-shadow: 0 0 8px rgba(200,151,58,0.9);
+  animation: vivaPulse 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes vivaPulse {
+  0%,100% { opacity:1; box-shadow: 0 0 8px rgba(200,151,58,0.9); }
+  50%      { opacity:0.45; box-shadow: 0 0 3px rgba(200,151,58,0.3); }
+}
+.etv-badge-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: var(--gold-500);
+  letter-spacing: 1.2px; text-transform: uppercase;
+}
+.etv-version {
+  font-family: 'Barlow', sans-serif;
+  font-size: 9px; color: var(--white-400);
+  margin-top: 6px; letter-spacing: 0.3px;
+}
+ 
+/* Sidebar Nav */
+.sidebar-nav { flex: 1; padding: 10px 0; }
+.nav-section { margin-bottom: 2px; }
+.nav-section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--white-500);
+  padding: 10px 20px 4px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 20px; cursor: pointer;
+  color: var(--white-300); font-size: 13px; font-weight: 500;
+  font-family: 'Barlow', sans-serif;
+  transition: all 0.16s cubic-bezier(0.4,0,0.2,1);
+  border-left: 2px solid transparent;
+  border-radius: 0 8px 8px 0; margin-right: 8px;
+}
+.nav-item:hover {
+  background: rgba(200,151,58,0.07);
+  color: var(--white-200);
+  border-left-color: rgba(200,151,58,0.35);
+}
+.nav-item.active {
+  background: rgba(200,151,58,0.11);
+  color: var(--gold-400);
+  border-left-color: var(--gold-500);
+  font-weight: 600;
+}
+.nav-item .nav-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
+.nav-badge {
+  margin-left: auto; font-size: 9px; padding: 2px 7px;
+  background: var(--gold-500); color: var(--navy-800);
+  border-radius: 20px; font-weight: 800;
+  font-family: 'Barlow Condensed', sans-serif;
+  letter-spacing: 0.5px;
+}
+ 
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 12px 20px 18px;
+  border-top: 1px solid rgba(200,151,58,0.10);
+  text-align: center;
+}
+.sidebar-footer-text {
+  font-family: 'Barlow', sans-serif;
+  font-size: 9px; color: var(--white-500); line-height: 1.8;
+}
+.sidebar-footer-brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  color: var(--gold-500); letter-spacing: 1px; text-transform: uppercase;
+}
+ 
+/* ══════════════════════════════════════
+   MAIN CONTENT
+   ══════════════════════════════════════ */
+.main-content { flex: 1; overflow-x: hidden; min-width: 0; }
+ 
+/* Page Header */
+.page-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 13px 30px;
+  border-bottom: 1px solid rgba(200,151,58,0.13);
+  background: rgba(8,13,22,0.90);
+  backdrop-filter: var(--blur-md); -webkit-backdrop-filter: var(--blur-md);
+  position: sticky; top: 0; z-index: 50;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 1px 0 rgba(200,151,58,0.08);
+}
+.page-header-left { display: flex; align-items: center; gap: 13px; }
+.page-header-icon {
+  width: 33px; height: 33px; border-radius: var(--r-sm);
+  background: rgba(200,151,58,0.10);
+  border: 1px solid rgba(200,151,58,0.28);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; flex-shrink: 0;
+}
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--white-100);
+  letter-spacing: 0.6px; text-transform: uppercase;
+}
+.page-subtitle { font-size: 11px; color: var(--white-400); margin-top: 1px; }
+.header-actions { display: flex; gap: 7px; align-items: center; flex-shrink: 0; }
+ 
+/* ══════════════════════════════════════
+   PANELS
+   ══════════════════════════════════════ */
+.panel {
+  display: none; padding: 24px 30px;
+  animation: panelIn 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+.panel.active { display: block; }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+ 
+/* ══════════════════════════════════════
+   CARDS — glass navy com acento dourado
+   ══════════════════════════════════════ */
+.card {
+  background: rgba(15,21,35,0.75);
+  backdrop-filter: var(--blur-md); -webkit-backdrop-filter: var(--blur-md);
+  border: 1px solid rgba(200,151,58,0.14);
+  border-radius: var(--r-xl);
+  padding: 22px 24px;
+  margin-bottom: 18px;
+  position: relative; overflow: hidden;
+  box-shadow: var(--sh-md), inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.card:hover {
+  border-color: rgba(200,151,58,0.30);
+  transform: translateY(-1px);
+  box-shadow: var(--sh-lg), 0 0 0 1px rgba(200,151,58,0.07);
+}
+/* Linha dourada no topo — assinatura VIVA */
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 20px; right: 20px; height: 1.5px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(200,151,58,0.0) 10%,
+    rgba(200,151,58,0.6) 40%,
+    rgba(218,168,76,0.8) 50%,
+    rgba(200,151,58,0.6) 60%,
+    rgba(200,151,58,0.0) 90%,
+    transparent 100%);
+  pointer-events: none;
+}
+ 
+.card-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--white-100);
+  letter-spacing: 0.8px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 9px;
+}
+.card-title-icon {
+  width: 27px; height: 27px; border-radius: var(--r-xs);
+  background: rgba(200,151,58,0.10);
+  border: 1px solid rgba(200,151,58,0.24);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0;
+}
+.card-desc { font-size: 11px; color: var(--white-400); margin-top: 3px; line-height: 1.5; }
+ 
+/* ── Grid ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+ 
+/* ══════════════════════════════════════
+   FORMS
+   ══════════════════════════════════════ */
+.field { margin-bottom: 14px; }
+.field label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  color: var(--white-400);
+  margin-bottom: 6px; letter-spacing: 1.3px; text-transform: uppercase;
+}
+.field label .req { color: var(--gold-400); margin-left: 2px; }
+.field-help { font-size: 11px; color: var(--white-500); margin-top: 4px; line-height: 1.4; }
+.field-hint {
+  display: inline-block; font-size: 9px; color: var(--white-400);
+  background: rgba(200,151,58,0.07);
+  border: 1px solid rgba(200,151,58,0.18);
+  padding: 2px 8px; border-radius: var(--r-xs); margin-top: 4px;
+  font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.5px;
+}
+input, select, textarea {
+  width: 100%;
+  background: rgba(8,13,22,0.72);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: var(--r-sm);
+  color: var(--white-100);
+  padding: 9px 13px;
+  font-size: 13px; font-family: 'Barlow', sans-serif; font-weight: 400;
+  transition: border-color 0.16s, box-shadow 0.16s, background 0.16s;
+  outline: none; appearance: none;
+}
+input::placeholder { color: var(--white-500); }
+input:hover, select:hover, textarea:hover {
+  border-color: rgba(200,151,58,0.28);
+  background: rgba(8,13,22,0.82);
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold-500);
+  background: rgba(8,13,22,0.88);
+  box-shadow: 0 0 0 3px rgba(200,151,58,0.12);
+}
+select { cursor: pointer; }
+select option { background: #0d1422; color: var(--white-100); }
+textarea { resize: vertical; min-height: 78px; }
+ 
+/* ══════════════════════════════════════
+   BUTTONS — dourado VIVA
+   ══════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 8px 17px;
+  border-radius: var(--r-sm);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; border: none;
+  transition: all 0.17s cubic-bezier(0.4,0,0.2,1);
+  position: relative; overflow: hidden; white-space: nowrap;
+}
+.btn::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 45%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 100%);
+  pointer-events: none;
+}
+/* Primário — dourado VIVA */
+.btn-primary {
+  background: linear-gradient(135deg, #c8973a 0%, #a87828 100%);
+  color: #0a0f1a;
+  box-shadow: 0 4px 16px rgba(200,151,58,0.35), 0 1px 0 rgba(255,255,255,0.14) inset;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #daa84c 0%, #c8973a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(200,151,58,0.50), 0 0 0 1px rgba(200,151,58,0.3);
+}
+.btn-primary:active { transform: translateY(0); }
+/* Secundário */
+.btn-secondary {
+  background: rgba(255,255,255,0.05);
+  color: var(--white-200);
+  border: 1px solid rgba(255,255,255,0.11);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+.btn-secondary:hover {
+  background: rgba(200,151,58,0.09);
+  border-color: rgba(200,151,58,0.38);
+  color: var(--gold-400);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.btn-danger {
+  background: rgba(224,82,82,0.10); color: var(--danger);
+  border: 1px solid rgba(224,82,82,0.25);
+}
+.btn-danger:hover { background: rgba(224,82,82,0.18); transform: translateY(-1px); }
+.btn-sm { padding: 6px 12px; font-size: 11px; border-radius: 5px; }
+.btn-lg { padding: 12px 24px; font-size: 14px; }
+ 
+/* ══════════════════════════════════════
+   TABLES
+   ══════════════════════════════════════ */
+.table-wrap { overflow-x: auto; border-radius: var(--r-md); }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th {
+  background: rgba(200,151,58,0.06);
+  color: var(--white-400);
+  padding: 10px 12px; text-align: left;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase;
+  border-bottom: 1px solid rgba(200,151,58,0.14);
+  white-space: nowrap;
+}
+td {
+  padding: 9px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.045);
+  color: var(--white-100);
+  font-family: 'DM Mono', monospace; font-size: 12px;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(200,151,58,0.04); }
+.td-label { font-family: 'Barlow', sans-serif; color: var(--white-300); font-weight: 500; }
+td input {
+  background: transparent; border: none; padding: 2px 4px;
+  width: 80px; font-family: 'DM Mono', monospace; font-size: 12px;
+  color: var(--white-100); text-align: right; box-shadow: none;
+}
+td input:focus { background: rgba(200,151,58,0.07); border-radius: 3px; outline: none; }
+ 
+/* ══════════════════════════════════════
+   METRICS
+   ══════════════════════════════════════ */
+.metric-row { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
+.metric {
+  flex: 1; min-width: 128px;
+  background: rgba(8,13,22,0.68);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(200,151,58,0.13);
+  border-radius: var(--r-md); padding: 14px 16px;
+  position: relative; overflow: hidden;
+  transition: all 0.18s;
+  box-shadow: var(--sh-sm);
+}
+.metric:hover {
+  border-color: rgba(200,151,58,0.32);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.55), 0 0 0 1px rgba(200,151,58,0.10);
+}
+/* Bottom gold rule */
+.metric::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(200,151,58,0.50), transparent);
+}
+.metric-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; color: var(--white-500);
+  text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700;
+}
+.metric-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 29px; color: var(--white-100);
+  margin-top: 4px; letter-spacing: -0.5px; font-weight: 700;
+}
+.metric-unit  { font-size: 11px; color: var(--white-400); font-family: 'Barlow', sans-serif; margin-top: 1px; }
+.metric-sub   { font-size: 11px; color: var(--white-300); margin-top: 3px; font-family: 'Barlow', sans-serif; }
+ 
+/* ══════════════════════════════════════
+   NS BADGES
+   ══════════════════════════════════════ */
+.ns-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: var(--r-sm);
+  font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700;
+}
+.ns-A { background: rgba(46,196,122,0.12); color: var(--ns-a); border: 1px solid rgba(46,196,122,0.35); }
+.ns-B { background: rgba(82,196,26,0.12);  color: var(--ns-b); border: 1px solid rgba(82,196,26,0.35); }
+.ns-C { background: rgba(218,168,76,0.12); color: var(--ns-c); border: 1px solid rgba(218,168,76,0.35); }
+.ns-D { background: rgba(217,127,53,0.12); color: var(--ns-d); border: 1px solid rgba(217,127,53,0.35); }
+.ns-E { background: rgba(217,85,48,0.12);  color: var(--ns-e); border: 1px solid rgba(217,85,48,0.35); }
+.ns-F { background: rgba(224,64,64,0.12);  color: var(--ns-f); border: 1px solid rgba(224,64,64,0.35); }
+.ns-large { width: 68px; height: 68px; border-radius: 14px; font-size: 40px; }
+ 
+/* ── Tags ── */
+.tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: var(--r-xs);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase;
+}
+.tag-ok   { background: rgba(46,196,122,0.10); color: var(--ns-a); border: 1px solid rgba(46,196,122,0.28); }
+.tag-warn { background: rgba(217,127,53,0.10); color: var(--warn); border: 1px solid rgba(217,127,53,0.28); }
+.tag-info { background: rgba(200,151,58,0.10); color: var(--gold-400); border: 1px solid rgba(200,151,58,0.28); }
+ 
+/* ── Section dividers — gold ── */
+.section-divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 22px 0 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--white-500);
+}
+.section-divider::before, .section-divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,151,58,0.28), transparent);
+}
+ 
+/* ── Alerts ── */
+.alert {
+  display: flex; gap: 12px; padding: 12px 15px;
+  border-radius: var(--r-md); margin-bottom: 13px;
+  font-size: 12px; align-items: flex-start;
+}
+.alert-info {
+  background: rgba(200,151,58,0.06);
+  border: 1px solid rgba(200,151,58,0.20);
+  border-left: 3px solid rgba(200,151,58,0.60);
+  color: var(--white-200);
+}
+.alert-warn {
+  background: rgba(217,127,53,0.07);
+  border: 1px solid rgba(217,127,53,0.22);
+  border-left: 3px solid rgba(217,127,53,0.60);
+  color: #e0a878;
+}
+.alert-icon { font-size: 15px; flex-shrink: 0; }
+ 
+/* ── Tooltips ── */
+[data-tip] { position: relative; cursor: help; }
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute; bottom: 130%;
+  left: 50%; transform: translateX(-50%);
+  background: rgba(8,13,22,0.97);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  color: var(--white-200); font-size: 11px; padding: 9px 13px;
+  border-radius: var(--r-sm); width: 230px; line-height: 1.55;
+  border: 1px solid rgba(200,151,58,0.25); white-space: normal;
+  pointer-events: none; opacity: 0; transition: opacity 0.2s;
+  z-index: 999; box-shadow: 0 8px 32px rgba(0,0,0,0.7);
+  font-family: 'Barlow', sans-serif; font-weight: 400;
+}
+[data-tip]:hover::after { opacity: 1; }
+ 
+/* ── Chart ── */
+.chart-container { width: 100%; height: 200px; position: relative; }
+canvas { max-width: 100%; }
+ 
+/* ── Upload area ── */
+.upload-area {
+  border: 2px dashed rgba(200,151,58,0.22);
+  border-radius: var(--r-lg); padding: 34px 30px;
+  text-align: center; cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4,0,0.2,1); margin-bottom: 14px;
+  background: rgba(8,13,22,0.45); position: relative; overflow: hidden;
+}
+.upload-area::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at center, rgba(200,151,58,0.04) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.3s;
+}
+.upload-area:hover, .upload-area.drag-over {
+  border-color: rgba(200,151,58,0.55);
+  background: rgba(200,151,58,0.04);
+  box-shadow: 0 0 30px rgba(200,151,58,0.08);
+}
+.upload-area:hover::before, .upload-area.drag-over::before { opacity: 1; }
+.upload-icon { font-size: 40px; margin-bottom: 12px; display: block; }
+.upload-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--white-100);
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.upload-sub { font-size: 11px; color: var(--white-400); margin-top: 5px; line-height: 1.5; }
+ 
+/* ── Progress steps ── */
+.progress-steps { display: flex; margin-bottom: 26px; }
+.step { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; }
+.step::before {
+  content: ''; position: absolute; top: 15px; left: 50%; right: -50%;
+  height: 1px; background: rgba(200,151,58,0.14); z-index: 0;
+}
+.step:last-child::before { display: none; }
+.step-dot {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(8,13,22,0.85);
+  border: 1.5px solid rgba(255,255,255,0.11);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700; z-index: 1;
+  transition: all 0.25s cubic-bezier(0.4,0,0.2,1); color: var(--white-500);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.step.done .step-dot {
+  background: linear-gradient(135deg, #c8973a, #a87828);
+  border-color: #c8973a; color: #0a0f1a;
+  box-shadow: 0 0 14px rgba(200,151,58,0.55);
+}
+.step.active .step-dot {
+  background: rgba(200,151,58,0.10);
+  border-color: var(--gold-500); color: var(--gold-400);
+  box-shadow: 0 0 0 3px rgba(200,151,58,0.18);
+}
+.step.done::before { background: linear-gradient(90deg, #c8973a, rgba(200,151,58,0.3)); }
+.step-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px; color: var(--white-500); margin-top: 6px;
+  text-align: center; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+}
+.step.active .step-label, .step.done .step-label { color: var(--white-400); }
+ 
+/* ── Memorial ── */
+.memorial-block {
+  background: rgba(8,13,22,0.68);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(200,151,58,0.12);
+  border-radius: var(--r-md); padding: 17px; margin-bottom: 11px;
+  font-family: 'DM Mono', monospace; font-size: 12px;
+  box-shadow: var(--sh-sm);
+}
+.memorial-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 800; color: var(--gold-400);
+  margin-bottom: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 8px;
+}
+.memorial-title::before {
+  content: ''; width: 3px; height: 14px; border-radius: 2px;
+  background: linear-gradient(180deg, var(--gold-500), var(--green-500));
+  flex-shrink: 0;
+}
+.formula-line { color: var(--white-400); margin: 4px 0; line-height: 1.7; }
+.formula-result { color: #f0d090; font-weight: 600; }
+.formula-var { color: #e0c080; }
+ 
+/* ── Compare table ── */
+.compare-table th:first-child { width: 200px; }
+.compare-better { color: var(--ns-b); font-weight: 700; }
+.compare-worse  { color: var(--ns-f); font-weight: 700; }
+ 
+/* ── Scrollbar — dourado fino ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+::-webkit-scrollbar-thumb { background: rgba(200,151,58,0.22); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200,151,58,0.48); }
+ 
+/* ── Print ── */
+@media print {
+  body, body::before, body::after { background: white !important; }
+  .sidebar, .page-header, .header-actions, .btn { display: none !important; }
+  .panel { display: block !important; padding: 0; }
+  .card { background: white !important; border-color: #ccc !important; backdrop-filter: none !important; box-shadow: none !important; }
+  .metric { background: #f8f8f8 !important; backdrop-filter: none !important; }
+  body, td, .metric-value, .formula-line, .page-title { color: #111 !important; }
+  .card::before, body::after { display: none !important; }
+}
+ 
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .sidebar { width: 58px; min-width: 58px; }
+  .nav-item span:not(.nav-icon) { display: none; }
+  .etv-badge-text, .etv-version, .nav-section-label, .nav-badge, .sidebar-footer, .viva-logo-img { display: none; }
+  .etv-badge { padding: 4px; justify-content: center; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .metric-row { flex-direction: column; }
+  .panel { padding: 14px 16px; }
+  .page-header { padding: 11px 14px; }
+  .page-header-icon { display: none; }
+}
+</style>
+</head>
+ 
+<body>
+<div class="noise-overlay"></div>
+<div class="app-layout">
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <img
+      class="viva-logo-img"
+      src="https://static.wixstatic.com/media/9c5691_126c696fafa040d7bec9dd823b499482~mv2.png/v1/fill/w_300,h_88,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo_viva_final_transparencia.png"
+      alt="VIVA Assessoria Ambiental"
+      onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block'"
+    >
+    <div id="logo-fallback" style="display:none; font-family:'Syne',sans-serif; font-size:20px; font-weight:800; color:#2d7d46; letter-spacing:-0.5px; margin-bottom:10px;">VIVA</div>
+    <div class="etv-badge">
+      <div class="etv-badge-dot"></div>
+      <span class="etv-badge-text">ETV · Estudo de Tráfego</span>
+    </div>
+    <div class="etv-version">Sistema v2.0 · VIVA Assessoria Ambiental</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-label">Estudo</div>
+      <div class="nav-item active" onclick="showPanel('cadastro')">
+        <span class="nav-icon">📋</span><span>Cadastro</span>
+      </div>
+      <div class="nav-item" onclick="showPanel('contagem')">
+        <span class="nav-icon">🔢</span><span>Contagem</span><span class="nav-badge" id="badge-contagem" style="display:none">✓</span>
+      </div>
+      <div class="nav-item" onclick="showPanel('parametros')">
+        <span class="nav-icon">⚙️</span><span>Parâmetros</span>
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Diagnóstico</div>
+      <div class="nav-item" onclick="showPanel('diagnostico')">
+        <span class="nav-icon">📊</span><span>Situação Atual</span>
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Projeção</div>
+      <div class="nav-item" onclick="showPanel('empreendimento')">
+        <span class="nav-icon">🏗️</span><span>Empreendimento</span>
+      </div>
+      <div class="nav-item" onclick="showPanel('cenariofuturo')">
+        <span class="nav-icon">📈</span><span>Cenário Futuro</span>
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Saída</div>
+      <div class="nav-item" onclick="showPanel('comparacao')">
+        <span class="nav-icon">⚖️</span><span>Comparação</span>
+      </div>
+      <div class="nav-item" onclick="showPanel('memorial')">
+        <span class="nav-icon">📄</span><span>Memorial</span>
+      </div>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-footer-text">Desenvolvido por</div>
+    <div class="sidebar-footer-brand">VIVA Assessoria Ambiental</div>
+    <div class="sidebar-footer-text" style="margin-top:2px">Itajaí/SC · 2025</div>
+  </div>
+</aside>
+ 
+<!-- MAIN -->
+<main class="main-content">
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-header-icon" id="pageHeaderIcon">📋</div>
+      <div>
+        <div class="page-title" id="pageTitle">Cadastro do Estudo</div>
+        <div class="page-subtitle" id="pageSubtitle">Identificação e dados gerais do estudo de tráfego</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-secondary btn-sm" onclick="exportJSON()">⬆ Exportar</button>
+      <button class="btn btn-secondary btn-sm" onclick="importJSON()">⬇ Importar</button>
+      <button class="btn btn-primary btn-sm" onclick="calcularTudo()">▶ Calcular Tudo</button>
+      <button class="btn btn-secondary btn-sm" onclick="showPanel('memorial'); gerarMemorial()">📄 Memorial</button>
+    </div>
+  </div>
+ 
+  <!-- ==================== PAINEL 1: CADASTRO ==================== -->
+  <div class="panel active" id="panel-cadastro">
+    <div class="progress-steps" id="progress-steps">
+      <div class="step active" id="step-1"><div class="step-dot">1</div><div class="step-label">Cadastro</div></div>
+      <div class="step" id="step-2"><div class="step-dot">2</div><div class="step-label">Contagem</div></div>
+      <div class="step" id="step-3"><div class="step-dot">3</div><div class="step-label">Parâmetros</div></div>
+      <div class="step" id="step-4"><div class="step-dot">4</div><div class="step-label">Diagnóstico</div></div>
+      <div class="step" id="step-5"><div class="step-dot">5</div><div class="step-label">Empreendimento</div></div>
+      <div class="step" id="step-6"><div class="step-dot">6</div><div class="step-label">Cenário Futuro</div></div>
+      <div class="step" id="step-7"><div class="step-dot">7</div><div class="step-label">Memorial</div></div>
+    </div>
+ 
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title"><span class="card-title-icon">📋</span>Identificação do Estudo</div>
+          <div class="card-desc">Dados de cabeçalho do Estudo de Tráfego Veicular</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Nome do Estudo <span class="req">*</span></label>
+            <input type="text" id="nomeEstudo" placeholder="Ex: ETV – Praia Brava" oninput="updateHeader()">
+          </div>
+          <div class="field">
+            <label>Código <span class="req">*</span></label>
+            <input type="text" id="codigoEstudo" placeholder="Ex: CV103-2025">
+          </div>
+          <div class="field">
+            <label>Via Analisada <span class="req">*</span></label>
+            <input type="text" id="viaAnalise" placeholder="Ex: Av. Osvaldo Reis">
+          </div>
+          <div class="field">
+            <label>Localização</label>
+            <input type="text" id="localizacao" placeholder="Ex: Bairro Praia Brava, Itajaí/SC">
+          </div>
+          <div class="field">
+            <label>Data da Contagem <span class="req">*</span></label>
+            <input type="date" id="dataContagem">
+          </div>
+          <div class="field">
+            <label>Dia da Semana</label>
+            <select id="diaSemana">
+              <option value="Útil">Dia Útil</option>
+              <option value="Sábado">Sábado</option>
+              <option value="Domingo">Domingo</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Sentido Analisado</label>
+            <input type="text" id="sentidoEstudo" placeholder="Ex: A > B (Norte→Sul)" value="A > B">
+          </div>
+          <div class="field">
+            <label>Horário de Coleta</label>
+            <input type="text" id="horarioColeta" placeholder="Ex: 07:00 às 19:00" value="07:00 às 19:00">
+          </div>
+        </div>
+        <div class="field">
+          <label>Observações</label>
+          <textarea id="observacoes" placeholder="Observações gerais, condições climáticas, particularidades da via..."></textarea>
+        </div>
+      </div>
+ 
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">👤Responsável Técnico</div>
+          <div class="card-desc">Dados da empresa e profissional responsável</div></div>
+        </div>
+        <div class="field">
+          <label>Empresa / Consultoria</label>
+          <input type="text" id="empresa" placeholder="Ex: VIVA Assessoria Ambiental" value="VIVA Assessoria Ambiental">
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Profissional Responsável</label>
+            <input type="text" id="profissional" placeholder="Nome completo" value="Victor Valente Silvestre">
+          </div>
+          <div class="field">
+            <label>Registro Profissional</label>
+            <input type="text" id="registro" placeholder="Ex: CREA/SC 118978-4" value="CREA/SC 118978-4">
+          </div>
+          <div class="field">
+            <label>Qualificação</label>
+            <input type="text" id="qualificacao" placeholder="Título profissional" value="Engenheiro Sanitarista e Ambiental">
+          </div>
+          <div class="field">
+            <label>ART nº</label>
+            <input type="text" id="artNum" placeholder="Número da ART">
+          </div>
+        </div>
+        <div class="section-divider">Identificação do Empreendedor</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Empreendedor / Razão Social</label>
+            <input type="text" id="empreendedor" placeholder="Nome ou razão social">
+          </div>
+          <div class="field">
+            <label>Nome do Empreendimento</label>
+            <input type="text" id="nomeEmpreendimento" placeholder="Ex: Residencial Novo Horizonte">
+          </div>
+          <div class="field">
+            <label>Área Construída (m²)</label>
+            <input type="number" id="areaConstruida" placeholder="0" oninput="gerarViagens()">
+          </div>
+          <div class="field">
+            <label>Área do Terreno (m²)</label>
+            <input type="number" id="areaTerreno" placeholder="0">
+          </div>
+        </div>
+        <div class="field">
+          <label>Endereço do Imóvel</label>
+          <input type="text" id="enderecoImovel" placeholder="Rua, Número, Bairro, Município/UF">
+        </div>
+        <div style="margin-top:20px">
+          <button class="btn btn-primary" onclick="showPanel('contagem')">Próximo: Contagem de Tráfego →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ==================== PAINEL 2: CONTAGEM ==================== -->
+  <div class="panel" id="panel-contagem">
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">⬆Importar / Inserir Contagem</div>
+        <div class="card-desc">Carregue um arquivo CSV/XLSX ou preencha a tabela manualmente. Período de 7h a 19h.</div></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-secondary btn-sm" onclick="carregarExemplo()">Carregar Exemplo</button>
+          <button class="btn btn-secondary btn-sm" onclick="limparContagem()">Limpar</button>
+        </div>
+      </div>
+ 
+      <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()"
+        ondragover="event.preventDefault();this.classList.add('drag-over')"
+        ondragleave="this.classList.remove('drag-over')"
+        ondrop="handleDrop(event)">
+        <div class="upload-icon">📂</div>
+        <div class="upload-text">Arraste um arquivo CSV ou clique para selecionar</div>
+        <div class="upload-sub">Formato esperado: colunas Hora, Autos, Caminhonetas, Vans, Onibus2C, Onibus3C, Caminhao2C, Caminhao3C, Caminhao4C, Motos</div>
+        <input type="file" id="fileInput" accept=".csv,.xlsx" style="display:none" onchange="handleFile(event)">
+      </div>
+ 
+      <div class="alert alert-info">
+        <span class="alert-icon">ℹ️</span>
+        <div>
+          <strong>Fatores de equivalência (UCP/h):</strong> Autos/Caminhonetas/Vans = 1,0 · Caminhão 2C (leve) = 1,05 · Caminhão 3C (médio) = 1,10 · Caminhão 4C+ (pesado/ônibus) = 1,15 · Motocicletas = 0,5 &nbsp;&nbsp;
+          <span data-tip="Estes fatores convertem os veículos contados para Unidades de Carro de Passeio (ucp/h), unidade padrão para análise de capacidade viária conforme DNIT 2006 e metodologia adotada nos estudos de referência.">❓</span>
+        </div>
+      </div>
+ 
+      <div class="table-wrap">
+        <table id="contagemTable">
+          <thead>
+            <tr>
+              <th>Período</th>
+              <th data-tip="Automóveis de passeio, pickups, utilitários leves — fator 1,0">Autos<br><span style="font-weight:400;opacity:.6">f=1,0</span></th>
+              <th data-tip="Caminhonetes, utilitários — fator 1,0">Caminhonetas<br><span style="font-weight:400;opacity:.6">f=1,0</span></th>
+              <th data-tip="Vans, micro-ônibus leves — fator 1,0">Vans<br><span style="font-weight:400;opacity:.6">f=1,0</span></th>
+              <th data-tip="Ônibus urbano 2 eixos — fator 1,15">Ônibus 2C<br><span style="font-weight:400;opacity:.6">f=1,15</span></th>
+              <th data-tip="Ônibus articulado 3 eixos — fator 1,15">Ônibus 3C<br><span style="font-weight:400;opacity:.6">f=1,15</span></th>
+              <th data-tip="Caminhão leve 2 eixos — fator 1,05">Cam. 2C<br><span style="font-weight:400;opacity:.6">f=1,05</span></th>
+              <th data-tip="Caminhão médio 3 eixos — fator 1,10">Cam. 3C<br><span style="font-weight:400;opacity:.6">f=1,10</span></th>
+              <th data-tip="Caminhão pesado/bitrem 4+ eixos — fator 1,15">Cam. 4C+<br><span style="font-weight:400;opacity:.6">f=1,15</span></th>
+              <th data-tip="Motocicletas e bicicletas — fator 0,5">Motos<br><span style="font-weight:400;opacity:.6">f=0,5</span></th>
+              <th>Total Bruto</th>
+              <th style="color:var(--accent)">Total UCP/h</th>
+            </tr>
+          </thead>
+          <tbody id="contagemBody"></tbody>
+          <tfoot>
+            <tr style="background:var(--surface3)">
+              <td class="td-label" style="font-weight:700">TOTAL / DIA</td>
+              <td id="tot-autos" style="font-weight:600">—</td>
+              <td id="tot-cam">—</td>
+              <td id="tot-van">—</td>
+              <td id="tot-on2">—</td>
+              <td id="tot-on3">—</td>
+              <td id="tot-c2">—</td>
+              <td id="tot-c3">—</td>
+              <td id="tot-c4">—</td>
+              <td id="tot-moto">—</td>
+              <td id="tot-bruto" style="font-weight:700;color:var(--text)">—</td>
+              <td id="tot-ucp" style="font-weight:700;color:var(--accent)">—</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div style="margin-top:20px;display:flex;gap:10px">
+        <button class="btn btn-primary" onclick="calcularContagem();showPanel('parametros')">Confirmar e Calcular →</button>
+        <button class="btn btn-secondary" onclick="showPanel('cadastro')">← Voltar</button>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ==================== PAINEL 3: PARÂMETROS ==================== -->
+  <div class="panel" id="panel-parametros">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title"><span class="icon">🛣️</span>Características da Via</div>
+          <div class="card-desc">Parâmetros geométricos para cálculo da VFL</div></div>
+        </div>
+        <div class="field">
+          <label data-tip="Classe I: motoristas esperam trafegar em velocidades elevadas. Classe II: sem expectativa de alta velocidade. Determina os critérios de NS aplicáveis.">Classe da Via ❓</label>
+          <select id="classeVia" onchange="atualizarParametros()">
+            <option value="I">Classe I – Alta velocidade esperada</option>
+            <option value="II" selected>Classe II – Sem expectativa de alta velocidade</option>
+          </select>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label data-tip="Número de faixas de tráfego no sentido analisado. Cada faixa suporta até 1.700 ucp/h em condições ideais.">Nº de Faixas ❓</label>
+            <select id="numFaixas">
+              <option value="1">1 faixa</option>
+              <option value="2" selected>2 faixas</option>
+              <option value="3">3 faixas</option>
+            </select>
+          </div>
+          <div class="field">
+            <label data-tip="BVFL: base para o cálculo da VFL. Geralmente é a velocidade regulamentada (VR) da via. Adotar o valor da sinalização oficial.">BVFL – Velocidade Base (km/h) ❓</label>
+            <input type="number" id="bvfl" value="60" min="20" max="120" oninput="calcularVFL()">
+            <div class="field-help">Geralmente igual à velocidade regulamentada da via</div>
+          </div>
+        </div>
+        <div class="section-divider">Tabela 1 – Ajust. Largura de Faixa (ffa)</div>
+        <div class="grid-2">
+          <div class="field">
+            <label data-tip="Largura da faixa de tráfego principal. Faixas abaixo de 3,0m impõem penalidades maiores na VFL.">Largura da Faixa (m) ❓</label>
+            <select id="larguraFaixa" onchange="calcularVFL()">
+              <option value="3.6">≥ 3,6 m (ideal)</option>
+              <option value="3.3">≥ 3,3 < 3,6 m</option>
+              <option value="3.0">≥ 3,0 < 3,3 m</option>
+              <option value="2.7">2,7 < 3,0 m</option>
+            </select>
+          </div>
+          <div class="field">
+            <label data-tip="Largura do acostamento ou afastamento lateral. Valores maiores permitem velocidades mais altas.">Largura do Acostamento (m) ❓</label>
+            <select id="larguraAcost" onchange="calcularVFL()">
+              <option value="1.8">≥ 1,8 m (ideal)</option>
+              <option value="1.2">≥ 1,2 < 1,8 m</option>
+              <option value="0.6">≥ 0,6 < 1,2 m</option>
+              <option value="0.0">< 0,6 m (sem acostamento)</option>
+            </select>
+          </div>
+        </div>
+        <div class="section-divider">Tabela 2 – Ajust. Densidade de Acessos (fA)</div>
+        <div class="field">
+          <label data-tip="Número de acessos (entradas/saídas de imóveis, cruzamentos) por quilômetro, contados em ambos os lados da via.">Acessos por km (ambos os lados) ❓</label>
+          <select id="densAcessos" onchange="calcularVFL()">
+            <option value="0">0 acessos/km</option>
+            <option value="6" selected>6 acessos/km</option>
+            <option value="12">12 acessos/km</option>
+            <option value="18">18 acessos/km</option>
+            <option value="24">≥ 24 acessos/km</option>
+          </select>
+        </div>
+        <div class="section-divider">VFL Calculada</div>
+        <div class="metric-row" style="margin-bottom:0">
+          <div class="metric">
+            <div class="metric-label">BVFL</div>
+            <div class="metric-value" id="disp-bvfl">60</div>
+            <div class="metric-unit">km/h</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">ffa</div>
+            <div class="metric-value" id="disp-ffa">–</div>
+            <div class="metric-unit">km/h</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">fA</div>
+            <div class="metric-value" id="disp-fa">–</div>
+            <div class="metric-unit">km/h</div>
+          </div>
+          <div class="metric" style="border-color:rgba(0,212,160,0.3)">
+            <div class="metric-label" style="color:var(--accent)">VFL</div>
+            <div class="metric-value" id="disp-vfl" style="color:var(--accent)">–</div>
+            <div class="metric-unit">km/h</div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title"><span class="icon">⚖️</span>Fatores de Ajustamento</div>
+          <div class="card-desc">Parâmetros para cálculo do fluxo (Vp), VMV e PTGS</div></div>
+        </div>
+        <div class="section-divider">Tabela 3 – Fator de Greide (fG)</div>
+        <div class="field">
+          <label data-tip="Tipo de terreno ao longo do trecho analisado. Influencia o fator fG que ajusta o fluxo de tráfego.">Tipo de Terreno ❓</label>
+          <select id="tipoTerreno">
+            <option value="plano" selected>Plano</option>
+            <option value="ondulado">Ondulado</option>
+          </select>
+          <div class="field-help">Terreno montanhoso: consultar DNIT manual (não coberto pela metodologia aplicada)</div>
+        </div>
+        <div class="section-divider">Tabela 4 – Veículos Pesados (fVP)</div>
+        <div class="grid-2">
+          <div class="field">
+            <label data-tip="Ec: equivalência de caminhões e ônibus em carros de passeio. Plano=1,5 · Ondulado=2,5. Calculado automaticamente com base no terreno.">Ec (caminhões/ônibus) ❓</label>
+            <input type="number" id="ec" value="1.5" step="0.1" min="1" readonly style="opacity:.7">
+            <div class="field-hint">Auto: Plano=1,5 · Ondulado=2,5</div>
+          </div>
+          <div class="field">
+            <label data-tip="Evr: equivalência de veículos de recreio. Plano=1,2 · Ondulado=2,0. Calculado automaticamente.">Evr (veíc. recreio) ❓</label>
+            <input type="number" id="evr" value="1.2" step="0.1" min="1" readonly style="opacity:.7">
+            <div class="field-hint">Auto: Plano=1,2 · Ondulado=2,0</div>
+          </div>
+        </div>
+        <div class="section-divider">Distribuição Direcional</div>
+        <div class="field">
+          <label data-tip="Percentual do volume total de tráfego que flui no sentido dominante. 50/50 = distribuição uniforme. Afeta o fator fd/up na tabela 6.">Distribuição por Sentido ❓</label>
+          <select id="distDir">
+            <option value="50">50/50 – Uniforme</option>
+            <option value="60" selected>60/40</option>
+            <option value="70">70/30</option>
+            <option value="80">80/20</option>
+            <option value="90">90/10</option>
+          </select>
+        </div>
+        <div class="section-divider">Zonas de Ultrapassagem</div>
+        <div class="field">
+          <label data-tip="Percentual da extensão da via onde a ultrapassagem é proibida. Valores maiores aumentam o PTGS (tempo em fila). Tabelas 5 e 6.">% Zonas de Ultrapassagem Proibida ❓</label>
+          <select id="zonaUltra">
+            <option value="0">0% (Ultrapassagem livre)</option>
+            <option value="20">20%</option>
+            <option value="40" selected>40%</option>
+            <option value="60">60%</option>
+            <option value="80">80%</option>
+            <option value="100">100% (Totalmente proibida)</option>
+          </select>
+        </div>
+        <div style="margin-top:20px;display:flex;gap:10px">
+          <button class="btn btn-primary" onclick="calcularDiagnostico();showPanel('diagnostico')">Calcular Diagnóstico →</button>
+          <button class="btn btn-secondary" onclick="showPanel('contagem')">← Voltar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ==================== PAINEL 4: DIAGNÓSTICO ==================== -->
+  <div class="panel" id="panel-diagnostico">
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">📊Situação Atual da Via</div>
+        <div class="card-desc">Diagnóstico operacional sem empreendimento</div></div>
+        <button class="btn btn-secondary btn-sm" onclick="calcularDiagnostico()">↻ Recalcular</button>
+      </div>
+      <!-- Métricas Principais -->
+      <div class="metric-row">
+        <div class="metric">
+          <div class="metric-label">Volume Total (Dia)</div>
+          <div class="metric-value" id="d-vol-total">—</div>
+          <div class="metric-unit">veículos</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Hora de Pico</div>
+          <div class="metric-value" id="d-hora-pico" style="font-size:20px">—</div>
+          <div class="metric-unit">horário</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Vol. Pico (UCP)</div>
+          <div class="metric-value" id="d-vol-pico">—</div>
+          <div class="metric-unit">ucp/h</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">FHP</div>
+          <div class="metric-value" id="d-fhp">—</div>
+          <div class="metric-sub">0,25–1,00</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">V15 max</div>
+          <div class="metric-value" id="d-v15">—</div>
+          <div class="metric-unit">ucp/h</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div class="metric">
+          <div class="metric-label">VFL</div>
+          <div class="metric-value" id="d-vfl">—</div>
+          <div class="metric-unit">km/h</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Fluxo Vp (UCP)</div>
+          <div class="metric-value" id="d-vp">—</div>
+          <div class="metric-unit">ucp/h</div>
+          <div class="metric-sub">nos 15 min mais carregados</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">VMV</div>
+          <div class="metric-value" id="d-vmv">—</div>
+          <div class="metric-unit">km/h</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">PTGS</div>
+          <div class="metric-value" id="d-ptgs">—</div>
+          <div class="metric-unit">%</div>
+        </div>
+        <div class="metric" style="border-color:rgba(0,212,160,0.3);align-items:center;justify-content:center">
+          <div class="metric-label" style="text-align:center">Nível de Serviço</div>
+          <div style="display:flex;gap:8px;margin-top:6px;align-items:center">
+            <div class="ns-badge ns-large" id="d-ns-badge-vp">—</div>
+            <div style="font-size:11px;color:var(--text3)">
+              <div>por Vp: <span id="d-ns-vp" style="color:var(--text)">—</span></div>
+              <div>por PTGS: <span id="d-ns-ptgs" style="color:var(--text)">—</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tabela Horária -->
+      <div class="section-divider">Distribuição Horária com UCP/h</div>
+      <div class="table-wrap">
+        <table id="tabelaHoraria">
+          <thead>
+            <tr>
+              <th>Período</th>
+              <th>Total Bruto</th>
+              <th style="color:var(--accent)">UCP/h</th>
+              <th>% do Total</th>
+              <th>Relação c/ Pico</th>
+              <th>PC (caminhões)</th>
+            </tr>
+          </thead>
+          <tbody id="corpoHorario"></tbody>
+        </table>
+      </div>
+      <!-- Gráfico -->
+      <div class="section-divider">Variação Horária do Tráfego</div>
+      <div class="chart-container" style="height:220px">
+        <canvas id="chartHorario"></canvas>
+      </div>
+      <!-- Detalhamento fVP -->
+      <div class="section-divider">Cálculo do Fator de Veículos Pesados (fVP)</div>
+      <div id="detalhe-fvp" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text2);line-height:2"></div>
+      <div style="margin-top:20px;display:flex;gap:10px">
+        <button class="btn btn-primary" onclick="showPanel('empreendimento')">Próximo: Empreendimento →</button>
+        <button class="btn btn-secondary" onclick="showPanel('parametros')">← Parâmetros</button>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ==================== PAINEL 5: EMPREENDIMENTO ==================== -->
+  <div class="panel" id="panel-empreendimento">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title"><span class="icon">🏗️</span>Tipo de Empreendimento</div>
+          <div class="card-desc">Seleção do modelo de geração de viagens</div></div>
+        </div>
+        <div class="field">
+          <label data-tip="Define qual equação de geração de viagens será aplicada. Baseado em: Torquato & Júnior (2012) para residencial; Oliveira et al. (2016/2017) e Freitas (2009) para supermercado/shopping; CET-SP para outros.">Tipo de Empreendimento ❓</label>
+          <select id="tipoEmp" onchange="mostrarCamposEmp()">
+            <option value="">— Selecione —</option>
+            <optgroup label="Residencial">
+              <option value="res_vertical">Condomínio Residencial Vertical</option>
+              <option value="res_horizontal">Condomínio Residencial Horizontal</option>
+            </optgroup>
+            <optgroup label="Comercial">
+              <option value="supermercado">Supermercado / Hipermercado</option>
+              <option value="shopping">Shopping Center</option>
+              <option value="escritorio">Centro Empresarial / Escritórios</option>
+            </optgroup>
+            <optgroup label="Educacional">
+              <option value="escola">Escola (Ens. Fund. / Médio)</option>
+              <option value="ies">Instituição de Ensino Superior</option>
+            </optgroup>
+            <optgroup label="Saúde">
+              <option value="hospital">Hospital / UPA</option>
+            </optgroup>
+            <optgroup label="Entretenimento">
+              <option value="casa_noturna">Casa Noturna / Show House</option>
+            </optgroup>
+          </select>
+        </div>
+        <div id="campos-emp" style="display:none">
+          <div id="emp-modelo-desc" class="alert alert-info" style="display:none">
+            <span class="alert-icon">📐</span>
+            <div id="emp-modelo-txt"></div>
+          </div>
+          <div id="campos-dinamicos"></div>
+          <div class="section-divider">Resultado da Geração</div>
+          <div class="metric-row">
+            <div class="metric">
+              <div class="metric-label">Viagens Geradas/dia</div>
+              <div class="metric-value" id="vg-total">—</div>
+              <div class="metric-unit">viagens totais</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Por Sentido A>B</div>
+              <div class="metric-value" id="vg-ab">—</div>
+              <div class="metric-unit">viagens</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Por Sentido B>A</div>
+              <div class="metric-value" id="vg-ba">—</div>
+              <div class="metric-unit">viagens</div>
+            </div>
+          </div>
+          <div id="vg-equacao" style="font-family:'DM Mono',monospace;font-size:12px;color:var(--text2);line-height:2;margin-top:8px;padding:12px;background:var(--surface2);border-radius:var(--radius)"></div>
+        </div>
+      </div>
+ 
+      <div class="card">
+        <div class="card-header">
+          <div><div class="card-title">🕐Distribuição Horária</div>
+          <div class="card-desc">Distribuição proporcional das viagens do empreendimento pela curva horária observada</div></div>
+        </div>
+        <div class="alert alert-info">
+          <span class="alert-icon">📐</span>
+          <div>As viagens adicionais do empreendimento são distribuídas proporcionalmente ao perfil horário observado na contagem, conforme metodologia adotada nos estudos de referência (CV80-2024 e CV103).</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Período</th>
+                <th>Atual (UCP)</th>
+                <th>% Horária</th>
+                <th>Viagens Adicionais</th>
+                <th>Projetado</th>
+              </tr>
+            </thead>
+            <tbody id="distHorariaBody"></tbody>
+          </table>
+        </div>
+        <div style="margin-top:20px;display:flex;gap:10px">
+          <button class="btn btn-primary" onclick="calcularCenarioFuturo();showPanel('cenariofuturo')">Calcular Cenário Futuro →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ==================== PAINEL 6: CENÁRIO FUTURO ==================== -->
+  <div class="panel" id="panel-cenariofuturo">
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">📈Nível de Serviço com Empreendimento</div>
+        <div class="card-desc">Diagnóstico operacional projetado após implantação</div></div>
+        <button class="btn btn-secondary btn-sm" onclick="calcularCenarioFuturo()">↻ Recalcular</button>
+      </div>
+      <div class="metric-row">
+        <div class="metric">
+          <div class="metric-label">Volume Projetado/dia</div>
+          <div class="metric-value" id="f-vol-total">—</div>
+          <div class="metric-unit">veículos</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Hora de Pico</div>
+          <div class="metric-value" id="f-hora-pico" style="font-size:20px">—</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Vol. Pico (UCP)</div>
+          <div class="metric-value" id="f-vol-pico">—</div>
+          <div class="metric-unit">ucp/h</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">FHP</div>
+          <div class="metric-value" id="f-fhp">—</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Vp (UCP)</div>
+          <div class="metric-value" id="f-vp">—</div>
+          <div class="metric-unit">ucp/h</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div class="metric">
+          <div class="metric-label">VFL</div>
+          <div class="metric-value" id="f-vfl">—</div>
+          <div class="metric-unit">km/h</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">VMV</div>
+          <div class="metric-value" id="f-vmv">—</div>
+          <div class="metric-unit">km/h</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">PTGS</div>
+          <div class="metric-value" id="f-ptgs">—</div>
+          <div class="metric-unit">%</div>
+        </div>
+        <div class="metric" style="border-color:rgba(0,212,160,0.3)">
+          <div class="metric-label" style="text-align:center">Nível de Serviço</div>
+          <div style="display:flex;gap:8px;margin-top:6px;align-items:center">
+            <div class="ns-badge ns-large" id="f-ns-badge-vp">—</div>
+            <div style="font-size:11px;color:var(--text3)">
+              <div>por Vp: <span id="f-ns-vp" style="color:var(--text)">—</span></div>
+              <div>por PTGS: <span id="f-ns-ptgs" style="color:var(--text)">—</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section-divider">Distribuição Horária Projetada</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Período</th>
+              <th>Atual (UCP)</th>
+              <th>Viagens Adicionais</th>
+              <th>Projetado (UCP)</th>
+              <th>% Var.</th>
+            </tr>
+          </thead>
+          <tbody id="futuroHorarioBody"></tbody>
+        </table>
+      </div>
+      <div class="section-divider">Variação Horária – Atual vs. Projetado</div>
+      <div class="chart-container" style="height:220px">
+        <canvas id="chartComparativo"></canvas>
+      </div>
+      <div style="margin-top:20px;display:flex;gap:10px">
+        <button class="btn btn-primary" onclick="showPanel('comparacao')">Ver Comparação →</button>
+        <button class="btn btn-secondary" onclick="showPanel('empreendimento')">← Voltar</button>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ==================== PAINEL 7: COMPARAÇÃO ==================== -->
+  <div class="panel" id="panel-comparacao">
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title"><span class="icon">⚖️</span>Comparação: Situação Atual × Com Empreendimento</div>
+        <div class="card-desc">Síntese comparativa dos indicadores operacionais nos dois cenários</div></div>
+      </div>
+      <div class="table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Indicador</th>
+              <th>Situação Atual</th>
+              <th>Com Empreendimento</th>
+              <th>Variação</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="compareBody"></tbody>
+        </table>
+      </div>
+      <div class="section-divider">Nível de Serviço – Situação Atual</div>
+      <div id="ns-atual-desc" style="padding:16px;background:var(--surface2);border-radius:var(--radius);font-size:13px;line-height:1.7;color:var(--text2)">—</div>
+      <div class="section-divider">Nível de Serviço – Com Empreendimento</div>
+      <div id="ns-futuro-desc" style="padding:16px;background:var(--surface2);border-radius:var(--radius);font-size:13px;line-height:1.7;color:var(--text2)">—</div>
+      <div style="margin-top:20px;display:flex;gap:10px">
+        <button class="btn btn-primary" onclick="showPanel('memorial');gerarMemorial()">📄 Gerar Memorial de Cálculo →</button>
+        <button class="btn btn-secondary" onclick="window.print()">🖨 Imprimir</button>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- ==================== PAINEL 8: MEMORIAL ==================== -->
+  <div class="panel" id="panel-memorial">
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">📄Memorial de Cálculo Auditável</div>
+        <div class="card-desc">Registro completo de todas as entradas, parâmetros, fórmulas e resultados</div></div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-secondary btn-sm" onclick="gerarMemorial()">↻ Regenerar</button>
+          <button class="btn btn-secondary btn-sm" onclick="window.print()">🖨 Imprimir</button>
+          <button class="btn btn-primary btn-sm" onclick="exportarMemorial()">⬇ Exportar TXT</button>
+        </div>
+      </div>
+      <div id="memorial-content"></div>
+    </div>
+  </div>
+</main>
+</div>
+ 
+<!-- ==================== JAVASCRIPT ==================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// ==================== ESTADO GLOBAL ====================
+const S = {
+  contagem: [], // [{h:'07-08', autos, cam, van, on2, on3, c2, c3, c4, moto, totalBruto, ucp}]
+  ucpHorario: [], // ucp/h por hora
+  ucpTotal: 0,
+  horasPeriodo: ['07–08','08–09','09–10','10–11','11–12','12–13','13–14','14–15','15–16','16–17','17–18'],
+  // Parâmetros
+  bvfl: 60, ffa: 0, fA: 0, vfl: 60,
+  numFaixas: 2,
+  tipoTerreno: 'plano', ec: 1.5, evr: 1.2,
+  distDir: 60, zonaUltra: 40,
+  // Diagnóstico Atual
+  volTotal: 0, horaPico: '', volPico: 0, fhp: 1,
+  v15max: 0, vp: 0, fg: 1, fvp: 1,
+  vmv: 0, ptgs: 0,
+  nsVp: 'A', nsPtgs: 'A',
+  // Empreendimento
+  tipoEmp: '', viagensGeradas: 0, propAB: 0.5,
+  viagensAB: 0, viagensBA: 0,
+  distHoraria: [],
+  // Cenário Futuro
+  ucpProjetado: [],
+  fVolTotal: 0, fHoraPico: '', fVolPico: 0, fFhp: 1,
+  fVp: 0, fVmv: 0, fPtgs: 0,
+  fNsVp: 'A', fNsPtgs: 'A',
+  // Memorial
+  memorial: []
+};
+ 
+// ==================== NAVEGAÇÃO ====================
+const panelTitles = {
+  cadastro:     ['Cadastro do Estudo',        'Identificação e dados gerais do ETV',                        '📋'],
+  contagem:     ['Contagem Volumétrica',       'Inserção e importação de dados de tráfego',                  '🔢'],
+  parametros:   ['Parâmetros da Via',          'Configuração dos fatores de ajustamento',                    '⚙️'],
+  diagnostico:  ['Diagnóstico – Situação Atual','Indicadores operacionais sem empreendimento',               '📊'],
+  empreendimento:['Empreendimento',            'Estimativa de viagens geradas e distribuição horária',       '🏗️'],
+  cenariofuturo:['Cenário Futuro',             'Nível de serviço com a implantação do empreendimento',       '📈'],
+  comparacao:   ['Comparação de Cenários',     'Síntese comparativa atual × projetado',                     '⚖️'],
+  memorial:     ['Memorial de Cálculo',        'Registro auditável de todas as etapas e fórmulas',          '📄']
+};
+const stepMap = {cadastro:1, contagem:2, parametros:3, diagnostico:4, empreendimento:5, cenariofuturo:6, memorial:7};
+ 
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if(n.getAttribute('onclick') && n.getAttribute('onclick').includes("'"+id+"'")) n.classList.add('active');
+  });
+  const [t,s,ic] = panelTitles[id] || ['ETV','','🗂️'];
+  document.getElementById('pageTitle').textContent = t;
+  document.getElementById('pageSubtitle').textContent = s;
+  const iconEl = document.getElementById('pageHeaderIcon');
+  if(iconEl) iconEl.textContent = ic;
+  // steps
+  const sn = stepMap[id] || 0;
+  for(let i=1;i<=7;i++){
+    const st = document.getElementById('step-'+i);
+    if(!st) continue;
+    st.className = 'step';
+    if(i < sn) st.classList.add('done');
+    else if(i === sn) st.classList.add('active');
+  }
+}
+ 
+// ==================== CONTAGEM ====================
+function initContagemTable() {
+  const horas = S.horasPeriodo;
+  const body = document.getElementById('contagemBody');
+  body.innerHTML = '';
+  horas.forEach((h,i) => {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td class="td-label">${h}h</td>` +
+      ['autos','cam','van','on2','on3','c2','c3','c4','moto'].map(f =>
+        `<td><input type="number" id="cnt-${f}-${i}" value="0" min="0" oninput="recalcRow(${i})" style="width:72px"></td>`
+      ).join('') +
+      `<td id="row-bruto-${i}" style="font-weight:600">0</td>` +
+      `<td id="row-ucp-${i}" style="color:var(--accent);font-weight:600">0</td>`;
+    body.appendChild(row);
+  });
+}
+ 
+function recalcRow(i) {
+  const F = {autos:1,cam:1,van:1,on2:1.15,on3:1.15,c2:1.05,c3:1.10,c4:1.15,moto:0.5};
+  const fields = Object.keys(F);
+  let bruto=0, ucp=0;
+  fields.forEach(f => {
+    const v = parseFloat(document.getElementById(`cnt-${f}-${i}`)?.value)||0;
+    bruto += v;
+    ucp += v * F[f];
+  });
+  document.getElementById(`row-bruto-${i}`).textContent = Math.round(bruto);
+  document.getElementById(`row-ucp-${i}`).textContent = ucp.toFixed(1);
+  updateTotais();
+}
+ 
+function updateTotais() {
+  const F = {autos:1,cam:1,van:1,on2:1.15,on3:1.15,c2:1.05,c3:1.10,c4:1.15,moto:0.5};
+  const fields = Object.keys(F);
+  const totals = {};
+  fields.forEach(f => totals[f]=0);
+  let brutoTotal=0, ucpTotal=0;
+  S.horasPeriodo.forEach((_,i) => {
+    fields.forEach(f => {
+      const v=parseFloat(document.getElementById(`cnt-${f}-${i}`)?.value)||0;
+      totals[f]+=v; brutoTotal+=v; ucpTotal+=v*F[f];
+    });
+  });
+  const tmap = {autos:'tot-autos',cam:'tot-cam',van:'tot-van',on2:'tot-on2',on3:'tot-on3',c2:'tot-c2',c3:'tot-c3',c4:'tot-c4',moto:'tot-moto'};
+  Object.entries(tmap).forEach(([k,id])=>{ const el=document.getElementById(id); if(el) el.textContent=Math.round(totals[k]); });
+  document.getElementById('tot-bruto').textContent = Math.round(brutoTotal);
+  document.getElementById('tot-ucp').textContent = ucpTotal.toFixed(1);
+}
+ 
+function calcularContagem() {
+  const F = {autos:1,cam:1,van:1,on2:1.15,on3:1.15,c2:1.05,c3:1.10,c4:1.15,moto:0.5};
+  const fields = Object.keys(F);
+  S.contagem = [];
+  S.ucpHorario = [];
+  S.horasPeriodo.forEach((h,i) => {
+    const row = {h};
+    let bruto=0, ucp=0;
+    let pesados=0, total=0;
+    fields.forEach(f => {
+      const v = parseFloat(document.getElementById(`cnt-${f}-${i}`)?.value)||0;
+      row[f]=v; bruto+=v; ucp+=v*F[f]; total+=v;
+      if(['on2','on3','c2','c3','c4'].includes(f)) pesados+=v;
+    });
+    row.totalBruto = Math.round(bruto);
+    row.ucp = parseFloat(ucp.toFixed(2));
+    row.pc = total > 0 ? pesados/total : 0;
+    S.contagem.push(row);
+    S.ucpHorario.push(row.ucp);
+  });
+  S.ucpTotal = S.ucpHorario.reduce((a,b)=>a+b,0);
+  document.getElementById('badge-contagem').style.display = 'inline-block';
+}
+ 
+function carregarExemplo() {
+  // Dados reais do CV80 adaptados
+  const exemplo = [
+    [598,138,129,15,0,47,68,0,414],
+    [990,179,118,15,0,93,68,22,483],
+    [543,100,57,6,0,84,30,26,212],
+    [537,87,49,6,0,54,25,24,184],
+    [1191,195,124,14,0,137,59,57,478],
+    [1350,238,141,15,0,155,81,72,513],
+    [411,123,49,6,0,54,25,25,184],
+    [756,79,95,10,0,84,49,45,354],
+    [919,153,127,9,0,113,66,60,473],
+    [720,246,190,11,0,162,85,59,390],
+    [1353,319,222,13,0,87,72,42,480]
+  ];
+  const fields = ['autos','cam','van','on2','on3','c2','c3','c4','moto'];
+  exemplo.forEach((vals,i) => {
+    vals.forEach((v,j)=>{
+      const el = document.getElementById(`cnt-${fields[j]}-${i}`);
+      if(el) { el.value = v; }
+    });
+    recalcRow(i);
+  });
+  calcularContagem();
+}
+ 
+function limparContagem() {
+  S.horasPeriodo.forEach((_,i)=>{
+    ['autos','cam','van','on2','on3','c2','c3','c4','moto'].forEach(f=>{
+      const el=document.getElementById(`cnt-${f}-${i}`);
+      if(el) el.value=0;
+    });
+    recalcRow(i);
+  });
+  S.contagem=[]; S.ucpHorario=[]; S.ucpTotal=0;
+}
+ 
+function handleFile(evt) {
+  const file = evt.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const text = e.target.result;
+    const lines = text.split('\n').filter(l=>l.trim());
+    const header = lines[0].toLowerCase().split(/[,;\t]/);
+    lines.slice(1).forEach((line, i) => {
+      if(i >= S.horasPeriodo.length) return;
+      const vals = line.split(/[,;\t]/);
+      const fields = ['autos','cam','van','on2','on3','c2','c3','c4','moto'];
+      // Tenta mapear colunas automaticamente
+      fields.forEach((f, j) => {
+        const idx = header.findIndex(h=>h.includes(f)||h.includes(['auto','cam','van','on2','on3','c2','c3','c4','moto'][j]));
+        const v = idx >= 0 ? parseFloat(vals[idx])||0 : parseFloat(vals[j+1])||0;
+        const el = document.getElementById(`cnt-${f}-${i}`);
+        if(el) el.value = v;
+      });
+      recalcRow(i);
+    });
+    calcularContagem();
+    alert('Arquivo importado! Verifique os dados na tabela.');
+  };
+  reader.readAsText(file);
+}
+ 
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('uploadArea').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if(file) { document.getElementById('fileInput').files = e.dataTransfer.files; handleFile({target:{files:[file]}}); }
+}
+ 
+// ==================== PARÂMETROS / VFL ====================
+const TBL_FFA = {
+  '3.6': {'1.8':0, '1.2':2.1, '0.6':4.2, '0.0':6.8},
+  '3.3': {'1.8':0.7, '1.2':2.8, '0.6':4.9, '0.0':7.5},
+  '3.0': {'1.8':1.7, '1.2':3.8, '0.6':5.9, '0.0':8.5},
+  '2.7': {'1.8':3.5, '1.2':5.6, '0.6':7.7, '0.0':10.3}
+};
+const TBL_FA = {0:0, 6:4, 12:8, 18:12, 24:16};
+const TBL_FG = {
+  plano: [[600,1],[1200,1],[Infinity,1]],
+  ondulado: [[600,0.71],[1200,0.93],[Infinity,0.99]]
+};
+const TBL_EC = {plano:1.5, ondulado:2.5};
+const TBL_EVR = {plano:1.2, ondulado:2.0};
+// Tabela 5: fup (redução VMV por zonas ultrapassagem proibida)
+const TBL5_VP = [0,200,400,600,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200];
+const TBL5 = {
+  0:   [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+  20:  [0,1,2.7,2.5,2.2,1.8,1.3,0.9,0.9,0.8,0.8,0.8,0.8,0.8,0.8,0.8,0.8],
+  40:  [0,2.3,4.3,3.8,3.1,2.5,2,1.4,1.3,1.1,1,1,1,1,1,0.9,0.9],
+  60:  [0,3.8,5.7,4.9,3.9,3.2,2.6,1.9,1.7,1.6,1.4,1.4,1.3,1.3,1.2,1.1,1],
+  80:  [0,4.2,6.3,5.5,4.3,3.6,3,2.3,2.1,1.8,1.6,1.5,1.5,1.4,1.3,1.1,1],
+  100: [0,5.6,7.3,6.2,4.9,4.2,3.4,2.7,2.4,2.1,1.8,1.7,1.7,1.6,1.4,1.3,1.1]
+};
+// Tabela 6: fd/up (PTGS)
+const TBL6_VP = [200,400,600,800,1400,2000,2600,3200];
+const TBL6 = {
+  '50': {0:[0,0,0,0,0,0,0,0], 20:[10.1,12.4,11.2,9,3.6,1.8,1.1,0.7], 40:[17.2,19,16,12.3,5.5,2.9,1.6,0.9], 60:[20.2,22.7,18.7,14.1,6.7,3.7,2,1.1], 80:[21,23.8,19.7,14.5,7.3,4.1,2.3,1.2], 100:[21.8,24.8,20.5,15.4,7.9,4.4,2.4,1.4]},
+  '60': {0:[1.6,0.5,0,0,0,0,0,0], 20:[11.8,11.7,11.5,7.6,3.7,2.3,0.9,0], 40:[17.2,16.2,15.2,10.3,5.4,3.4,1.4,0], 60:[22.5,20.7,18.9,13,7.1,3.6,1.9,0], 80:[23.1,21.5,19.8,13.7,7.6,4,2.1,0], 100:[23.7,22.2,20.7,14.4,8.1,4.3,2.2,0]},
+  '70': {0:[2.8,1.1,0,0,0,0,0,0], 20:[13.4,12.5,11.6,7.7,3.8,1.4,0,0], 40:[19.1,17.5,15.4,10.5,5.6,4.9,0,0], 60:[14.8,22,19.1,13.3,7.4,3.5,0,0], 80:[25.2,22.6,20,14,7.9,3.9,0,0], 100:[25.5,23.2,20.9,14.6,8.3,4.2,0,0]},
+  '80': {0:[5.1,2.5,0,0,0,0,0,0], 20:[17.5,15.8,14,9.3,4.6,2.4,0,0], 40:[24.3,21.5,18.6,12.7,6.7,3.4,0,0], 60:[31.3,27.6,23.2,16,8.7,4.5,0,0], 80:[31.3,27.6,23.9,16.5,9.1,4.7,0,0], 100:[31.6,28,24.5,17,9.5,4.9,0,0]},
+  '90': {0:[5.6,2.4,0,0,0,0,0,0], 20:[21.6,19,16.3,10.9,5.5,0,0,0], 40:[29.4,25.6,21.8,14.8,7.8,0,0,0], 60:[37.2,32.2,27.2,18.6,10,0,0,0], 80:[37.4,32.5,27.6,19,10.4,0,0,0], 100:[37.6,32.8,28,19.4,10.7,0,0,0]}
+};
+ 
+function interpolate(xArr, yArr, x) {
+  if(x <= xArr[0]) return yArr[0];
+  if(x >= xArr[xArr.length-1]) return yArr[yArr.length-1];
+  for(let i=0;i<xArr.length-1;i++){
+    if(x >= xArr[i] && x <= xArr[i+1]){
+      const t = (x-xArr[i])/(xArr[i+1]-xArr[i]);
+      return yArr[i] + t*(yArr[i+1]-yArr[i]);
+    }
+  }
+  return yArr[yArr.length-1];
+}
+ 
+function calcularVFL() {
+  S.bvfl = parseFloat(document.getElementById('bvfl').value)||60;
+  const lf = document.getElementById('larguraFaixa').value;
+  const la = document.getElementById('larguraAcost').value;
+  // Arredondar acostamento para chave da tabela
+  const laKey = Object.keys(TBL_FFA[lf]).find(k=>{
+    const kv = parseFloat(k);
+    const lav = parseFloat(la);
+    return Math.abs(kv-lav)<0.01;
+  }) || '1.8';
+  S.ffa = TBL_FFA[lf]?.[laKey] ?? TBL_FFA['3.6']['1.8'];
+  S.fA = TBL_FA[parseInt(document.getElementById('densAcessos').value)] ?? 4;
+  S.vfl = S.bvfl - S.ffa - S.fA;
+  document.getElementById('disp-bvfl').textContent = S.bvfl;
+  document.getElementById('disp-ffa').textContent = S.ffa.toFixed(1);
+  document.getElementById('disp-fa').textContent = S.fA.toFixed(1);
+  document.getElementById('disp-vfl').textContent = S.vfl.toFixed(1);
+  // Atualizar Ec/Evr com base no terreno
+  S.tipoTerreno = document.getElementById('tipoTerreno').value;
+  S.ec = TBL_EC[S.tipoTerreno];
+  S.evr = TBL_EVR[S.tipoTerreno];
+  document.getElementById('ec').value = S.ec;
+  document.getElementById('evr').value = S.evr;
+}
+ 
+function atualizarParametros() { calcularVFL(); }
+ 
+// ==================== DIAGNÓSTICO ====================
+function calcularNivelServicoVp(vp) {
+  if(vp<=490) return 'A';
+  if(vp<=780) return 'B';
+  if(vp<=1190) return 'C';
+  if(vp<=1830) return 'D';
+  if(vp<=3200) return 'E';
+  return 'F';
+}
+function calcularNivelServicoPtgs(ptgs) {
+  if(ptgs<=40) return 'A';
+  if(ptgs<=55) return 'B';
+  if(ptgs<=70) return 'C';
+  if(ptgs<=85) return 'D';
+  if(ptgs<=95) return 'E';
+  return 'F';
+}
+ 
+function calcularFG(vTotalDual) {
+  const t = S.tipoTerreno;
+  for(const [lim, val] of TBL_FG[t]) {
+    if(vTotalDual <= lim) return val;
+  }
+  return 1;
+}
+ 
+function calcularFup(vp, zu) {
+  const col = TBL5[zu] || TBL5[0];
+  return interpolate(TBL5_VP, col, vp);
+}
+ 
+function calcularFdup(vp, distDir, zu) {
+  const d = String(distDir);
+  const rows = TBL6[d] || TBL6['60'];
+  const col = rows[zu] || rows[0];
+  return interpolate(TBL6_VP, col, vp);
+}
+ 
+function calcularDiagnosticoComDados(ucpArr) {
+  if(!ucpArr || ucpArr.length === 0) return null;
+  calcularVFL();
+  S.tipoTerreno = document.getElementById('tipoTerreno').value;
+  S.ec = TBL_EC[S.tipoTerreno];
+  S.evr = TBL_EVR[S.tipoTerreno];
+  S.numFaixas = parseInt(document.getElementById('numFaixas').value)||2;
+  S.distDir = parseInt(document.getElementById('distDir').value)||60;
+  S.zonaUltra = parseInt(document.getElementById('zonaUltra').value)||40;
+ 
+  // 1. Hora de pico e Vhp
+  let maxIdx = 0;
+  ucpArr.forEach((v,i)=>{ if(v>ucpArr[maxIdx]) maxIdx=i; });
+  const vhp = ucpArr[maxIdx];
+  const horaPico = S.horasPeriodo[maxIdx]+'h';
+  const v15max = vhp / 4;
+  const fhp = v15max > 0 ? vhp / (4 * v15max) : 1;
+ 
+  // 2. Proporção de pesados (usa S.contagem se disponível)
+  let pc = 0, pvr = 0;
+  if(S.contagem.length > maxIdx) {
+    const rowPico = S.contagem[maxIdx];
+    const total = rowPico.totalBruto || 1;
+    const pesados = (rowPico.on2||0)+(rowPico.on3||0)+(rowPico.c2||0)+(rowPico.c3||0)+(rowPico.c4||0);
+    pc = pesados / total;
+    pvr = 0; // sem VR identificados na contagem
+  }
+  // fVP
+  const fvp = 1 / (1 + pc*(S.ec-1) + pvr*(S.evr-1));
+ 
+  // 3. fG (baseado no volume total dos dois sentidos – estimativa: dobro do sentido analisado)
+  const vTotalDual = vhp * 2;
+  const fg = calcularFG(vTotalDual);
+ 
+  // 4. Vp
+  const vp = Math.max(0.001, fhp) > 0 ? vhp / (fhp * fg * fvp) : vhp;
+ 
+  // 5. VMV
+  const zu = S.zonaUltra;
+  const fup = calcularFup(vp, zu);
+  const vmv = S.vfl - 0.0125*vp - fup;
+ 
+  // 6. PTGS
+  const bptgs = 100 * (1 - Math.exp(-0.000879*vp));
+  const fdup = calcularFdup(vp, S.distDir, zu);
+  const ptgs = Math.min(100, bptgs + fdup);
+ 
+  // 7. NS
+  const nsVp = calcularNivelServicoVp(vp);
+  const nsPtgs = calcularNivelServicoPtgs(ptgs);
+ 
+  return {
+    ucpArr, vhp, horaPico, v15max, fhp,
+    pc, pvr, fvp, fg,
+    vp, fup, vmv, bptgs, fdup, ptgs,
+    nsVp, nsPtgs,
+    volTotal: ucpArr.reduce((a,b)=>a+b,0)
+  };
+}
+ 
+function calcularDiagnostico() {
+  calcularContagem();
+  const r = calcularDiagnosticoComDados(S.ucpHorario);
+  if(!r) { alert('Insira dados de contagem primeiro.'); return; }
+ 
+  S.volTotal = r.volTotal; S.horaPico = r.horaPico; S.volPico = r.vhp;
+  S.fhp = r.fhp; S.v15max = r.v15max; S.vp = r.vp; S.fg = r.fg; S.fvp = r.fvp;
+  S.vmv = r.vmv; S.ptgs = r.ptgs; S.nsVp = r.nsVp; S.nsPtgs = r.nsPtgs;
+ 
+  // Preencher métricas
+  setText('d-vol-total', Math.round(r.volTotal));
+  setText('d-hora-pico', r.horaPico);
+  setText('d-vol-pico', Math.round(r.vhp));
+  setText('d-fhp', r.fhp.toFixed(3));
+  setText('d-v15', r.v15max.toFixed(1));
+  setText('d-vfl', S.vfl.toFixed(1));
+  setText('d-vp', r.vp.toFixed(1));
+  setText('d-vmv', r.vmv.toFixed(2));
+  setText('d-ptgs', r.ptgs.toFixed(1));
+  setText('d-ns-vp', 'Nível '+r.nsVp);
+  setText('d-ns-ptgs', 'Nível '+r.nsPtgs);
+  setNsBadge('d-ns-badge-vp', r.nsVp);
+ 
+  // Tabela horária
+  const body = document.getElementById('corpoHorario');
+  body.innerHTML = '';
+  r.ucpArr.forEach((ucp,i)=>{
+    const pct = (ucp/r.volTotal*100).toFixed(1);
+    const rel = r.vhp>0 ? (ucp/r.vhp*100).toFixed(0)+'%' : '—';
+    const pc = S.contagem[i]?.pc ?? 0;
+    const isPico = i === r.ucpArr.indexOf(r.vhp);
+    body.innerHTML += `<tr style="${isPico?'background:rgba(0,212,160,0.05)':''}">
+      <td class="td-label">${isPico?'⭐ ':''}${S.horasPeriodo[i]}h</td>
+      <td>${Math.round(S.contagem[i]?.totalBruto||0)}</td>
+      <td style="color:var(--accent);font-weight:600">${ucp.toFixed(1)}</td>
+      <td>${pct}%</td>
+      <td><div style="background:rgba(0,212,160,${ucp/r.vhp});height:6px;border-radius:3px;width:${ucp/r.vhp*100}%;min-width:3px"></div> ${rel}</td>
+      <td>${(pc*100).toFixed(1)}%</td>
+    </tr>`;
+  });
+ 
+  // Detalhe fVP
+  document.getElementById('detalhe-fvp').innerHTML = `
+    Pc (prop. caminhões/ônibus) = ${(r.pc*100).toFixed(2)}%&nbsp;&nbsp;|&nbsp;&nbsp;
+    Pvr (prop. veíc. recreio) = ${(r.pvr*100).toFixed(2)}%<br>
+    Ec = ${S.ec} &nbsp;|&nbsp; Evr = ${S.evr} &nbsp;(Terreno: ${S.tipoTerreno})<br>
+    fVP = 1 / [1 + ${r.pc.toFixed(4)} × (${S.ec}-1) + ${r.pvr.toFixed(4)} × (${S.evr}-1)]
+        = <span style="color:var(--accent)">${r.fvp.toFixed(4)}</span><br>
+    fG = ${r.fg} &nbsp;|&nbsp; FHP = ${r.fhp.toFixed(3)} &nbsp;|&nbsp; fup = ${r.fup.toFixed(2)}<br>
+    Vp = ${r.vhp.toFixed(1)} / (${r.fhp.toFixed(3)} × ${r.fg} × ${r.fvp.toFixed(4)})
+       = <span style="color:var(--accent)">${r.vp.toFixed(2)} ucp/h</span><br>
+    VMV = ${S.vfl.toFixed(1)} − 0,0125 × ${r.vp.toFixed(2)} − ${r.fup.toFixed(2)}
+        = <span style="color:var(--accent)">${r.vmv.toFixed(2)} km/h</span><br>
+    BPTGS = 100 × (1 − e^(−0,000879 × ${r.vp.toFixed(2)})) = ${r.bptgs.toFixed(2)}<br>
+    fd/up = ${r.fdup.toFixed(2)}&nbsp;&nbsp;→&nbsp;&nbsp;
+    PTGS = ${r.bptgs.toFixed(2)} + ${r.fdup.toFixed(2)} = <span style="color:var(--accent)">${r.ptgs.toFixed(2)}%</span>
+  `;
+ 
+  // Gráfico
+  renderChartHorario(r.ucpArr);
+ 
+  // Preencher distribuição horária no painel empreendimento
+  atualizarDistHoraria();
+}
+ 
+// ==================== GRÁFICOS ====================
+let chartH, chartC;
+function renderChartHorario(data) {
+  const ctx = document.getElementById('chartHorario').getContext('2d');
+  if(chartH) chartH.destroy();
+  const maxVal = Math.max(...data);
+  const gradMain = ctx.createLinearGradient(0,0,0,200);
+  gradMain.addColorStop(0,'rgba(200,151,58,0.75)');
+  gradMain.addColorStop(1,'rgba(200,151,58,0.12)');
+  const gradOther = ctx.createLinearGradient(0,0,0,200);
+  gradOther.addColorStop(0,'rgba(255,255,255,0.22)');
+  gradOther.addColorStop(1,'rgba(255,255,255,0.04)');
+  chartH = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: S.horasPeriodo.map(h=>h+'h'),
+      datasets: [{
+        label: 'UCP/h',
+        data: data,
+        backgroundColor: data.map(v => v===maxVal ? gradMain : gradOther),
+        borderColor: data.map(v => v===maxVal ? 'rgba(200,151,58,1)' : 'rgba(255,255,255,0.35)'),
+        borderWidth: 1, borderRadius: 6, borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: {display:false},
+        tooltip: {
+          backgroundColor: 'rgba(15,25,35,0.92)',
+          borderColor: 'rgba(28,140,90,0.4)', borderWidth: 1,
+          titleColor: '#daa84c', bodyColor: '#8a9bb4',
+          callbacks: { label: c=>`${c.raw.toFixed(1)} ucp/h` }
+        }
+      },
+      scales: {
+        x: { ticks:{color:'#7a8fa4',font:{size:10,family:'DM Mono'}}, grid:{color:'rgba(255,255,255,0.04)'}, border:{color:'rgba(200,151,58,0.10)'} },
+        y: { ticks:{color:'#7a8fa4',font:{size:10,family:'DM Mono'}}, grid:{color:'rgba(255,255,255,0.04)'}, border:{color:'rgba(200,151,58,0.10)'} }
+      }
+    }
+  });
+}
+ 
+function renderChartComparativo(atual, projetado) {
+  const ctx = document.getElementById('chartComparativo').getContext('2d');
+  if(chartC) chartC.destroy();
+  const gradA = ctx.createLinearGradient(0,0,0,200);
+  gradA.addColorStop(0,'rgba(255,255,255,0.30)'); gradA.addColorStop(1,'rgba(255,255,255,0.04)');
+  const gradP = ctx.createLinearGradient(0,0,0,200);
+  gradP.addColorStop(0,'rgba(200,151,58,0.70)'); gradP.addColorStop(1,'rgba(200,151,58,0.08)');
+  chartC = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: S.horasPeriodo.map(h=>h+'h'),
+      datasets: [
+        { label:'Situação Atual', data:atual, backgroundColor:gradA, borderColor:'rgba(255,255,255,0.4)', borderWidth:1, borderRadius:5, borderSkipped:false },
+        { label:'Com Empreendimento', data:projetado, backgroundColor:gradP, borderColor:'rgba(200,151,58,0.8)', borderWidth:1, borderRadius:5, borderSkipped:false }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels:{ color:'#8a9bb4', font:{size:11,family:'Barlow'}, boxWidth:12, borderRadius:4 } },
+        tooltip: {
+          backgroundColor:'rgba(15,25,35,0.92)', borderColor:'rgba(28,140,90,0.35)', borderWidth:1,
+          titleColor:'#4ab96a', bodyColor:'#b0c8d8'
+        }
+      },
+      scales: {
+        x: { ticks:{color:'#7a8fa4',font:{size:10,family:'DM Mono'}}, grid:{color:'rgba(255,255,255,0.04)'}, border:{color:'rgba(200,151,58,0.10)'} },
+        y: { ticks:{color:'#7a8fa4',font:{size:10,family:'DM Mono'}}, grid:{color:'rgba(255,255,255,0.04)'}, border:{color:'rgba(200,151,58,0.10)'} }
+      }
+    }
+  });
+}
+ 
+// ==================== EMPREENDIMENTO ====================
+const MODELOS_EMP = {
+  res_vertical: {
+    label: 'Condomínio Residencial Vertical',
+    ref: 'Torquato & Júnior (2012)',
+    formula: 'TO = 10,03 × UO + 353,63',
+    campos: [{id:'uo', label:'Unidades Ocupadas (UO)', tip:'Número de unidades habitacionais que se estima estarão ocupadas na data da análise. Recomenda-se usar 100% das unidades.', default:'100'}],
+    calc: (v) => {
+      const UO = parseFloat(v.uo)||0;
+      return { viagens: 10.03*UO + 353.63, eq: `TO = 10,03 × ${UO} + 353,63 = ${(10.03*UO+353.63).toFixed(0)} viagens` };
+    }
+  },
+  res_horizontal: {
+    label: 'Condomínio Horizontal',
+    ref: 'Grieco & Portugal (2010) – distante do centro de consumo',
+    formula: 'V = 84,35 + 3,876 × UR',
+    campos: [{id:'ur', label:'Unidades Residenciais (UR)', tip:'Número total de lotes ou casas no condomínio.', default:'50'}],
+    calc: (v) => {
+      const UR = parseFloat(v.ur)||0;
+      const tot = 84.35+3.876*UR;
+      return { viagens: tot, eq: `V = 84,35 + 3,876 × ${UR} = ${tot.toFixed(0)} viagens` };
+    }
+  },
+  supermercado: {
+    label: 'Supermercado / Hipermercado',
+    ref: 'Oliveira et al. (2016) – Belo Horizonte; Freitas (2009)',
+    formula: 'V = 0,062 × ABC (área < 12.000m²)',
+    campos: [
+      {id:'abc', label:'Área Bruta Construída (ABC) em m²', tip:'Área total construída do estabelecimento comercial. Para supermercados: 2.000–12.000m². Para hipermercados: acima de 12.000m².', default:'5000'},
+      {id:'nv', label:'Nº de Vagas de Estacionamento', tip:'Número total de vagas de estacionamento do empreendimento. Modelo alternativo: V = 4,41 × NV', default:'100'},
+      {id:'nc', label:'Nº de Checkouts', tip:'Número de caixas de atendimento. Modelo alternativo: V = 30,1 × NC', default:'10'}
+    ],
+    calc: (v) => {
+      const abc=parseFloat(v.abc)||0, nv=parseFloat(v.nv)||0, nc=parseFloat(v.nc)||0;
+      const tot = 0.062*abc;
+      return { viagens: tot, eq: `V = 0,062 × ${abc} = ${tot.toFixed(0)} viagens/h (hora-pico)\n\nModelos alternativos (para conferência):\nV = 4,41 × ${nv} = ${(4.41*nv).toFixed(0)} viagens (por vagas)\nV = 30,1 × ${nc} = ${(30.1*nc).toFixed(0)} viagens (por checkouts)\nRef: Oliveira et al. (2016) – R²=0,81` };
+    }
+  },
+  shopping: {
+    label: 'Shopping Center',
+    ref: 'CET-SP (2000) / Oliveira et al. (2017)',
+    formula: 'V = 0,0089 × Area (hora-pico sexta)',
+    campos: [
+      {id:'abc', label:'Área Construída (m²)', tip:'Área bruta construída do shopping. Para comparação, CET-SP usa Área Bruta Locável (ABL).', default:'20000'},
+      {id:'nv', label:'Nº de Vagas de Estacionamento', tip:'Modelo com melhor ajuste para BH: V = 0,60 × NV. R²=0,98', default:'500'}
+    ],
+    calc: (v) => {
+      const abc=parseFloat(v.abc)||0, nv=parseFloat(v.nv)||0;
+      const v1=0.0089*abc, v2=0.60*nv;
+      return { viagens: v1, eq: `V = 0,0089 × ${abc} = ${v1.toFixed(0)} viagens/h (por área)\nV = 0,60 × ${nv} = ${v2.toFixed(0)} viagens/h (por vagas – R²=0,98)\nRef: Oliveira et al. (2017)` };
+    }
+  },
+  escritorio: {
+    label: 'Centro Empresarial / Escritórios',
+    ref: 'ITE (2008) / TECTRAN (2003)',
+    formula: 'V = 0,049 × Área',
+    campos: [{id:'abc', label:'Área Construída (m²)', tip:'Área total dos escritórios.', default:'5000'}],
+    calc: (v) => {
+      const abc=parseFloat(v.abc)||0;
+      const tot=0.049*abc;
+      return { viagens: tot, eq: `V = 0,049 × ${abc} = ${tot.toFixed(0)} viagens (Clifton et al. 2015)` };
+    }
+  },
+  escola: {
+    label: 'Escola (Ensino Fund. / Médio)',
+    ref: 'Oliveira et al. (2017) – Belo Horizonte; CET-SP (1983)',
+    formula: 'V = 3,95 × NFunc (R²=0,95)',
+    campos: [
+      {id:'nalunos', label:'Número de Alunos', tip:'Total de alunos matriculados (todos os turnos).', default:'500'},
+      {id:'nfunc', label:'Número de Funcionários', tip:'Total de funcionários (docentes + administrativos). Modelo com melhor R²=0,95.', default:'50'}
+    ],
+    calc: (v) => {
+      const na=parseFloat(v.nalunos)||0, nf=parseFloat(v.nfunc)||0;
+      const v1=0.50*na, v2=3.95*nf;
+      return { viagens: v2, eq: `V = 0,50 × ${na} = ${v1.toFixed(0)} (por alunos, R²=0,92)\nV = 3,95 × ${nf} = ${v2.toFixed(0)} (por funcionários, R²=0,95 – melhor ajuste)\nRef: Oliveira et al. (2017)` };
+    }
+  },
+  ies: {
+    label: 'Instituição de Ensino Superior',
+    ref: 'Oliveira et al. (2017) – manhã; TECTRAN (2003)',
+    formula: 'V = 0,054 × Area + 857 (manhã)',
+    campos: [
+      {id:'abc', label:'Área Construída (m²)', tip:'Área total construída da IES.', default:'20000'},
+      {id:'nv', label:'Nº Vagas de Estacionamento', tip:'Modelo alternativo V = 2,15 × NV + 516 (R²=0,96)', default:'300'}
+    ],
+    calc: (v) => {
+      const abc=parseFloat(v.abc)||0, nv=parseFloat(v.nv)||0;
+      const v1=0.054*abc+857, v2=2.1486*nv+515.6432;
+      return { viagens: v1, eq: `V = 0,054 × ${abc} + 857 = ${v1.toFixed(0)} (por área, R²=0,91)\nV = 2,15 × ${nv} + 516 = ${v2.toFixed(0)} (por vagas, R²=0,96)\nRef: Oliveira et al. (2017)` };
+    }
+  },
+  hospital: {
+    label: 'Hospital / UPA',
+    ref: 'Oliveira et al. (2017); Gontijo (2014)',
+    formula: 'V = 0,1 × NFunc (R²=0,88)',
+    campos: [
+      {id:'nfunc', label:'Número de Funcionários', tip:'Total de funcionários do hospital (modelo com melhor R² segundo estudo BH).', default:'500'},
+      {id:'nleitos', label:'Número de Leitos', tip:'Total de leitos hospitalares. Modelo alternativo: V = 0,54 × NLeitos', default:'100'}
+    ],
+    calc: (v) => {
+      const nf=parseFloat(v.nfunc)||0, nl=parseFloat(v.nleitos)||0;
+      const v1=0.1*nf, v2=0.54*nl;
+      return { viagens: v1, eq: `V = 0,1 × ${nf} = ${v1.toFixed(0)} (por func., R²=0,88)\nV = 0,54 × ${nl} = ${v2.toFixed(0)} (por leitos, R²=0,82)\nRef: Oliveira et al. (2017)` };
+    }
+  },
+  casa_noturna: {
+    label: 'Casa Noturna / Show House',
+    ref: 'Oliveira et al. (2017); Clifton et al. (2015)',
+    formula: 'V = 0,43 × Capacidade − 161,86',
+    campos: [{id:'cap', label:'Capacidade do Estabelecimento (pessoas)', tip:'Lotação máxima do local.', default:'400'}],
+    calc: (v) => {
+      const cap=parseFloat(v.cap)||0;
+      const tot=Math.max(0, 0.43*cap-161.86);
+      return { viagens: tot, eq: `V = 0,43 × ${cap} − 161,86 = ${tot.toFixed(0)} (R²=0,91)\nRef: Oliveira et al. (2017)` };
+    }
+  }
+};
+ 
+function mostrarCamposEmp() {
+  const t = document.getElementById('tipoEmp').value;
+  S.tipoEmp = t;
+  const mod = MODELOS_EMP[t];
+  if(!mod) { document.getElementById('campos-emp').style.display='none'; return; }
+  document.getElementById('campos-emp').style.display='block';
+  document.getElementById('emp-modelo-desc').style.display='flex';
+  document.getElementById('emp-modelo-txt').innerHTML = `<strong>${mod.label}</strong><br>Referência: ${mod.ref}<br>Equação: <code>${mod.formula}</code>`;
+ 
+  const dc = document.getElementById('campos-dinamicos');
+  dc.innerHTML = '';
+  mod.campos.forEach(c => {
+    dc.innerHTML += `<div class="field">
+      <label data-tip="${c.tip}">${c.label} ❓</label>
+      <input type="number" id="emp-${c.id}" value="${c.default}" min="0" oninput="gerarViagens()">
+    </div>`;
+  });
+  gerarViagens();
+}
+ 
+function gerarViagens() {
+  const t = S.tipoEmp;
+  const mod = MODELOS_EMP[t];
+  if(!mod) return;
+  const vals = {};
+  mod.campos.forEach(c => { vals[c.id] = document.getElementById('emp-'+c.id)?.value||0; });
+  try {
+    const res = mod.calc(vals);
+    S.viagensGeradas = res.viagens;
+    // Distribuição proporcional ao tráfego observado
+    const dist = parseInt(document.getElementById('distDir').value)||60;
+    S.propAB = dist/100;
+    S.viagensAB = S.viagensGeradas * S.propAB;
+    S.viagensBA = S.viagensGeradas * (1-S.propAB);
+    setText('vg-total', Math.round(S.viagensGeradas));
+    setText('vg-ab', Math.round(S.viagensAB));
+    setText('vg-ba', Math.round(S.viagensBA));
+    document.getElementById('vg-equacao').innerHTML = res.eq.replace(/\n/g,'<br>');
+    atualizarDistHoraria();
+  } catch(e) { console.error(e); }
+}
+ 
+function atualizarDistHoraria() {
+  const body = document.getElementById('distHorariaBody');
+  if(!body) return;
+  const total = S.ucpTotal || 1;
+  S.distHoraria = [];
+  body.innerHTML = '';
+  S.horasPeriodo.forEach((h,i) => {
+    const ucp = S.ucpHorario[i]||0;
+    const pct = ucp/total;
+    const add = S.viagensGeradas * pct;
+    const proj = ucp + add;
+    S.distHoraria.push({ h, ucp, pct, add, proj });
+    body.innerHTML += `<tr>
+      <td class="td-label">${h}h</td>
+      <td>${ucp.toFixed(1)}</td>
+      <td>${(pct*100).toFixed(1)}%</td>
+      <td style="color:var(--accent3)">${add.toFixed(1)}</td>
+      <td style="color:var(--accent);font-weight:600">${proj.toFixed(1)}</td>
+    </tr>`;
+  });
+}
+ 
+// ==================== CENÁRIO FUTURO ====================
+function calcularCenarioFuturo() {
+  if(S.ucpHorario.length === 0) { calcularContagem(); }
+  if(S.vfl === 0) { calcularVFL(); }
+  if(S.viagensGeradas === 0) { gerarViagens(); }
+  atualizarDistHoraria();
+ 
+  const ucpProj = S.distHoraria.map(d => d.proj);
+  S.ucpProjetado = ucpProj;
+  const r = calcularDiagnosticoComDados(ucpProj);
+  if(!r) return;
+ 
+  S.fVolTotal = r.volTotal; S.fHoraPico = r.horaPico; S.fVolPico = r.vhp;
+  S.fFhp = r.fhp; S.fVp = r.vp; S.fVmv = r.vmv; S.fPtgs = r.ptgs;
+  S.fNsVp = r.nsVp; S.fNsPtgs = r.nsPtgs;
+ 
+  setText('f-vol-total', Math.round(r.volTotal));
+  setText('f-hora-pico', r.horaPico);
+  setText('f-vol-pico', Math.round(r.vhp));
+  setText('f-fhp', r.fhp.toFixed(3));
+  setText('f-vp', r.vp.toFixed(1));
+  setText('f-vfl', S.vfl.toFixed(1));
+  setText('f-vmv', r.vmv.toFixed(2));
+  setText('f-ptgs', r.ptgs.toFixed(1));
+  setText('f-ns-vp', 'Nível '+r.nsVp);
+  setText('f-ns-ptgs', 'Nível '+r.nsPtgs);
+  setNsBadge('f-ns-badge-vp', r.nsVp);
+ 
+  // Tabela horária futuro
+  const body = document.getElementById('futuroHorarioBody');
+  body.innerHTML = '';
+  const maxIdx = ucpProj.indexOf(Math.max(...ucpProj));
+  ucpProj.forEach((ucp,i)=>{
+    const atual = S.ucpHorario[i]||0;
+    const add = S.distHoraria[i]?.add||0;
+    const variacao = atual > 0 ? ((ucp-atual)/atual*100).toFixed(1)+'%' : '—';
+    const isPico = i===maxIdx;
+    body.innerHTML += `<tr style="${isPico?'background:rgba(0,212,160,0.05)':''}">
+      <td class="td-label">${isPico?'⭐ ':''}${S.horasPeriodo[i]}h</td>
+      <td>${atual.toFixed(1)}</td>
+      <td style="color:var(--accent3)">${add.toFixed(1)}</td>
+      <td style="color:var(--accent);font-weight:600">${ucp.toFixed(1)}</td>
+      <td style="color:${add>0?'var(--warn)':'var(--text2)'}">${variacao}</td>
+    </tr>`;
+  });
+ 
+  renderChartComparativo(S.ucpHorario, ucpProj);
+  preencherComparacao();
+}
+ 
+// ==================== COMPARAÇÃO ====================
+const NS_DESC = {
+  A:'Fluxo livre, excelente qualidade de serviço. Velocidades elevadas, sem interferências significativas. Vp ≤ 490 ucp/h.',
+  B:'Fluxo razoavelmente livre. Restrições discretas. Vp ≤ 780 ucp/h.',
+  C:'Fluxo estável com restrições mais frequentes. Vp ≤ 1.190 ucp/h.',
+  D:'Fluxo próximo do instável, filas frequentes. Vp ≤ 1.830 ucp/h.',
+  E:'Fluxo instável, na capacidade da via. Vp ≤ 3.200 ucp/h.',
+  F:'Fluxo congestionado, demanda superior à capacidade.'
+};
+ 
+function preencherComparacao() {
+  const body = document.getElementById('compareBody');
+  const rows = [
+    ['Volume Total/dia (UCP)', S.volTotal.toFixed(1), S.fVolTotal.toFixed(1), true, 'ucp/h'],
+    ['Hora de Pico', S.horaPico, S.fHoraPico, null, ''],
+    ['Volume Pico (UCP)', S.volPico.toFixed(1), S.fVolPico.toFixed(1), true, 'ucp/h'],
+    ['FHP', S.fhp.toFixed(3), S.fFhp.toFixed(3), null, ''],
+    ['VFL', S.vfl.toFixed(1), S.vfl.toFixed(1), null, 'km/h'],
+    ['Fluxo Vp', S.vp.toFixed(2), S.fVp.toFixed(2), true, 'ucp/h'],
+    ['VMV', S.vmv.toFixed(2), S.fVmv.toFixed(2), false, 'km/h'],
+    ['PTGS', S.ptgs.toFixed(2), S.fPtgs.toFixed(2), true, '%'],
+    ['NS por Vp', S.nsVp, S.fNsVp, null, ''],
+    ['NS por PTGS', S.nsPtgs, S.fNsPtgs, null, ''],
+  ];
+  body.innerHTML = rows.map(([label,atual,fut,higherIsBad,unit])=>{
+    const aNum = parseFloat(atual), fNum = parseFloat(fut);
+    const same = atual===fut;
+    let status='', varTxt='', cls='';
+    if(!isNaN(aNum)&&!isNaN(fNum)&&aNum!==0){
+      const diff = fNum-aNum, pct = (diff/aNum*100).toFixed(1);
+      varTxt = (diff>=0?'+':'')+pct+'%';
+      if(same) { status='<span class="tag tag-ok">Sem alteração</span>'; cls=''; }
+      else if(higherIsBad===true&&diff>0) { status='<span class="tag tag-warn">↑ Aumentou</span>'; cls='compare-worse'; }
+      else if(higherIsBad===false&&diff<0) { status='<span class="tag tag-warn">↓ Reduziu</span>'; cls=''; }
+      else { status='<span class="tag tag-ok">Estável</span>'; cls=''; }
+    } else if(label.startsWith('NS')){
+      const nsColors = {A:'var(--ns-a)',B:'var(--ns-b)',C:'var(--ns-c)',D:'var(--ns-d)',E:'var(--ns-e)',F:'var(--ns-f)'};
+      const cor = nsColors[fut]||'var(--text)';
+      if(atual===fut) status='<span class="tag tag-ok">Mantido</span>';
+      else status='<span class="tag tag-warn">Alterado</span>';
+    }
+    return `<tr>
+      <td class="td-label" style="font-weight:500">${label}</td>
+      <td>${atual} <span style="font-size:10px;color:var(--text3)">${unit}</span></td>
+      <td class="${cls}">${fut} <span style="font-size:10px;color:var(--text3)">${unit}</span></td>
+      <td style="color:var(--text3);font-size:11px">${varTxt}</td>
+      <td>${status}</td>
+    </tr>`;
+  }).join('');
+ 
+  document.getElementById('ns-atual-desc').innerHTML =
+    `<strong>Nível de Serviço por Vp: ${S.nsVp}</strong> | <strong>por PTGS: ${S.nsPtgs}</strong><br>${NS_DESC[S.nsVp]||''}`;
+  document.getElementById('ns-futuro-desc').innerHTML =
+    `<strong>Nível de Serviço por Vp: ${S.fNsVp}</strong> | <strong>por PTGS: ${S.fNsPtgs}</strong><br>${NS_DESC[S.fNsVp]||''}` +
+    (S.fNsVp===S.nsVp ? '<br><br>✅ A implantação do empreendimento <strong>não altera o nível de serviço da via</strong>.' : '<br><br>⚠️ A implantação do empreendimento <strong>altera o nível de serviço da via</strong>.');
+}
+ 
+// ==================== MEMORIAL ====================
+function gerarMemorial() {
+  const nome = document.getElementById('nomeEstudo')?.value||'—';
+  const cod = document.getElementById('codigoEstudo')?.value||'—';
+  const via = document.getElementById('viaAnalise')?.value||'—';
+  const data = document.getElementById('dataContagem')?.value||'—';
+  const profis = document.getElementById('profissional')?.value||'—';
+  const reg = document.getElementById('registro')?.value||'—';
+ 
+  const html = `
+  <div class="memorial-block">
+    <div class="memorial-title">1. IDENTIFICAÇÃO DO ESTUDO</div>
+    <div class="formula-line"><span class="formula-var">Estudo:</span> ${nome}</div>
+    <div class="formula-line"><span class="formula-var">Código:</span> ${cod}</div>
+    <div class="formula-line"><span class="formula-var">Via Analisada:</span> ${via}</div>
+    <div class="formula-line"><span class="formula-var">Data da Contagem:</span> ${data}</div>
+    <div class="formula-line"><span class="formula-var">Sentido:</span> ${document.getElementById('sentidoEstudo')?.value||'—'}</div>
+    <div class="formula-line"><span class="formula-var">Responsável:</span> ${profis} (${reg})</div>
+    <div class="formula-line"><span class="formula-var">Empreendimento:</span> ${document.getElementById('nomeEmpreendimento')?.value||'—'}</div>
+    <div class="formula-line"><span class="formula-var">Área Construída:</span> ${document.getElementById('areaConstruida')?.value||'—'} m²</div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">2. FATORES DE EQUIVALÊNCIA VEICULAR (UCP/h)</div>
+    <div class="formula-line">Automóveis, caminhonetes, vans: <span class="formula-result">f = 1,0</span></div>
+    <div class="formula-line">Caminhão leve (2C): <span class="formula-result">f = 1,05</span></div>
+    <div class="formula-line">Caminhão médio (3C): <span class="formula-result">f = 1,10</span></div>
+    <div class="formula-line">Caminhão pesado / ônibus (4C+): <span class="formula-result">f = 1,15</span></div>
+    <div class="formula-line">Motocicletas: <span class="formula-result">f = 0,5</span></div>
+    <div class="formula-line" style="margin-top:8px;color:var(--text3)">Fonte: Tabela 2 – Conversão de categorias de veículos para unidades de automóveis (DNIT, 2006 / CV80-2024)</div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">3. CONTAGEM VOLUMÉTRICA – DADOS INSERIDOS</div>
+    ${S.horasPeriodo.map((h,i)=>{
+      const r = S.contagem[i];
+      if(!r) return '';
+      return `<div class="formula-line">${h}h: ${r.autos||0} autos + ${r.cam||0} cam + ${r.van||0} van + ${r.on2||0} ôn2C + ${r.on3||0} ôn3C + ${r.c2||0} cam2C + ${r.c3||0} cam3C + ${r.c4||0} cam4C + ${r.moto||0} motos → Total bruto: ${r.totalBruto} veíc | <span class="formula-result">${r.ucp?.toFixed(1)} ucp/h</span></div>`;
+    }).join('')}
+    <div class="formula-line" style="margin-top:8px"><span class="formula-var">TOTAL DIA:</span> <span class="formula-result">${S.ucpTotal?.toFixed(1)} ucp acumulados</span></div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">4. VELOCIDADE DE FLUXO LIVRE (VFL)</div>
+    <div class="formula-line">Equação: <span class="formula-result">VFL = BVFL − ffa − fA</span></div>
+    <div class="formula-line"><span class="formula-var">BVFL</span> (Velocidade base / regulamentada): ${S.bvfl} km/h</div>
+    <div class="formula-line"><span class="formula-var">ffa</span> (Ajust. largura de faixa + acostamento, Tab.1): ${S.ffa} km/h</div>
+    <div class="formula-line"><span class="formula-var">fA</span> (Ajust. densidade de acessos, Tab.2): ${S.fA} km/h</div>
+    <div class="formula-line"><span class="formula-result">VFL = ${S.bvfl} − ${S.ffa} − ${S.fA} = ${S.vfl?.toFixed(1)} km/h</span></div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">5. FATOR HORÁRIO DE PICO (FHP)</div>
+    <div class="formula-line">Equação: <span class="formula-result">FHP = Vhp / (4 × V15max)</span></div>
+    <div class="formula-line"><span class="formula-var">Vhp</span> (Volume hora de pico): ${S.volPico?.toFixed(1)} ucp/h (${S.horaPico})</div>
+    <div class="formula-line"><span class="formula-var">V15max</span> (Volume máximo de 15 min): ${S.v15max?.toFixed(2)} ucp (= Vhp/4)</div>
+    <div class="formula-line"><span class="formula-result">FHP = ${S.volPico?.toFixed(1)} / (4 × ${S.v15max?.toFixed(2)}) = ${S.fhp?.toFixed(4)}</span></div>
+    <div class="formula-line" style="color:var(--text3)">Intervalo teórico: 0,25 (totalmente concentrado) a 1,00 (totalmente uniforme)</div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">6. FLUXO DE TRÁFEGO (Vp)</div>
+    <div class="formula-line">Equação: <span class="formula-result">Vp = V / (FHP × fG × fVP)</span></div>
+    <div class="formula-line"><span class="formula-var">V</span> (Volume hora de pico): ${S.volPico?.toFixed(1)} ucp/h</div>
+    <div class="formula-line"><span class="formula-var">FHP</span>: ${S.fhp?.toFixed(4)}</div>
+    <div class="formula-line"><span class="formula-var">fG</span> (Ajust. greide – ${S.tipoTerreno}): ${S.fg?.toFixed(2)}</div>
+    <div class="formula-line"><span class="formula-var">fVP</span> = 1 / [1 + Pc×(Ec−1) + Pvr×(Evr−1)] = ${S.fvp?.toFixed(4)}</div>
+    <div class="formula-line"><span class="formula-result">Vp = ${S.volPico?.toFixed(1)} / (${S.fhp?.toFixed(4)} × ${S.fg} × ${S.fvp?.toFixed(4)}) = ${S.vp?.toFixed(2)} ucp/h</span></div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">7. VELOCIDADE MÉDIA DE VIAGEM (VMV)</div>
+    <div class="formula-line">Equação: <span class="formula-result">VMV = VFL − 0,0125 × Vp − fup</span></div>
+    <div class="formula-line"><span class="formula-var">VFL</span>: ${S.vfl?.toFixed(1)} km/h</div>
+    <div class="formula-line"><span class="formula-var">Vp</span>: ${S.vp?.toFixed(2)} ucp/h</div>
+    <div class="formula-line"><span class="formula-var">fup</span> (Ajust. zonas ultrapassagem proibida – ${S.zonaUltra}%): interpolado das Tabelas 5</div>
+    <div class="formula-line"><span class="formula-result">VMV = ${S.vfl?.toFixed(1)} − 0,0125 × ${S.vp?.toFixed(2)} − fup = ${S.vmv?.toFixed(2)} km/h</span></div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">8. PERCENTAGEM DE TEMPO GASTO SEGUINDO (PTGS)</div>
+    <div class="formula-line">Equação: <span class="formula-result">PTGS = BPTGS + fd/up</span></div>
+    <div class="formula-line"><span class="formula-var">BPTGS</span> = 100 × (1 − e^(−0,000879 × Vp))</div>
+    <div class="formula-line"><span class="formula-var">BPTGS</span> = 100 × (1 − e^(−0,000879 × ${S.vp?.toFixed(2)})) = ${(100*(1-Math.exp(-0.000879*S.vp))).toFixed(2)}%</div>
+    <div class="formula-line"><span class="formula-var">fd/up</span> (Tab. 6 – dist. ${S.distDir}/$(100-S.distDir) – ${S.zonaUltra}% proibida): interpolado</div>
+    <div class="formula-line"><span class="formula-result">PTGS = ${S.ptgs?.toFixed(2)}%</span></div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">9. NÍVEL DE SERVIÇO – SITUAÇÃO ATUAL</div>
+    <div class="formula-line"><span class="formula-var">Por Vp (${S.vp?.toFixed(2)} ucp/h):</span> <span class="formula-result">Nível ${S.nsVp}</span></div>
+    <div class="formula-line"><span class="formula-var">Por PTGS (${S.ptgs?.toFixed(2)}%):</span> <span class="formula-result">Nível ${S.nsPtgs}</span></div>
+    <div class="formula-line" style="margin-top:6px">${NS_DESC[S.nsVp]||''}</div>
+    <div class="formula-line" style="margin-top:4px;color:var(--text3)">
+      Critérios: NS-A ≤490; NS-B ≤780; NS-C ≤1.190; NS-D ≤1.830; NS-E ≤3.200; NS-F >3.200 ucp/h<br>
+      PTGS: NS-A ≤40%; NS-B ≤55%; NS-C ≤70%; NS-D ≤85%; NS-E ≤95%; NS-F >99%
+    </div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">10. GERAÇÃO DE VIAGENS DO EMPREENDIMENTO</div>
+    <div class="formula-line"><span class="formula-var">Tipo:</span> ${document.getElementById('tipoEmp')?.options[document.getElementById('tipoEmp')?.selectedIndex]?.text||'—'}</div>
+    <div class="formula-line"><span class="formula-var">Modelo:</span> ${MODELOS_EMP[S.tipoEmp]?.ref||'—'}</div>
+    <div class="formula-line"><span class="formula-var">Fórmula:</span> ${MODELOS_EMP[S.tipoEmp]?.formula||'—'}</div>
+    <div class="formula-line"><span class="formula-var">Viagens Geradas/dia:</span> <span class="formula-result">${Math.round(S.viagensGeradas)}</span></div>
+    <div class="formula-line"><span class="formula-var">Distribuição direcional:</span> ${S.propAB*100}/${(1-S.propAB)*100} (${Math.round(S.viagensAB)} sentido A>B / ${Math.round(S.viagensBA)} sentido B>A)</div>
+    <div class="formula-line" style="color:var(--text3);margin-top:6px">Critério de distribuição: proporcional à curva horária observada na contagem</div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">11. DISTRIBUIÇÃO HORÁRIA DAS VIAGENS ADICIONAIS</div>
+    ${S.distHoraria.map(d=>
+      `<div class="formula-line">${d.h}h: ${d.ucp.toFixed(1)} (atual) + ${d.add.toFixed(1)} (adicional) = <span class="formula-result">${d.proj.toFixed(1)} ucp/h</span> [${(d.pct*100).toFixed(1)}% do total diário]</div>`
+    ).join('')}
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">12. NÍVEL DE SERVIÇO – COM EMPREENDIMENTO (CENÁRIO FUTURO)</div>
+    <div class="formula-line"><span class="formula-var">Vp projetado:</span> ${S.fVp?.toFixed(2)} ucp/h</div>
+    <div class="formula-line"><span class="formula-var">VMV projetado:</span> ${S.fVmv?.toFixed(2)} km/h</div>
+    <div class="formula-line"><span class="formula-var">PTGS projetado:</span> ${S.fPtgs?.toFixed(2)}%</div>
+    <div class="formula-line"><span class="formula-var">NS por Vp:</span> <span class="formula-result">Nível ${S.fNsVp}</span></div>
+    <div class="formula-line"><span class="formula-var">NS por PTGS:</span> <span class="formula-result">Nível ${S.fNsPtgs}</span></div>
+    <div class="formula-line" style="margin-top:8px;font-weight:600;color:${S.fNsVp===S.nsVp?'var(--ns-a)':'var(--warn)'}">
+      ${S.fNsVp===S.nsVp?'✅ A implantação do empreendimento NÃO altera o nível de serviço da via.':'⚠️ A implantação do empreendimento ALTERA o nível de serviço da via.'}
+    </div>
+  </div>
+ 
+  <div class="memorial-block">
+    <div class="memorial-title">13. REFERÊNCIAS BIBLIOGRÁFICAS</div>
+    <div class="formula-line">DNIT – Departamento Nacional de Infraestrutura de Transportes. <em>Manual de Estudos de Tráfego</em>. 2006.</div>
+    <div class="formula-line">OLIVEIRA, L.K. et al. Proposição de modelos de geração de viagens para Belo Horizonte. <em>Transportes</em>, v.25, n.2, 2017.</div>
+    <div class="formula-line">OLIVEIRA, L.K. et al. Modelo de geração de viagens de carga em áreas urbanas. <em>Transportes</em>, v.24, n.2, 2016.</div>
+    <div class="formula-line">TORQUATO, T.L.L.; RAIA JUNIOR, A.A. Modelos de geração de viagens para condomínios residenciais horizontais. <em>Transportes</em>, v.22, n.1, 2014.</div>
+    <div class="formula-line">GRIECO, E.P.; PORTUGAL, L.S. Taxas de geração de viagens em condomínios residenciais – estudo de caso. <em>Transportes</em>, v.18, n.1, 2010.</div>
+    <div class="formula-line">FREITAS, G.V. Metodologia de delimitação de área de influência e elaboração de modelo de geração de viagens para supermercados. Dissertação, UFSC, 2009.</div>
+    <div class="formula-line">CET-SP. Polos geradores de tráfego II. Boletim Técnico nº 36, 2000.</div>
+    <div class="formula-line">PIETROANTONIO, L.B.N. <em>Engenharia de tráfego</em>. São Paulo, 1999.</div>
+  </div>
+ 
+  <div class="memorial-block" style="border-color:rgba(0,212,160,0.2)">
+    <div class="memorial-title" style="color:var(--text3)">⚠️ NOTAS METODOLÓGICAS</div>
+    <div class="formula-line" style="color:var(--text3)">1. Esta análise representa um único sentido de tráfego. Para análise completa, devem ser calculados ambos os sentidos.</div>
+    <div class="formula-line" style="color:var(--text3)">2. O fator fG foi determinado assumindo-se que o volume do sentido oposto é equivalente ao sentido analisado (estimativa). Para rigor, coletar dados de ambos os sentidos.</div>
+    <div class="formula-line" style="color:var(--text3)">3. V15max foi estimado como Vhp/4 (distribuição uniforme dentro da hora de pico), resultando em FHP=1. Em situações onde se disponha de dados de 15 minutos, recalcular com V15max observado.</div>
+    <div class="formula-line" style="color:var(--text3)">4. Viagens de recreio (Pvr) foram assumidas como zero. Caso o perfil viário inclua trânsito turístico ou de lazer relevante, coletar e inserir esta proporção.</div>
+    <div class="formula-line" style="color:var(--text3)">5. Os modelos de geração de viagens selecionados são de natureza estatística e representam o comportamento médio de empreendimentos similares. Modelos locais tendem a ser mais precisos (Oliveira et al. 2017).</div>
+    <div class="formula-line" style="color:var(--text3)">6. Gerado automaticamente por ETV · Sistema de Estudo de Tráfego Veicular — VIVA Assessoria Ambiental · Itajaí/SC — ${new Date().toLocaleDateString('pt-BR')}</div>
+  </div>`;
+ 
+  document.getElementById('memorial-content').innerHTML = html;
+}
+ 
+// ==================== HELPERS ====================
+function setText(id, val) { const el=document.getElementById(id); if(el) el.textContent=val; }
+function setNsBadge(id, ns) {
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.textContent = ns;
+  el.className = `ns-badge ns-large ns-${ns}`;
+}
+ 
+function calcularTudo() {
+  calcularContagem();
+  calcularVFL();
+  calcularDiagnostico();
+  gerarViagens();
+  calcularCenarioFuturo();
+  preencherComparacao();
+  alert('✅ Todos os módulos calculados. Navegue pelos painéis para ver os resultados.');
+}
+ 
+function updateHeader() {}
+ 
+function exportarMemorial() {
+  const content = document.getElementById('memorial-content')?.innerText||'';
+  const blob = new Blob([content], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `Memorial_ETV_${document.getElementById('codigoEstudo')?.value||'estudo'}.txt`;
+  a.click();
+}
+ 
+function exportJSON() {
+  const data = {
+    cadastro: {
+      nome: document.getElementById('nomeEstudo')?.value,
+      codigo: document.getElementById('codigoEstudo')?.value,
+      via: document.getElementById('viaAnalise')?.value,
+      data: document.getElementById('dataContagem')?.value,
+    },
+    contagem: S.contagem,
+    parametros: { bvfl:S.bvfl, ffa:S.ffa, fA:S.fA, vfl:S.vfl, tipoTerreno:S.tipoTerreno, distDir:S.distDir, zonaUltra:S.zonaUltra },
+    resultados: { nsVp:S.nsVp, nsPtgs:S.nsPtgs, vp:S.vp, vmv:S.vmv, ptgs:S.ptgs },
+    empreendimento: { tipo:S.tipoEmp, viagens:S.viagensGeradas },
+    futuro: { nsVp:S.fNsVp, nsPtgs:S.fNsPtgs, vp:S.fVp, vmv:S.fVmv }
+  };
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='etv_export.json'; a.click();
+}
+ 
+function importJSON() {
+  const input = document.createElement('input');
+  input.type='file'; input.accept='.json';
+  input.onchange = (e) => {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const d = JSON.parse(ev.target.result);
+        if(d.cadastro) {
+          if(d.cadastro.nome) document.getElementById('nomeEstudo').value=d.cadastro.nome;
+          if(d.cadastro.codigo) document.getElementById('codigoEstudo').value=d.cadastro.codigo;
+          if(d.cadastro.via) document.getElementById('viaAnalise').value=d.cadastro.via;
+          if(d.cadastro.data) document.getElementById('dataContagem').value=d.cadastro.data;
+        }
+        alert('✅ Arquivo importado com sucesso!');
+      } catch(err) { alert('Erro ao importar: '+err.message); }
+    };
+    reader.readAsText(e.target.files[0]);
+  };
+  input.click();
+}
+ 
+// ==================== INIT ====================
+window.addEventListener('DOMContentLoaded', () => {
+  initContagemTable();
+  calcularVFL();
+  // Auto-update Ec/Evr quando terreno muda
+  document.getElementById('tipoTerreno')?.addEventListener('change', () => {
+    S.tipoTerreno = document.getElementById('tipoTerreno').value;
+    S.ec = TBL_EC[S.tipoTerreno];
+    S.evr = TBL_EVR[S.tipoTerreno];
+    document.getElementById('ec').value = S.ec;
+    document.getElementById('evr').value = S.evr;
+  });
+  // Set today as default date
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('dataContagem').value = today;
+});
+</script>
+</body>
+</html>
