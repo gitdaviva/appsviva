@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAES CV162-2026 | VIVA Assessoria Ambiental</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy-950: #021B3A;
+  --navy-900: #062A5E;
+  --navy-800: #0B3A75;
+  --navy-700: #0E4A8F;
+  --navy-600: #1256A8;
+  --ice-50: #F6F8FB;
+  --ice-100: #E2E8F0;
+  --accent: #1256A8;
+  --accent-light: #3B82F6;
+  --text-muted: #B6BFD3;
+  --text-light: rgba(255,255,255,0.88);
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --glass-hover: rgba(255,255,255,0.07);
+  --gold: #C9A84C;
+  --gold-dim: rgba(201,168,76,0.10);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--navy-950);
+  color:#fff;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ═══ SCROLLBAR ═══ */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--navy-700);border-radius:2px}
+
+/* ═══ NAV ═══ */
+#topnav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(2,27,58,0.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 32px;height:60px;
+}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.nav-logo img{height:22px;opacity:0.9}
+.nav-ref{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);letter-spacing:2px}
+.nav-links{display:flex;gap:4px}
+.nav-link{
+  font-size:11px;font-weight:500;color:var(--text-muted);
+  padding:6px 12px;border-radius:6px;cursor:pointer;
+  transition:all 0.2s;text-decoration:none;letter-spacing:0.3px;
+}
+.nav-link:hover{background:var(--glass);color:#fff}
+.nav-link.active{background:var(--navy-800);color:#fff}
+
+/* ═══ HERO ═══ */
+#hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:80px 32px 60px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(11,58,117,0.4) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 70%, rgba(18,86,168,0.2) 0%, transparent 50%),
+    var(--navy-950);
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+.hero-inner{position:relative;z-index:2;max-width:1100px;width:100%;text-align:center}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(11,58,117,0.6);border:1px solid rgba(18,86,168,0.4);
+  border-radius:100px;padding:7px 18px;margin-bottom:28px;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;color:var(--accent-light);text-transform:uppercase;
+}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent-light);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.85)}}
+
+.hero-title{font-size:clamp(2.8rem,7vw,6rem);font-weight:800;line-height:1.05;letter-spacing:-0.03em;margin-bottom:8px}
+.hero-title .line1{color:#fff}
+.hero-title .line2{
+  background:linear-gradient(135deg, #fff 0%, var(--accent-light) 40%, #93C5FD 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-subtitle{
+  font-size:clamp(1rem,2vw,1.2rem);color:var(--text-muted);
+  font-weight:300;max-width:680px;margin:16px auto 0;line-height:1.65;
+}
+.hero-meta{
+  display:flex;justify-content:center;gap:32px;margin-top:40px;flex-wrap:wrap;
+}
+.meta-item{text-align:center}
+.meta-val{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:#fff}
+.meta-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
+.meta-divider{width:1px;background:var(--glass-border)}
+.hero-logos{
+  display:flex;align-items:center;justify-content:center;gap:28px;
+  margin-top:44px;
+}
+.hero-logos img{height:28px;opacity:0.8}
+.hero-logos .sep{font-size:20px;color:var(--text-muted);font-weight:200}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,var(--navy-800),var(--navy-700));
+  border:1px solid rgba(18,86,168,0.5);
+  padding:12px 28px;border-radius:10px;
+  font-size:13px;font-weight:600;color:#fff;
+  cursor:pointer;margin-top:36px;transition:all 0.3s;
+  text-decoration:none;
+}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(18,86,168,0.3)}
+.hero-cta svg{transition:transform 0.3s}
+.hero-cta:hover svg{transform:translateY(4px)}
+
+/* ═══ SECTION WRAPPER ═══ */
+.section{
+  max-width:1200px;margin:0 auto;padding:80px 32px;
+}
+.section-divider{
+  height:1px;background:linear-gradient(90deg,transparent,var(--glass-border),transparent);
+  margin:0 32px;
+}
+.section-tag{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:3px;text-transform:uppercase;color:var(--accent-light);
+  margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.section-tag::before{content:'';width:24px;height:1px;background:var(--accent-light)}
+.section-title{font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:10px}
+.section-desc{color:var(--text-muted);font-size:14px;line-height:1.7;max-width:680px;margin-bottom:36px}
+
+/* ═══ CARDS ═══ */
+.card-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card-split{display:flex;flex-direction:column;gap:24px}
+
+.glass-card{
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:14px;padding:22px;
+  transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
+  position:relative;overflow:hidden;
+}
+.glass-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent-light),transparent);
+  opacity:0;transition:opacity 0.3s;
+}
+.glass-card:hover{transform:translateY(-3px);border-color:rgba(18,86,168,0.3)}
+.glass-card:hover::before{opacity:1}
+.glass-card h3{font-size:0.95rem;font-weight:700;margin-bottom:7px;color:#fff}
+.glass-card p{color:var(--text-muted);font-size:12.5px;line-height:1.6}
+
+.card-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(18,86,168,0.25);border:1px solid rgba(18,86,168,0.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;margin-bottom:12px;
+}
+
+/* ═══ STAT STRIP ═══ */
+.stat-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:14px;overflow:hidden;margin-bottom:32px;
+}
+.stat-cell{
+  padding:22px 24px;border-right:1px solid var(--glass-border);
+  position:relative;
+}
+.stat-cell:last-child{border-right:none}
+.stat-num{font-size:1.9rem;font-weight:900;color:#fff;line-height:1}
+.stat-unit{font-size:0.75rem;font-weight:500;color:var(--accent-light);margin-left:4px}
+.stat-lbl{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:5px}
+.stat-bar{
+  position:absolute;bottom:0;left:0;height:2px;
+  background:linear-gradient(90deg,var(--accent-light),transparent);
+}
+
+/* ═══ INFO TABLE ═══ */
+.info-table{width:100%;border-collapse:collapse}
+.info-table tr{border-bottom:1px solid var(--glass-border)}
+.info-table tr:last-child{border-bottom:none}
+.info-table td{padding:10px 0;font-size:12.5px;vertical-align:top}
+.info-table td:first-child{color:var(--text-muted);width:45%;font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;padding-right:12px}
+.info-table td:last-child{color:#fff;font-weight:400}
+
+/* ═══ FEATURE LIST ═══ */
+.feat-list{list-style:none}
+.feat-list li{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:8px 0;border-bottom:1px solid var(--glass-border);
+  font-size:13px;color:var(--text-light);
+}
+.feat-list li:last-child{border-bottom:none}
+.feat-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--accent-light);margin-top:7px;flex-shrink:0;
+}
+.feat-dot.red{background:#F87171}
+.feat-dot.yellow{background:#FCD34D}
+.feat-dot.green{background:#34D399}
+
+/* ═══ RISK BADGE ═══ */
+.risk-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 10px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:0.5px;
+}
+.risk-high{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);color:#FCA5A5}
+.risk-med{background:rgba(252,211,77,0.12);border:1px solid rgba(252,211,77,0.3);color:#FCD34D}
+.risk-low{background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.3);color:#6EE7B7}
+
+/* ═══ HIGHLIGHT BOX ═══ */
+.hl-box{
+  border-left:3px solid var(--accent-light);
+  background:rgba(18,86,168,0.08);
+  padding:16px 18px;border-radius:0 12px 12px 0;
+  margin:16px 0;
+}
+.hl-box.warning{border-left-color:#F59E0B;background:rgba(245,158,11,0.07)}
+.hl-box.danger{border-left-color:#EF4444;background:rgba(239,68,68,0.07)}
+.hl-box.success{border-left-color:#10B981;background:rgba(16,185,129,0.07)}
+.hl-box h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
+.hl-box p,.hl-box li{font-size:12.5px;color:var(--text-light);line-height:1.6}
+
+/* ═══ DATA TABLE ═══ */
+.data-table{width:100%;border-collapse:collapse;margin-top:12px}
+.data-table th{
+  text-align:left;font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:1px;
+  color:var(--text-muted);padding:8px 12px;
+  border-bottom:1px solid var(--glass-border);
+}
+.data-table td{
+  padding:10px 12px;font-size:12.5px;color:var(--text-light);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.data-table tr:hover td{background:var(--glass)}
+.data-table .total-row{
+  background:rgba(18,86,168,0.15);border:1px solid rgba(18,86,168,0.25);
+}
+.data-table .total-row td{font-weight:700;color:#fff}
+.percent-pill{
+  display:inline-block;background:rgba(18,86,168,0.25);
+  border-radius:4px;padding:2px 8px;font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--accent-light);
+}
+
+/* ═══ SECTION HEADER ═══ */
+.sec-header{
+  display:flex;align-items:center;gap:16px;
+  padding:20px 24px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:12px 12px 0 0;border-bottom:none;
+}
+.sec-num{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--accent-light);letter-spacing:2px;
+  background:rgba(18,86,168,0.2);border:1px solid rgba(18,86,168,0.3);
+  padding:5px 10px;border-radius:6px;flex-shrink:0;
+}
+.sec-header h2{font-size:1.15rem;font-weight:700}
+.sec-body{
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:0 0 12px 12px;padding:24px;
+}
+.report-section{margin-bottom:32px}
+
+/* ═══ MAP VIEWER ═══ */
+.map-viewer-wrap{
+  position:relative;border-radius:14px;overflow:hidden;
+  border:1px solid var(--glass-border);
+  background:#000;
+}
+.map-viewer-controls{
+  position:absolute;top:12px;right:12px;z-index:20;
+  display:flex;flex-direction:column;gap:6px;
+}
+.mvc-sep{height:6px}
+.mvc-btn{
+  width:34px;height:34px;border-radius:8px;
+  background:rgba(2,27,58,0.85);backdrop-filter:blur(10px);
+  border:1px solid var(--glass-border);
+  color:#fff;font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+.mvc-btn:hover{background:var(--navy-800);border-color:rgba(18,86,168,0.5)}
+.map-zoom-display{
+  position:absolute;bottom:12px;left:12px;z-index:20;
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  background:rgba(2,27,58,0.85);backdrop-filter:blur(10px);
+  border:1px solid var(--glass-border);
+  padding:5px 10px;border-radius:6px;color:var(--accent-light);letter-spacing:1px;
+  display:flex;gap:10px;align-items:center;
+}
+.map-instructions{
+  position:absolute;bottom:12px;right:12px;z-index:20;
+  font-size:10px;color:var(--text-muted);
+  background:rgba(2,27,58,0.8);backdrop-filter:blur(8px);
+  border:1px solid var(--glass-border);
+  padding:5px 10px;border-radius:6px;
+  font-family:'JetBrains Mono',monospace;letter-spacing:0.5px;
+}
+.map-container{
+  width:100%;height:580px;overflow:hidden;cursor:grab;
+  background:rgba(0,0,0,0.4);position:relative;user-select:none;
+}
+/* Gallery 2-col: maintain generous landscape height */
+.map-gallery .map-container{height:580px}
+/* Single-col full-width maps: taller */
+.map-gallery.single .map-container{height:580px}
+/* Split layout side maps */
+.card-split .map-container{height:580px}
+.map-container:active{cursor:grabbing}
+.map-container img{
+  position:absolute;transform-origin:0 0;
+  max-width:none;max-height:none;transition:none;
+  display:block;
+}
+.map-label{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);
+  padding:8px 14px;background:var(--glass);border-bottom:1px solid var(--glass-border);
+}
+.map-minimap{
+  position:absolute;top:12px;left:12px;z-index:20;
+  width:80px;height:60px;
+  background:rgba(2,27,58,0.9);backdrop-filter:blur(10px);
+  border:1px solid var(--glass-border);border-radius:6px;overflow:hidden;
+}
+.map-minimap-img{width:100%;height:100%;object-fit:cover;opacity:0.6}
+.map-minimap-rect{
+  position:absolute;top:0;left:0;
+  border:1.5px solid var(--accent-light);
+  pointer-events:none;box-shadow:0 0 0 1px rgba(18,86,168,0.3);
+}
+
+/* ═══ SCENARIO COMPARISON ═══ */
+.scenario-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.scenario-card{border-radius:14px;overflow:hidden;border:1px solid var(--glass-border)}
+.scenario-head{
+  padding:14px 18px;display:flex;align-items:center;justify-content:space-between;
+}
+.scenario-head.critical{background:rgba(239,68,68,0.12)}
+.scenario-head.ideal{background:rgba(16,185,129,0.10)}
+.scenario-head h3{font-size:0.9rem;font-weight:700}
+.scenario-body{padding:18px;background:var(--glass)}
+
+/* ═══ FLOWCHART ═══ */
+.flow-steps{display:flex;gap:0;align-items:stretch;flex-wrap:wrap}
+.flow-step{
+  flex:1;min-width:130px;
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:10px;padding:16px 14px;text-align:center;
+  position:relative;
+}
+.flow-step:not(:last-child)::after{
+  content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);
+  color:var(--accent-light);font-size:14px;z-index:1;
+}
+.flow-step-num{
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(18,86,168,0.3);border:1px solid rgba(18,86,168,0.5);
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 8px;color:var(--accent-light);
+}
+.flow-step h4{font-size:11px;font-weight:700;margin-bottom:5px}
+.flow-step p{font-size:10.5px;color:var(--text-muted);line-height:1.5}
+
+/* ═══ TEAM ═══ */
+.team-card{
+  display:flex;gap:20px;align-items:flex-start;
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:14px;padding:22px;
+}
+.team-avatar{
+  width:90px;height:90px;border-radius:12px;object-fit:cover;
+  border:2px solid var(--glass-border);flex-shrink:0;
+}
+.team-name{font-size:1.05rem;font-weight:700}
+.team-role{font-size:12px;color:var(--text-muted);margin:3px 0 10px}
+.tag-row{display:flex;flex-wrap:wrap;gap:5px}
+.tag{
+  background:var(--navy-800);border:1px solid rgba(255,255,255,0.06);
+  padding:3px 9px;border-radius:12px;font-size:10px;color:var(--text-light);
+}
+.tag.blue{background:rgba(18,86,168,0.3);border-color:rgba(18,86,168,0.4);color:var(--accent-light)}
+
+/* ═══ MAP IMAGES GALLERY ═══ */
+.map-gallery{display:flex;flex-direction:column;gap:24px}
+.map-gallery.single{display:flex;flex-direction:column;gap:24px}
+
+/* ═══ LEGEND ITEM ═══ */
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text-muted)}
+.legend-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* ═══ PROGRESS BAR ═══ */
+.prog-row{margin-bottom:12px}
+.prog-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font-size:12px}
+.prog-label span:first-child{color:var(--text-light)}
+.prog-label span:last-child{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent-light)}
+.prog-track{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(0.16,1,0.3,1)}
+.prog-fill.red{background:linear-gradient(90deg,#F87171,#EF4444)}
+.prog-fill.orange{background:linear-gradient(90deg,#FB923C,#F97316)}
+.prog-fill.yellow{background:linear-gradient(90deg,#FCD34D,#F59E0B)}
+.prog-fill.blue{background:linear-gradient(90deg,var(--accent-light),var(--accent))}
+.prog-fill.green{background:linear-gradient(90deg,#34D399,#10B981)}
+
+/* ═══ CONCLUSION ═══ */
+.concl-card{
+  background:linear-gradient(135deg,rgba(11,58,117,0.4),rgba(2,27,58,0.8));
+  border:1px solid rgba(18,86,168,0.3);
+  border-radius:16px;padding:32px;text-align:center;
+}
+.concl-card h2{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;margin-bottom:12px}
+.concl-card p{color:var(--text-muted);font-size:14px;line-height:1.7;max-width:700px;margin:0 auto}
+
+/* ═══ FOOTER ═══ */
+footer{
+  border-top:1px solid var(--glass-border);
+  padding:32px;text-align:center;
+  font-size:11px;color:var(--text-muted);
+  font-family:'JetBrains Mono',monospace;letter-spacing:1px;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:900px){
+  .card-grid-3,.card-grid-2,.card-split,.scenario-grid{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .meta-divider{display:none}
+  #topnav .nav-links{display:none}
+  .flow-steps{flex-direction:column}
+  .flow-step:not(:last-child)::after{display:none}
+  .map-gallery{grid-template-columns:1fr}
+  .map-container{height:420px}
+  .map-gallery .map-container{height:420px}
+  .card-split .map-container{height:420px}
+}
+@media(max-width:600px){
+  .section{padding:60px 20px}
+  .stat-strip{grid-template-columns:1fr 1fr}
+}
+
+/* ═══ ANIMATE ON SCROLL ═══ */
+.aos{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+.aos.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="topnav">
+  <div class="nav-logo">
+    <img src="https://static.wixstatic.com/media/9c5691_126c696fafa040d7bec9dd823b499482~mv2.png/v1/fill/w_300,h_88,al_c,q_85,usm_0.66_1.00_0.01,enc_avif/logo_viva_final_transparencia.png" alt="VIVA">
+    <span class="nav-ref">CV162-2026 · PAES</span>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link" href="#identificacao">Identificação</a>
+    <a class="nav-link" href="#localizacao">Localização</a>
+    <a class="nav-link" href="#restricoes">Restrições</a>
+    <a class="nav-link" href="#area-util">Área Útil</a>
+    <a class="nav-link" href="#licenciamento">Licenciamento</a>
+    <a class="nav-link" href="#conclusao">Conclusão</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      PLANEJAMENTO AMBIENTAL ESTRATÉGICO
+    </div>
+    <h1 class="hero-title">
+      <div class="line1">Planejamento Ambiental</div>
+      <div class="line2">Estratégico — PAES</div>
+    </h1>
+    <p class="hero-subtitle">
+      Rua Laura dos Santos Laurindo, Nº 284, Praia Brava, Itajaí/SC · Cód. CV162-2026 · Coordenação: Victor Valente Silvestre · CREA/SC 118978-4
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <div class="meta-num">995<span class="meta-unit" style="font-size:1rem">K m²</span></div>
+        <div class="meta-label">Área Total</div>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <div class="meta-num">44<span class="meta-unit">%</span></div>
+        <div class="meta-label">APP Total</div>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <div class="meta-num">81<span class="meta-unit">%</span></div>
+        <div class="meta-label">Alta Suscetibilidade</div>
+      </div>
+      <div class="meta-divider"></div>
+      <div class="meta-item">
+        <div class="meta-num">94<span class="meta-unit">%</span></div>
+        <div class="meta-label">ZPA</div>
+      </div>
+    </div>
+    <div class="hero-logos">
+      <img src="https://static.wixstatic.com/media/9c5691_126c696fafa040d7bec9dd823b499482~mv2.png/v1/fill/w_300,h_88,al_c,q_85,usm_0.66_1.00_0.01,enc_avif/logo_viva_final_transparencia.png" alt="VIVA">
+      <span class="sep">×</span>
+      <span style="font-size:13px;color:var(--text-muted);font-weight:500">VENDECASA Empreendimentos Imobiliários Ltda.</span>
+    </div>
+    <a href="#identificacao" class="hero-cta">
+      Explorar Relatório
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- IDENTIFICAÇÃO -->
+<div class="section-divider"></div>
+<section id="identificacao" class="section">
+  <div class="section-tag">01 · Identificação</div>
+  <h2 class="section-title">Dados do Empreendimento</h2>
+  <p class="section-desc">Identificação do empreendedor, imóvel e equipe técnica responsável pela elaboração deste Planejamento Ambiental Estratégico.</p>
+
+  <div class="card-split">
+    <div>
+      <div class="glass-card" style="margin-bottom:16px">
+        <div class="card-icon">🏢</div>
+        <h3>Empreendedor</h3>
+        <table class="info-table" style="margin-top:8px">
+          <tr><td>Razão Social</td><td>VENDECASA Empreendimentos Imobiliários Ltda.</td></tr>
+          <tr><td>CNPJ</td><td>85.134.864/0001-59</td></tr>
+          <tr><td>Endereço</td><td>Av. Brasil, 1500, Sl 302 — Centro, Itajaí/SC</td></tr>
+          <tr><td>Representante</td><td>Horacio Platao Goes De Figueiredo</td></tr>
+        </table>
+      </div>
+      <div class="glass-card">
+        <div class="card-icon">📍</div>
+        <h3>Imóvel</h3>
+        <table class="info-table" style="margin-top:8px">
+          <tr><td>Endereço</td><td>Rua Laura dos Santos Laurindo, 284 — Praia Brava</td></tr>
+          <tr><td>Município</td><td>Itajaí/SC</td></tr>
+          <tr><td>Matrícula</td><td>24.293</td></tr>
+          <tr><td>Área Total</td><td>995.345,30 m²</td></tr>
+          <tr><td>Latitude/Longitude</td><td>-26.943664° / -48.644297°</td></tr>
+          <tr><td>Datum</td><td>SIRGAS 2000 · Zona 22J</td></tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="team-card aos">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRecHBHZvaAjJlJoFMd3rJaUfnEGDbgZU_cA&s" class="team-avatar" alt="Victor">
+        <div>
+          <div class="team-name">Victor Valente Silvestre</div>
+          <div class="team-role">Coordenação Técnica · VIVA Assessoria Ambiental</div>
+          <div class="tag-row">
+            <span class="tag blue">CREA/SC 118978-4</span>
+            <span class="tag">Eng. Sanitarista e Ambiental</span>
+            <span class="tag">MSc. Eng. Ambiental</span>
+            <span class="tag">Doutorando UFSC</span>
+          </div>
+          <div style="margin-top:14px">
+            <ul class="feat-list">
+              <li><span class="feat-dot"></span>Ex-Superintendente do órgão ambiental de Itajaí</li>
+              <li><span class="feat-dot"></span>Ex-Diretor de Saneamento do SEMASA (2023)</li>
+              <li><span class="feat-dot"></span>Presidente da CT de Licenciamento — ACES</li>
+              <li><span class="feat-dot"></span>Formação complementar: EPFL (Suíça) · UNC (EUA)</li>
+              <li><span class="feat-dot"></span>1.700+ processos de licenciamento conduzidos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <div class="hl-box">
+          <h4>🏢 VIVA Assessoria Ambiental</h4>
+          <p>CNPJ 22.153.368/0001-22 · Seixas Business Tower, Rua Dr. Nereu Ramos, 197, Sala 1303, Centro, Itajaí/SC · CEP 88.301-215</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<div class="section-divider"></div>
+<section id="localizacao" class="section">
+  <div class="section-tag">02 · Diagnóstico Preliminar</div>
+  <h2 class="section-title">Localização & Zoneamento</h2>
+  <p class="section-desc">O imóvel localiza-se no bairro Praia Brava, em zona de transição entre a ocupação urbana consolidada e remanescentes de áreas naturais, com acesso pela Av. Osvaldo Reis (SC-412).</p>
+
+  <div class="stat-strip">
+    <div class="stat-cell">
+      <div class="stat-num">995<span class="stat-unit">K m²</span></div>
+      <div class="stat-lbl">Área Total</div>
+      <div class="stat-bar" style="width:100%"></div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">24.293</div>
+      <div class="stat-lbl">Matrícula</div>
+      <div class="stat-bar" style="width:40%"></div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">4</div>
+      <div class="stat-lbl">Zonas Incidentes</div>
+      <div class="stat-bar" style="width:60%"></div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">1.262<span class="stat-unit">m</span></div>
+      <div class="stat-lbl">Dist. Linha de Marinha</div>
+      <div class="stat-bar" style="width:75%"></div>
+    </div>
+  </div>
+
+  <div class="map-gallery" style="margin-bottom:24px">
+    <div class="map-viewer-wrap aos">
+      <div class="map-label">MAPA DE LOCALIZAÇÃO — CV162-2026</div>
+      <div class="map-container" id="mc-local">
+        <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_c5cc60e117954b3eb94fb67c040a2271~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-local" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+        <img src="https://static.wixstatic.com/media/9c5691_c5cc60e117954b3eb94fb67c040a2271~mv2.png" alt="Localização" id="mi-local">
+      </div>
+      <div class="map-viewer-controls">
+        <button class="mvc-btn" onclick="zoomMap('local',1.25)" title="Zoom +">+</button>
+        <button class="mvc-btn" onclick="zoomMap('local',0.8)" title="Zoom -">−</button>
+        <button class="mvc-btn" onclick="resetMap('local')" title="Reset" style="font-size:11px">⊙</button>
+        <button class="mvc-btn" onclick="fitMap('local')" title="Fit" style="font-size:11px">⊡</button>
+      </div>
+      <div class="map-zoom-display" id="mz-local"><span id="mzoom-local">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-local">0°</span></div>
+      <div class="map-instructions">scroll · drag · dbl-click</div>
+    </div>
+    <div class="map-viewer-wrap aos">
+      <div class="map-label">ZONEAMENTO MUNICIPAL — CV162-2026</div>
+      <div class="map-container" id="mc-zone">
+        <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_848bee80eb874c2688c399761a71071a~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-zone" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+        <img src="https://static.wixstatic.com/media/9c5691_848bee80eb874c2688c399761a71071a~mv2.png" alt="Zoneamento" id="mi-zone">
+      </div>
+      <div class="map-viewer-controls">
+        <button class="mvc-btn" onclick="zoomMap('zone',1.25)">+</button>
+        <button class="mvc-btn" onclick="zoomMap('zone',0.8)">−</button>
+        <button class="mvc-btn" onclick="resetMap('zone')" style="font-size:11px">⊙</button>
+        <button class="mvc-btn" onclick="fitMap('zone')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('zone',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('zone',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('zone')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+      </div>
+      <div class="map-zoom-display" id="mz-zone"><span id="mzoom-zone">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-zone">0°</span></div>
+      <div class="map-instructions">scroll · drag · dbl-click</div>
+    </div>
+  </div>
+
+  <div class="card-grid-3">
+    <div class="glass-card aos">
+      <div class="card-icon">🏙️</div>
+      <h3>ZMC3 — Zona Mista Central 3</h3>
+      <p>CA máx. 6,5 · TO base 80% / torre 60% · Gabarito até 105m · Permeabilidade mín. 10%</p>
+    </div>
+    <div class="glass-card aos">
+      <div class="card-icon">🔀</div>
+      <h3>ZTU1 — Zona de Transição Urbana</h3>
+      <p>CA máx. 4,0 · TO base 70% / torre 40% · Gabarito até 43,40m · Permeabilidade mín. 25%</p>
+    </div>
+    <div class="glass-card aos">
+      <div class="card-icon">🌿</div>
+      <h3>ZPA — Zona de Proteção Ambiental</h3>
+      <p>CA máx. 0,5 · TO máx. 20% · Lote mín. 2.000m² · Permeabilidade mín. 40% · 93,98% da área</p>
+    </div>
+  </div>
+
+  <div style="margin-top:24px">
+    <div class="section-tag" style="margin-top:32px">Histórico de Uso</div>
+    <div class="map-gallery" style="margin-top:16px">
+      <div class="map-viewer-wrap aos">
+        <div class="map-label">HISTÓRICO 1957 e 1978</div>
+        <div class="map-container" id="mc-hist1">
+          <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_fb9d9cbca8ce4acf91c3aaae1b7cb60f~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-hist1" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+          <img src="https://static.wixstatic.com/media/9c5691_fb9d9cbca8ce4acf91c3aaae1b7cb60f~mv2.png" alt="Histórico 1957-1978" id="mi-hist1">
+        </div>
+        <div class="map-viewer-controls">
+          <button class="mvc-btn" onclick="zoomMap('hist1',1.25)">+</button>
+          <button class="mvc-btn" onclick="zoomMap('hist1',0.8)">−</button>
+          <button class="mvc-btn" onclick="resetMap('hist1')" style="font-size:11px">⊙</button>
+          <button class="mvc-btn" onclick="fitMap('hist1')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('hist1',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('hist1',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('hist1')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+        </div>
+        <div class="map-zoom-display" id="mz-hist1"><span id="mzoom-hist1">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-hist1">0°</span></div>
+        <div class="map-instructions">scroll · drag · dbl-click</div>
+      </div>
+      <div class="map-viewer-wrap aos">
+        <div class="map-label">HISTÓRICO 2004 e 2026</div>
+        <div class="map-container" id="mc-hist2">
+          <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_2e2b98df7be345c9b4fb69b36ba13cd1~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-hist2" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+          <img src="https://static.wixstatic.com/media/9c5691_2e2b98df7be345c9b4fb69b36ba13cd1~mv2.png" alt="Histórico 2004-2026" id="mi-hist2">
+        </div>
+        <div class="map-viewer-controls">
+          <button class="mvc-btn" onclick="zoomMap('hist2',1.25)">+</button>
+          <button class="mvc-btn" onclick="zoomMap('hist2',0.8)">−</button>
+          <button class="mvc-btn" onclick="resetMap('hist2')" style="font-size:11px">⊙</button>
+          <button class="mvc-btn" onclick="fitMap('hist2')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('hist2',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('hist2',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('hist2')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+        </div>
+        <div class="map-zoom-display" id="mz-hist2"><span id="mzoom-hist2">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-hist2">0°</span></div>
+        <div class="map-instructions">scroll · drag · dbl-click</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESTRIÇÕES AMBIENTAIS -->
+<div class="section-divider"></div>
+<section id="restricoes" class="section">
+  <div class="section-tag">03 · Aspectos Ambientais</div>
+  <h2 class="section-title">Restrições & Condicionantes</h2>
+  <p class="section-desc">Análise integrada das condicionantes ambientais incidentes sobre o imóvel, identificando riscos, APPs, declividade, geologia, pedologia e demais aspectos relevantes ao licenciamento ambiental.</p>
+
+  <!-- DECLIVIDADE -->
+  <div class="report-section aos">
+    <div class="sec-header">
+      <span class="sec-num">6.1</span>
+      <h2>Declividade & Áreas de Uso Restrito</h2>
+      <span class="risk-badge risk-high">RISCO ALTO</span>
+    </div>
+    <div class="sec-body">
+      <div class="card-split">
+        <div>
+          <div class="prog-row">
+            <div class="prog-label"><span>Declividade entre 25° e 45° (Uso Restrito)</span><span>60,12%</span></div>
+            <div class="prog-track"><div class="prog-fill orange" style="width:60.12%"></div></div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-label"><span>Declividade > 45° (APP)</span><span>2,03%</span></div>
+            <div class="prog-track"><div class="prog-fill red" style="width:15%"></div></div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-label"><span>Entre 9° e 25°</span><span>~26%</span></div>
+            <div class="prog-track"><div class="prog-fill yellow" style="width:26%"></div></div>
+          </div>
+          <div class="prog-row">
+            <div class="prog-label"><span>0° a 9° (Baixa Declividade)</span><span>~12%</span></div>
+            <div class="prog-track"><div class="prog-fill green" style="width:12%"></div></div>
+          </div>
+          <div class="hl-box warning" style="margin-top:16px">
+            <h4>⚠ Premissa Técnica</h4>
+            <p>Intervenções em áreas com declividade 25°–45° exigem fundamentação técnica e jurídica no âmbito do licenciamento, demonstrando que as restrições do art. 11 do Código Florestal têm escopo primordial em áreas rurais.</p>
+          </div>
+        </div>
+        <div>
+          <div class="map-viewer-wrap">
+            <div class="map-label">MAPA DE DECLIVIDADE</div>
+            <div class="map-container" id="mc-decliv">
+              <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_682515aae19d4ab4928500481b684ef7~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-decliv" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+              <img src="https://static.wixstatic.com/media/9c5691_682515aae19d4ab4928500481b684ef7~mv2.png" alt="Declividade" id="mi-decliv">
+            </div>
+            <div class="map-viewer-controls">
+              <button class="mvc-btn" onclick="zoomMap('decliv',1.25)">+</button>
+              <button class="mvc-btn" onclick="zoomMap('decliv',0.8)">−</button>
+              <button class="mvc-btn" onclick="resetMap('decliv')" style="font-size:11px">⊙</button>
+              <button class="mvc-btn" onclick="fitMap('decliv')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('decliv',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('decliv',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('decliv')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+            </div>
+            <div class="map-zoom-display" id="mz-decliv"><span id="mzoom-decliv">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-decliv">0°</span></div>
+            <div class="map-instructions">scroll · drag · dbl-click</div>
+          </div>
+          <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>0°–9°</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#fde68a"></div>9°–25°</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#fb923c"></div>25°–45° (Restrito)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>>45° (APP)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div class="report-section aos" style="margin-top:24px">
+    <div class="sec-header">
+      <span class="sec-num">6.2</span>
+      <h2>Áreas de Preservação Permanente (APP)</h2>
+      <span class="risk-badge risk-high">44,03% DA ÁREA</span>
+    </div>
+    <div class="sec-body">
+      <div class="data-table-wrap" style="margin-bottom:20px">
+        <table class="data-table">
+          <thead><tr><th>Tipologia</th><th>Fundamentação Legal</th><th>Área (m²)</th><th>% Terreno</th></tr></thead>
+          <tbody>
+            <tr><td>APP por cursos d'água</td><td>Art. 4º, I, "a", Lei 12.651/2012</td><td>417.742,40</td><td><span class="percent-pill">42,00%</span></td></tr>
+            <tr><td>APP por declividade (>45°)</td><td>Art. 4º, V, Lei 12.651/2012</td><td>20.168,49</td><td><span class="percent-pill">2,03%</span></td></tr>
+            <tr class="total-row"><td><strong>TOTAL DE APP</strong></td><td></td><td><strong>437.910,89</strong></td><td><span class="percent-pill">44,03%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="map-gallery">
+        <div class="map-viewer-wrap">
+          <div class="map-label">APP — HIDROGRAFIA E NASCENTES</div>
+          <div class="map-container" id="mc-apphi">
+            <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_3b9eebb905714216b866fc91b5a22d79~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-apphi" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+            <img src="https://static.wixstatic.com/media/9c5691_3b9eebb905714216b866fc91b5a22d79~mv2.png" alt="APP Hidrografia" id="mi-apphi">
+          </div>
+          <div class="map-viewer-controls">
+            <button class="mvc-btn" onclick="zoomMap('apphi',1.25)">+</button>
+            <button class="mvc-btn" onclick="zoomMap('apphi',0.8)">−</button>
+            <button class="mvc-btn" onclick="resetMap('apphi')" style="font-size:11px">⊙</button>
+            <button class="mvc-btn" onclick="fitMap('apphi')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('apphi',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('apphi',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('apphi')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+          </div>
+          <div class="map-zoom-display" id="mz-apphi"><span id="mzoom-apphi">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-apphi">0°</span></div>
+          <div class="map-instructions">scroll · drag · dbl-click</div>
+        </div>
+        <div class="map-viewer-wrap">
+          <div class="map-label">APP — DECLIVIDADE >45°</div>
+          <div class="map-container" id="mc-appdecl">
+            <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_e5fbc38ecac249d4a9145f5609508539~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-appdecl" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+            <img src="https://static.wixstatic.com/media/9c5691_e5fbc38ecac249d4a9145f5609508539~mv2.png" alt="APP Declividade" id="mi-appdecl">
+          </div>
+          <div class="map-viewer-controls">
+            <button class="mvc-btn" onclick="zoomMap('appdecl',1.25)">+</button>
+            <button class="mvc-btn" onclick="zoomMap('appdecl',0.8)">−</button>
+            <button class="mvc-btn" onclick="resetMap('appdecl')" style="font-size:11px">⊙</button>
+            <button class="mvc-btn" onclick="fitMap('appdecl')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('appdecl',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('appdecl',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('appdecl')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+          </div>
+          <div class="map-zoom-display" id="mz-appdecl"><span id="mzoom-appdecl">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-appdecl">0°</span></div>
+          <div class="map-instructions">scroll · drag · dbl-click</div>
+        </div>
+      </div>
+      <div class="map-viewer-wrap" style="margin-top:16px">
+        <div class="map-label">DEMARCAÇÃO TOTAL DE APP</div>
+        <div class="map-container" id="mc-app">
+          <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_8176b64caf13460c9c06c81fbb2489ca~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-app" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+          <img src="https://static.wixstatic.com/media/9c5691_8176b64caf13460c9c06c81fbb2489ca~mv2.png" alt="APP Total" id="mi-app">
+        </div>
+        <div class="map-viewer-controls">
+          <button class="mvc-btn" onclick="zoomMap('app',1.25)">+</button>
+          <button class="mvc-btn" onclick="zoomMap('app',0.8)">−</button>
+          <button class="mvc-btn" onclick="resetMap('app')" style="font-size:11px">⊙</button>
+          <button class="mvc-btn" onclick="fitMap('app')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('app',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('app',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('app')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+        </div>
+        <div class="map-zoom-display" id="mz-app"><span id="mzoom-app">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-app">0°</span></div>
+        <div class="map-instructions">scroll · drag · dbl-click</div>
+      </div>
+      <div class="hl-box danger" style="margin-top:16px">
+        <h4>⚠ Recomendação Técnica</h4>
+        <p>Recomenda-se a elaboração de <strong>Laudo Hidrogeológico</strong> e <strong>Estudo de Caracterização Hidrográfica</strong> para confirmar a presença e regime dos cursos hídricos, conferindo maior robustez técnica e respaldo jurídico às APPs delimitadas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GEOLOGIA -->
+  <div class="report-section aos" style="margin-top:24px">
+    <div class="sec-header">
+      <span class="sec-num">6.3</span>
+      <h2>Geologia</h2>
+      <span class="risk-badge risk-med">RISCO MODERADO</span>
+    </div>
+    <div class="sec-body">
+      <div class="card-split">
+        <div>
+          <div class="card-grid-2" style="margin-bottom:16px">
+            <div class="glass-card">
+              <h3>Formação Botuverá</h3>
+              <p>Rochas metamórficas com foliação e bandamento composicional. Boa competência geomecânica. Possíveis zonas de fraturamento e alteração intempérica.</p>
+            </div>
+            <div class="glass-card">
+              <h3>Depósitos Praiais Atuais</h3>
+              <p>Sedimentos arenosos inconsolidados de planície costeira. Elevada permeabilidade, baixa coesão. Nível freático potencialmente próximo à superfície.</p>
+            </div>
+          </div>
+          <div class="hl-box">
+            <h4>Recomendações Técnicas</h4>
+            <ul class="feat-list">
+              <li><span class="feat-dot"></span>Sondagens geotécnicas SPT com descrição estratigráfica</li>
+              <li><span class="feat-dot"></span>Análise de estabilidade de taludes e cortes projetados</li>
+              <li><span class="feat-dot"></span>Estudo de fraturamento e orientação estrutural</li>
+              <li><span class="feat-dot"></span>Estudo hidrogeológico de reconhecimento</li>
+            </ul>
+          </div>
+        </div>
+        <div class="map-viewer-wrap">
+          <div class="map-label">FORMAÇÕES GEOLÓGICAS</div>
+          <div class="map-container" id="mc-geo">
+            <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_107d4cf3072e40eaba740026b7687758~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-geo" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+            <img src="https://static.wixstatic.com/media/9c5691_107d4cf3072e40eaba740026b7687758~mv2.png" alt="Geologia" id="mi-geo">
+          </div>
+          <div class="map-viewer-controls">
+            <button class="mvc-btn" onclick="zoomMap('geo',1.25)">+</button>
+            <button class="mvc-btn" onclick="zoomMap('geo',0.8)">−</button>
+            <button class="mvc-btn" onclick="resetMap('geo')" style="font-size:11px">⊙</button>
+            <button class="mvc-btn" onclick="fitMap('geo')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('geo',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('geo',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('geo')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+          </div>
+          <div class="map-zoom-display" id="mz-geo"><span id="mzoom-geo">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-geo">0°</span></div>
+          <div class="map-instructions">scroll · drag · dbl-click</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PEDOLOGIA -->
+  <div class="report-section aos" style="margin-top:24px">
+    <div class="sec-header">
+      <span class="sec-num">6.4</span>
+      <h2>Pedologia</h2>
+    </div>
+    <div class="sec-body">
+      <div class="card-split">
+        <div>
+          <p style="font-size:13px;color:var(--text-light);line-height:1.7;margin-bottom:14px">
+            A área apresenta predominância de <strong>Argissolos</strong>, desenvolvidos a partir do intemperismo de rochas metamórficas da Formação Botuverá. Presença de horizonte B textural (Bt) com aumento de argila em profundidade, favorecendo escoamento lateral subsuperficial.
+          </p>
+          <div class="hl-box warning">
+            <h4>Implicações Construtivas</h4>
+            <p>Susceptibilidade moderada à erosão quando expostos. Redução da resistência ao cisalhamento em condições de elevada saturação hídrica. Requer manejo adequado durante movimentação de terra.</p>
+          </div>
+        </div>
+        <div class="map-viewer-wrap">
+          <div class="map-label">MAPEAMENTO PEDOLÓGICO</div>
+          <div class="map-container" id="mc-pedo">
+            <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_75bf086fce2140a5b89e4aa6d73db5bd~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-pedo" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+            <img src="https://static.wixstatic.com/media/9c5691_75bf086fce2140a5b89e4aa6d73db5bd~mv2.png" alt="Pedologia" id="mi-pedo">
+          </div>
+          <div class="map-viewer-controls">
+            <button class="mvc-btn" onclick="zoomMap('pedo',1.25)">+</button>
+            <button class="mvc-btn" onclick="zoomMap('pedo',0.8)">−</button>
+            <button class="mvc-btn" onclick="resetMap('pedo')" style="font-size:11px">⊙</button>
+            <button class="mvc-btn" onclick="fitMap('pedo')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('pedo',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('pedo',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('pedo')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+          </div>
+          <div class="map-zoom-display" id="mz-pedo"><span id="mzoom-pedo">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-pedo">0°</span></div>
+          <div class="map-instructions">scroll · drag · dbl-click</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HIDROGRAFIA -->
+  <div class="report-section aos" style="margin-top:24px">
+    <div class="sec-header">
+      <span class="sec-num">6.3 / 6.8</span>
+      <h2>Hidrografia & Drenagem</h2>
+    </div>
+    <div class="sec-body">
+      <div class="card-split">
+        <div class="map-viewer-wrap">
+          <div class="map-label">REDE HIDROGRÁFICA</div>
+          <div class="map-container" id="mc-hidro">
+            <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_8aaddfed309142448d7a5353207e778b~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-hidro" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+            <img src="https://static.wixstatic.com/media/9c5691_8aaddfed309142448d7a5353207e778b~mv2.png" alt="Hidrografia" id="mi-hidro">
+          </div>
+          <div class="map-viewer-controls">
+            <button class="mvc-btn" onclick="zoomMap('hidro',1.25)">+</button>
+            <button class="mvc-btn" onclick="zoomMap('hidro',0.8)">−</button>
+            <button class="mvc-btn" onclick="resetMap('hidro')" style="font-size:11px">⊙</button>
+            <button class="mvc-btn" onclick="fitMap('hidro')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('hidro',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('hidro',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('hidro')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+          </div>
+          <div class="map-zoom-display" id="mz-hidro"><span id="mzoom-hidro">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-hidro">0°</span></div>
+          <div class="map-instructions">scroll · drag · dbl-click</div>
+        </div>
+        <div>
+          <p style="font-size:13px;color:var(--text-light);line-height:1.7;margin-bottom:14px">
+            A área é interceptada por rede de drenagem com dois cursos principais — um com direção N–S a oeste e outros com orientação O–L atravessando a região central. Identificadas nascentes e pontos de surgência hídrica que caracterizam APPs com raio mínimo de 50m.
+          </p>
+          <div class="hl-box danger">
+            <h4>Consulta de Drenagem Pendente</h4>
+            <p>Não foi protocolada consulta formal de viabilidade de drenagem junto ao órgão municipal. Esta solicitação deve ser realizada antes da aprovação do projeto executivo junto à Secretaria Municipal de Obras.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUSCETIBILIDADE -->
+  <div class="report-section aos" style="margin-top:24px">
+    <div class="sec-header">
+      <span class="sec-num">6.6</span>
+      <h2>Suscetibilidade a Movimentos de Massa</h2>
+      <span class="risk-badge risk-high">81,44% ALTA</span>
+    </div>
+    <div class="sec-body">
+      <div class="card-split" style="margin-bottom:20px">
+        <div>
+          <table class="data-table">
+            <thead><tr><th>Classificação</th><th>Área (m²)</th><th>% Terreno</th></tr></thead>
+            <tbody>
+              <tr><td>Alta Suscetibilidade</td><td>816.302,37</td><td><span class="percent-pill" style="background:rgba(239,68,68,0.2);color:#FCA5A5;border-color:rgba(239,68,68,0.3)">81,44%</span></td></tr>
+              <tr><td>Média Suscetibilidade</td><td>78.385,08</td><td><span class="percent-pill" style="background:rgba(252,211,77,0.15);color:#FCD34D;border-color:rgba(252,211,77,0.3)">7,82%</span></td></tr>
+              <tr><td>Baixa Suscetibilidade</td><td>107.608,98</td><td><span class="percent-pill" style="background:rgba(52,211,153,0.15);color:#6EE7B7;border-color:rgba(52,211,153,0.3)">10,74%</span></td></tr>
+              <tr class="total-row"><td>Área Total</td><td>1.002.296,43</td><td><span class="percent-pill">100%</span></td></tr>
+            </tbody>
+          </table>
+          <div class="hl-box danger" style="margin-top:14px">
+            <h4>Riscos Identificados</h4>
+            <ul class="feat-list">
+              <li><span class="feat-dot red"></span>Escorregamentos de solo (rasos e profundos)</li>
+              <li><span class="feat-dot red"></span>Fluxos de detritos em áreas de drenagem concentrada</li>
+              <li><span class="feat-dot red"></span>Processos erosivos acelerados após retirada de vegetação</li>
+              <li><span class="feat-dot red"></span>Instabilidade induzida por cortes e aterros</li>
+              <li><span class="feat-dot red"></span>Saturação do solo por deficiência de drenagem</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <div class="map-viewer-wrap">
+            <div class="map-label">SUSCETIBILIDADE + CURVA DE NÍVEL</div>
+            <div class="map-container" id="mc-susc">
+              <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_f379e7f3710349eba3d1b4e6de5d4dbe~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-susc" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+              <img src="https://static.wixstatic.com/media/9c5691_f379e7f3710349eba3d1b4e6de5d4dbe~mv2.png" alt="Suscetibilidade" id="mi-susc">
+            </div>
+            <div class="map-viewer-controls">
+              <button class="mvc-btn" onclick="zoomMap('susc',1.25)">+</button>
+              <button class="mvc-btn" onclick="zoomMap('susc',0.8)">−</button>
+              <button class="mvc-btn" onclick="resetMap('susc')" style="font-size:11px">⊙</button>
+              <button class="mvc-btn" onclick="fitMap('susc')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('susc',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('susc',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('susc')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+            </div>
+            <div class="map-zoom-display" id="mz-susc"><span id="mzoom-susc">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-susc">0°</span></div>
+            <div class="map-instructions">scroll · drag · dbl-click</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIDADE DE CONSERVAÇÃO -->
+  <div class="report-section aos" style="margin-top:24px">
+    <div class="sec-header">
+      <span class="sec-num">6.13</span>
+      <h2>Unidade de Conservação — Parque Municipal da Ressacada</h2>
+      <span class="risk-badge risk-med">ANÁLISE JURÍDICA</span>
+    </div>
+    <div class="sec-body">
+      <div class="card-split">
+        <div>
+          <div class="hl-box success" style="margin-bottom:14px">
+            <h4>✓ Conclusão Técnico-Jurídica</h4>
+            <p>À luz do Decreto nº 2.824/1982, do SNUC (Lei 9.985/2000) e do Decreto 4.340/2002, <strong>não se comprova a existência vigente de Parque Municipal sobre o imóvel</strong>. O decreto de 1982 não apresenta coordenadas georreferenciadas, memorial descritivo nem atos expropriatórios.</p>
+          </div>
+          <ul class="feat-list">
+            <li><span class="feat-dot green"></span>Decreto 1982 sem poligonal formal — referência apenas toponímica</li>
+            <li><span class="feat-dot yellow"></span>TAC judicial não determinou ampliação do PMR</li>
+            <li><span class="feat-dot yellow"></span>Cota 70m: proposta técnica não convertida em ato normativo</li>
+            <li><span class="feat-dot green"></span>Sem plano de manejo aprovado → sem zona de amortecimento formal</li>
+            <li><span class="feat-dot green"></span>Sem desapropriação (art. 11, §1º, SNUC)</li>
+            <li><span class="feat-dot yellow"></span>Interseção com delimitação Bedin (2013): ~12.560 m²</li>
+          </ul>
+        </div>
+        <div class="map-gallery map-gallery single">
+          <div class="map-viewer-wrap">
+            <div class="map-label">PNM DA RESSACADA E ÁREA DO IMÓVEL</div>
+            <div class="map-container" id="mc-pnm">
+              <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_3738201c961341e08888405cecd3bcfc~mv2.jpeg" alt=""><div class="map-minimap-rect" id="mmr-pnm" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+              <img src="https://static.wixstatic.com/media/9c5691_3738201c961341e08888405cecd3bcfc~mv2.jpeg" alt="PNM Ressacada" id="mi-pnm">
+            </div>
+            <div class="map-viewer-controls">
+              <button class="mvc-btn" onclick="zoomMap('pnm',1.25)">+</button>
+              <button class="mvc-btn" onclick="zoomMap('pnm',0.8)">−</button>
+              <button class="mvc-btn" onclick="resetMap('pnm')" style="font-size:11px">⊙</button>
+              <button class="mvc-btn" onclick="fitMap('pnm')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('pnm',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('pnm',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('pnm')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+            </div>
+            <div class="map-zoom-display" id="mz-pnm"><span id="mzoom-pnm">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-pnm">0°</span></div>
+            <div class="map-instructions">scroll · drag · dbl-click</div>
+          </div>
+          <div class="map-viewer-wrap" style="margin-top:16px">
+            <div class="map-label">UNIDADES DE CONSERVAÇÃO — CONTEXTO REGIONAL</div>
+            <div class="map-container" id="mc-uc">
+              <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_9510b5afcf9549eaaafcde0d5a9aa791~mv2.jpeg" alt=""><div class="map-minimap-rect" id="mmr-uc" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+              <img src="https://static.wixstatic.com/media/9c5691_9510b5afcf9549eaaafcde0d5a9aa791~mv2.jpeg" alt="UC" id="mi-uc">
+            </div>
+            <div class="map-viewer-controls">
+              <button class="mvc-btn" onclick="zoomMap('uc',1.25)">+</button>
+              <button class="mvc-btn" onclick="zoomMap('uc',0.8)">−</button>
+              <button class="mvc-btn" onclick="resetMap('uc')" style="font-size:11px">⊙</button>
+              <button class="mvc-btn" onclick="fitMap('uc')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('uc',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('uc',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('uc')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+            </div>
+            <div class="map-zoom-display" id="mz-uc"><span id="mzoom-uc">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-uc">0°</span></div>
+            <div class="map-instructions">scroll · drag · dbl-click</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIAS -->
+  <div class="report-section aos" style="margin-top:24px">
+    <div class="sec-header">
+      <span class="sec-num">6.18</span>
+      <h2>Demanda & Aspectos Viários</h2>
+    </div>
+    <div class="sec-body">
+      <div class="card-split">
+        <div class="map-viewer-wrap">
+          <div class="map-label">MAPA DE PRINCIPAIS VIAS</div>
+          <div class="map-container" id="mc-vias">
+            <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_da6380a1a3134fc6ae8f90939e3e6892~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-vias" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+            <img src="https://static.wixstatic.com/media/9c5691_da6380a1a3134fc6ae8f90939e3e6892~mv2.png" alt="Vias" id="mi-vias">
+          </div>
+          <div class="map-viewer-controls">
+            <button class="mvc-btn" onclick="zoomMap('vias',1.25)">+</button>
+            <button class="mvc-btn" onclick="zoomMap('vias',0.8)">−</button>
+            <button class="mvc-btn" onclick="resetMap('vias')" style="font-size:11px">⊙</button>
+            <button class="mvc-btn" onclick="fitMap('vias')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('vias',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('vias',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('vias')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+          </div>
+          <div class="map-zoom-display" id="mz-vias"><span id="mzoom-vias">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-vias">0°</span></div>
+          <div class="map-instructions">scroll · drag · dbl-click</div>
+        </div>
+        <div>
+          <p style="font-size:13px;color:var(--text-light);line-height:1.7;margin-bottom:14px">
+            A Av. Osvaldo Reis (SC-412) constitui o principal eixo viário regional conectando Itajaí a Balneário Camboriú. A implantação do empreendimento pode potencializar pressões sobre o sistema viário existente.
+          </p>
+          <div class="hl-box">
+            <h4>Estudo de Tráfego Recomendado</h4>
+            <ul class="feat-list">
+              <li><span class="feat-dot"></span>Projeção do aumento de fluxo veicular nas fases de implantação e operação</li>
+              <li><span class="feat-dot"></span>Identificação de pontos críticos e gargalos</li>
+              <li><span class="feat-dot"></span>Proposição de adequações geométricas e sinalização</li>
+              <li><span class="feat-dot"></span>Avaliação do nível de serviço das vias existentes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÁREA ÚTIL -->
+<div class="section-divider"></div>
+<section id="area-util" class="section">
+  <div class="section-tag">04 · Mapeamento de Área Útil</div>
+  <h2 class="section-title">Cenários de Ocupação</h2>
+  <p class="section-desc">Análise comparativa entre o cenário crítico (pessimista) e o cenário ideal (otimista), considerando as restrições ambientais incidentes sobre o imóvel.</p>
+
+  <div class="scenario-grid aos">
+    <div class="scenario-card">
+      <div class="scenario-head critical">
+        <h3>🔴 Cenário Crítico — Pessimista</h3>
+        <span class="risk-badge risk-high">~24% aproveitável</span>
+      </div>
+      <div class="scenario-body">
+        <table class="data-table">
+          <thead><tr><th>Condicionante</th><th>Área (m²)</th><th>%</th></tr></thead>
+          <tbody>
+            <tr><td>Uso restrito (25°–45°)</td><td>598.357,69</td><td><span class="percent-pill">60,12%</span></td></tr>
+            <tr><td>APP hídrica</td><td>417.742,40</td><td><span class="percent-pill">41,97%</span></td></tr>
+            <tr><td>APP declividade >45°</td><td>20.168,49</td><td><span class="percent-pill">2,03%</span></td></tr>
+            <tr><td>Arruamento projetado</td><td>58.046,03</td><td><span class="percent-pill">5,83%</span></td></tr>
+            <tr><td>Alta suscetibilidade massa</td><td>816.302,37</td><td><span class="percent-pill">82,01%</span></td></tr>
+            <tr><td>Área em ZPA</td><td>935.444,65</td><td><span class="percent-pill">93,98%</span></td></tr>
+            <tr><td>FOD — manutenção mín. (50%)</td><td>440.000,00</td><td><span class="percent-pill">44,21%</span></td></tr>
+            <tr class="total-row"><td><strong>Área Útil Final</strong></td><td><strong>≈ 243.035</strong></td><td><span class="percent-pill">≈ 24,42%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-head ideal">
+        <h3>🟢 Cenário Ideal — Otimista</h3>
+        <span class="risk-badge risk-low">~64% aproveitável</span>
+      </div>
+      <div class="scenario-body">
+        <table class="data-table">
+          <thead><tr><th>Condicionante</th><th>Área (m²)</th><th>%</th></tr></thead>
+          <tbody>
+            <tr><td>Uso restrito (flexibilizado)</td><td>—</td><td><span class="percent-pill">—</span></td></tr>
+            <tr><td>APP hídrica (refinada)</td><td>359.119,16</td><td><span class="percent-pill">36,08%</span></td></tr>
+            <tr><td>APP declividade >45°</td><td>20.168,49</td><td><span class="percent-pill">2,03%</span></td></tr>
+            <tr><td>Arruamento projetado</td><td>58.046,03</td><td><span class="percent-pill">5,83%</span></td></tr>
+            <tr><td>FOD — manutenção mín. (30%)</td><td>264.000,00</td><td><span class="percent-pill">26,52%</span></td></tr>
+            <tr><td>FOD — passível supressão (70%)</td><td>616.000,00</td><td><span class="percent-pill">61,89%</span></td></tr>
+            <tr><td>Restrições totais</td><td>≈ 359.779</td><td><span class="percent-pill">≈ 36,15%</span></td></tr>
+            <tr class="total-row"><td><strong>Área Útil Final</strong></td><td><strong>≈ 635.566</strong></td><td><span class="percent-pill">≈ 63,85%</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="map-gallery" style="margin-top:24px">
+    <div class="map-viewer-wrap aos">
+      <div class="map-label">MAPA DE RESTRIÇÕES — CENÁRIO CRÍTICO</div>
+      <div class="map-container" id="mc-restr">
+        <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_e8d83e4be178466b8d7d2d45d2de455b~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-restr" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+        <img src="https://static.wixstatic.com/media/9c5691_e8d83e4be178466b8d7d2d45d2de455b~mv2.png" alt="Restrições Crítico" id="mi-restr">
+      </div>
+      <div class="map-viewer-controls">
+        <button class="mvc-btn" onclick="zoomMap('restr',1.25)">+</button>
+        <button class="mvc-btn" onclick="zoomMap('restr',0.8)">−</button>
+        <button class="mvc-btn" onclick="resetMap('restr')" style="font-size:11px">⊙</button>
+        <button class="mvc-btn" onclick="fitMap('restr')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('restr',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('restr',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('restr')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+      </div>
+      <div class="map-zoom-display" id="mz-restr"><span id="mzoom-restr">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-restr">0°</span></div>
+      <div class="map-instructions">scroll · drag · dbl-click</div>
+    </div>
+    <div class="map-viewer-wrap aos">
+      <div class="map-label">MAPA DE RESTRIÇÕES — CENÁRIO IDEAL</div>
+      <div class="map-container" id="mc-ideal">
+        <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_f46a13ee23ed40d6945d2d3c4ca5d794~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-ideal" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+        <img src="https://static.wixstatic.com/media/9c5691_f46a13ee23ed40d6945d2d3c4ca5d794~mv2.png" alt="Restrições Ideal" id="mi-ideal">
+      </div>
+      <div class="map-viewer-controls">
+        <button class="mvc-btn" onclick="zoomMap('ideal',1.25)">+</button>
+        <button class="mvc-btn" onclick="zoomMap('ideal',0.8)">−</button>
+        <button class="mvc-btn" onclick="resetMap('ideal')" style="font-size:11px">⊙</button>
+        <button class="mvc-btn" onclick="fitMap('ideal')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('ideal',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('ideal',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('ideal')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+      </div>
+      <div class="map-zoom-display" id="mz-ideal"><span id="mzoom-ideal">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-ideal">0°</span></div>
+      <div class="map-instructions">scroll · drag · dbl-click</div>
+    </div>
+  </div>
+</section>
+
+<!-- LICENCIAMENTO -->
+<div class="section-divider"></div>
+<section id="licenciamento" class="section">
+  <div class="section-tag">05 · Licenciamento Ambiental</div>
+  <h2 class="section-title">Masterplan & Estratégia</h2>
+  <p class="section-desc">Compatibilização entre o Masterplan "Cidade Figueiredo" e o zoneamento incidente, com estratégia de licenciamento trifásico: LAP → LAI → LAO.</p>
+
+  <div class="map-viewer-wrap aos" style="margin-bottom:24px">
+    <div class="map-label">MASTERPLAN — CIDADE FIGUEIREDO (PROJETO BIOSSPLENA)</div>
+    <div class="map-container" id="mc-master">
+      <div class="map-minimap"><img class="map-minimap-img" src="https://static.wixstatic.com/media/9c5691_68efaf898e92480e9ce1c585a5d09a88~mv2.png" alt=""><div class="map-minimap-rect" id="mmr-master" style="width:60%;height:60%;top:20%;left:20%"></div></div>
+      <img src="https://static.wixstatic.com/media/9c5691_68efaf898e92480e9ce1c585a5d09a88~mv2.png" alt="Masterplan" id="mi-master">
+    </div>
+    <div class="map-viewer-controls">
+      <button class="mvc-btn" onclick="zoomMap('master',1.25)">+</button>
+      <button class="mvc-btn" onclick="zoomMap('master',0.8)">−</button>
+      <button class="mvc-btn" onclick="resetMap('master')" style="font-size:11px">⊙</button>
+      <button class="mvc-btn" onclick="fitMap('master')" style="font-size:11px">⊡</button>
+        <div class="mvc-sep"></div>
+        <button class="mvc-btn" onclick="rotateMap('master',-90)" title="Girar esquerda" style="font-size:13px">↺</button>
+        <button class="mvc-btn" onclick="rotateMap('master',90)" title="Girar direita" style="font-size:13px">↻</button>
+        <button class="mvc-btn" onclick="resetRotate('master')" title="Sem rotação" style="font-size:9px;letter-spacing:0">0°</button>
+    </div>
+    <div class="map-zoom-display" id="mz-master"><span id="mzoom-master">100%</span><span style="color:var(--text-muted)">|</span><span id="mrot-master">0°</span></div>
+    <div class="map-instructions">scroll · drag · dbl-click</div>
+  </div>
+
+  <div class="card-grid-3 aos" style="margin-bottom:28px">
+    <div class="glass-card">
+      <div class="card-icon">🟢</div>
+      <h3>ZMC3 & ZTU1</h3>
+      <p>Usos residenciais, comerciais, institucionais e educacionais de maior intensidade. Núcleos estruturadores do empreendimento em áreas já antropizadas.</p>
+    </div>
+    <div class="glass-card">
+      <div class="card-icon">🌿</div>
+      <h3>ZPA — Parque de Natureza</h3>
+      <p>Parques, corredores ecológicos, educação ambiental, contemplação e recreação de baixo impacto. Compatível com a função ecológica da ZPA.</p>
+    </div>
+    <div class="glass-card">
+      <div class="card-icon">📋</div>
+      <h3>Licenciamento Trifásico</h3>
+      <p>LAP (viabilidade locacional) → LAI (projetos executivos e programas) → LAO (comprovação de cumprimento de condicionantes).</p>
+    </div>
+  </div>
+
+  <!-- Processo -->
+  <div class="report-section aos">
+    <div class="sec-header">
+      <span class="sec-num">Fluxo</span>
+      <h2>Processo de Licenciamento Ambiental</h2>
+    </div>
+    <div class="sec-body">
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-num">1</div>
+          <h4>Estudos Técnicos</h4>
+          <p>Sondagem, laudo hidrogeológico, inventário florestal, EAS</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">2</div>
+          <h4>LAP</h4>
+          <p>Licença Ambiental Prévia — viabilidade locacional</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">3</div>
+          <h4>AuC + EIV</h4>
+          <p>Autorização de Corte de Vegetação + Estudo de Impacto de Vizinhança</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">4</div>
+          <h4>LAI</h4>
+          <p>Licença Ambiental de Instalação — projetos executivos</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">5</div>
+          <h4>Alvará + Obras</h4>
+          <p>Emissão do alvará e início das obras com monitoramento</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-step-num">6</div>
+          <h4>LAO</h4>
+          <p>Licença Ambiental de Operação</p>
+        </div>
+      </div>
+
+      <div class="card-grid-2" style="margin-top:20px">
+        <div class="hl-box">
+          <h4>Estudos Obrigatórios Identificados</h4>
+          <ul class="feat-list">
+            <li><span class="feat-dot"></span>Laudo Hidrogeológico (análise lençol freático)</li>
+            <li><span class="feat-dot"></span>Estudo de Caracterização Hidrográfica</li>
+            <li><span class="feat-dot"></span>Inventário Florestal (FOD ~880.000 m²)</li>
+            <li><span class="feat-dot"></span>Estudo Ambiental Simplificado (EAS)</li>
+            <li><span class="feat-dot"></span>Estudo de Impacto de Vizinhança (EIV)</li>
+            <li><span class="feat-dot"></span>Estudo de Tráfego Veicular</li>
+            <li><span class="feat-dot"></span>Estudo de Fauna + Programa de Afugentamento</li>
+            <li><span class="feat-dot"></span>Estudo de Sombreamento (Art. 91, LC 449/2024)</li>
+            <li><span class="feat-dot"></span>Avaliação de Ruído (ABNT NBR 10151:2019)</li>
+          </ul>
+        </div>
+        <div class="hl-box warning">
+          <h4>Pendências Identificadas</h4>
+          <ul class="feat-list">
+            <li><span class="feat-dot yellow"></span>Consulta de viabilidade de drenagem — não protocolada</li>
+            <li><span class="feat-dot yellow"></span>SEMASA: sem rede de esgoto — ETE própria necessária</li>
+            <li><span class="feat-dot yellow"></span>Análise Prévia da Defesa Civil — risco de alagamento</li>
+            <li><span class="feat-dot yellow"></span>Certificação de área de marinha (SPU) — 1.262m distante</li>
+            <li><span class="feat-dot yellow"></span>Inventário Florestal — antes da definição final de área útil</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCLUSÃO -->
+<div class="section-divider"></div>
+<section id="conclusao" class="section">
+  <div class="section-tag">06 · Conclusão</div>
+  <h2 class="section-title">Síntese & Recomendações</h2>
+  <p class="section-desc">Análise integrada das condicionantes identificadas e estratégia recomendada para viabilização do empreendimento com segurança jurídica e ambiental.</p>
+
+  <div class="card-grid-2 aos" style="margin-bottom:28px">
+    <div class="glass-card">
+      <div class="card-icon">📊</div>
+      <h3>Cenário Crítico — 24,42% útil</h3>
+      <div style="margin-top:12px">
+        <div class="prog-row">
+          <div class="prog-label"><span>Áreas com restrição</span><span>75,58%</span></div>
+          <div class="prog-track"><div class="prog-fill red" style="width:75.58%"></div></div>
+        </div>
+        <div class="prog-row">
+          <div class="prog-label"><span>Área útil estimada</span><span>~243.035 m²</span></div>
+          <div class="prog-track"><div class="prog-fill blue" style="width:24.42%"></div></div>
+        </div>
+      </div>
+      <p style="margin-top:10px;font-size:12px">Aplicação integral das restrições legais sem flexibilizações técnicas. FOD manutenção mínima 50%.</p>
+    </div>
+    <div class="glass-card">
+      <div class="card-icon">📈</div>
+      <h3>Cenário Ideal — 63,85% útil</h3>
+      <div style="margin-top:12px">
+        <div class="prog-row">
+          <div class="prog-label"><span>Áreas com restrição</span><span>36,15%</span></div>
+          <div class="prog-track"><div class="prog-fill yellow" style="width:36.15%"></div></div>
+        </div>
+        <div class="prog-row">
+          <div class="prog-label"><span>Área útil estimada</span><span>~635.566 m²</span></div>
+          <div class="prog-track"><div class="prog-fill green" style="width:63.85%"></div></div>
+        </div>
+      </div>
+      <p style="margin-top:10px;font-size:12px">Refinamento técnico, validações de campo e flexibilização jurídica de restrições. FOD supressão até 70%.</p>
+    </div>
+  </div>
+
+  <div class="concl-card aos">
+    <h2>Empreendimento é Tecnicamente Viável</h2>
+    <p>A viabilidade do empreendimento depende de um planejamento ambiental estratégico que concentre os usos de maior adensamento nas zonas ZMC3 e ZTU1, destinando as áreas em ZPA às funções conservacionistas e de lazer de baixo impacto. A consolidação do diagnóstico com validações de campo e aprofundamento dos estudos técnicos tende a reduzir incertezas e otimizar a área efetivamente aproveitável.</p>
+    <div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <span class="risk-badge risk-low">Baixo Risco de Inundação</span>
+      <span class="risk-badge risk-low">Sem Área de Marinha</span>
+      <span class="risk-badge risk-med">APP: 44,03%</span>
+      <span class="risk-badge risk-high">Alta Suscetibilidade: 81%</span>
+    </div>
+  </div>
+
+  <div class="card-grid-3 aos" style="margin-top:24px">
+    <div class="glass-card">
+      <div class="card-icon">⚡</div>
+      <h3>Ação Imediata</h3>
+      <p>Protocolação de consultas de viabilidade (SEMASA, Defesa Civil, Drenagem). Contratação de sondagem geotécnica e laudo hidrogeológico.</p>
+    </div>
+    <div class="glass-card">
+      <div class="card-icon">🔬</div>
+      <h3>Curto Prazo</h3>
+      <p>Realização do Inventário Florestal, Levantamento Faunístico e Estudo de Caracterização Hidrográfica. Preparação do EAS para LAP.</p>
+    </div>
+    <div class="glass-card">
+      <div class="card-icon">🏗️</div>
+      <h3>Médio Prazo</h3>
+      <p>Protocolo da LAP com EAS. Elaboração simultânea de EIV, Estudo de Tráfego e Estudo de Sombreamento para aprovação urbanística.</p>
+    </div>
+  </div>
+
+  <div class="hl-box" style="margin-top:24px">
+    <h4>Referência Legal — Principais Normas Aplicáveis</h4>
+    <p>
+      Lei nº 12.651/2012 (Código Florestal) · Lei nº 11.428/2006 (Lei da Mata Atlântica) · 
+      Lei nº 9.985/2000 (SNUC) · Resolução CONSEMA nº 250/2024 · 
+      LC nº 449/2024 (Plano Diretor Itajaí) · LC nº 414/2022 (EIV Itajaí) · 
+      IN nº 128/2025 (INIS) · ABNT NBR 10151:2019
+    </p>
+  </div>
+</section>
+
+<footer>
+  <img src="https://static.wixstatic.com/media/9c5691_126c696fafa040d7bec9dd823b499482~mv2.png/v1/fill/w_212,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo_viva_final_transparencia.png" alt="VIVA" style="height:20px;opacity:0.5;display:block;margin:0 auto 12px">
+  VIVA Assessoria Ambiental · CNPJ 22.153.368/0001-22 · Seixas Business Tower, Rua Dr. Nereu Ramos, 197, Sala 1303, Centro, Itajaí/SC · viva@vivaassessoria.com<br>
+  <span style="opacity:0.5;font-size:9px;margin-top:8px;display:block">CV162-2026 · PAES · Documento confidencial · Reprodução proibida</span>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════
+   MAP VIEWER ENGINE — with Rotation Support
+   ═══════════════════════════════════════════ */
+const mapState = {};
+
+function initMap(id) {
+  const container = document.getElementById('mc-' + id);
+  const img = document.getElementById('mi-' + id);
+  if (!container || !img) return;
+
+  const state = {
+    scale: 1, tx: 0, ty: 0,
+    rotation: 0,
+    isDragging: false, lastX: 0, lastY: 0,
+    minScale: 0.1, maxScale: 8,
+    container, img
+  };
+  mapState[id] = state;
+
+  img.onload = () => fitMap(id);
+  if (img.complete && img.naturalWidth) fitMap(id);
+
+  container.addEventListener('wheel', e => { e.preventDefault(); onWheel(id, e); }, { passive: false });
+  container.addEventListener('mousedown', e => onMouseDown(id, e));
+  container.addEventListener('mousemove', e => onMouseMove(id, e));
+  container.addEventListener('mouseup', () => onMouseUp(id));
+  container.addEventListener('mouseleave', () => onMouseUp(id));
+  container.addEventListener('dblclick', e => onDblClick(id, e));
+  container.addEventListener('touchstart', e => onTouchStart(id, e), { passive: true });
+  container.addEventListener('touchmove', e => onTouchMove(id, e), { passive: false });
+  container.addEventListener('touchend', () => onMouseUp(id));
+}
+
+function applyTransform(id) {
+  const s = mapState[id];
+  if (!s) return;
+  // transform-origin is 0 0; rotation applied after scale so it spins in place
+  s.img.style.transformOrigin = '0 0';
+  s.img.style.transform = `translate(${s.tx}px, ${s.ty}px) scale(${s.scale}) rotate(${s.rotation}deg)`;
+
+  const zoomEl = document.getElementById('mzoom-' + id);
+  const rotEl  = document.getElementById('mrot-'  + id);
+  if (zoomEl) zoomEl.textContent = Math.round(s.scale * 100) + '%';
+  if (rotEl)  rotEl.textContent  = s.rotation + '°';
+
+  updateMinimap(id);
+}
+
+function updateMinimap(id) {
+  const s = mapState[id];
+  if (!s) return;
+  const mmr = document.getElementById('mmr-' + id);
+  if (!mmr) return;
+  const cw = s.container.offsetWidth, ch = s.container.offsetHeight;
+  const iw = s.img.naturalWidth || s.img.offsetWidth || 800;
+  const ih = s.img.naturalHeight || s.img.offsetHeight || 600;
+  const visW = Math.min(cw / s.scale, iw);
+  const visH = Math.min(ch / s.scale, ih);
+  const percW = Math.min(visW / iw * 100, 100);
+  const percH = Math.min(visH / ih * 100, 100);
+  const percX = Math.max(0, (-s.tx / s.scale) / iw * 100);
+  const percY = Math.max(0, (-s.ty / s.scale) / ih * 100);
+  mmr.style.width  = percW + '%';
+  mmr.style.height = percH + '%';
+  mmr.style.left   = Math.min(percX, 100 - percW) + '%';
+  mmr.style.top    = Math.min(percY, 100 - percH) + '%';
+}
+
+function zoomAt(id, factor, cx, cy) {
+  const s = mapState[id];
+  if (!s) return;
+  const newScale = Math.min(s.maxScale, Math.max(s.minScale, s.scale * factor));
+  const ratio = newScale / s.scale;
+  s.tx = cx - ratio * (cx - s.tx);
+  s.ty = cy - ratio * (cy - s.ty);
+  s.scale = newScale;
+  applyTransform(id);
+}
+
+function zoomMap(id, factor) {
+  const s = mapState[id];
+  if (!s) return;
+  const cw = s.container.offsetWidth, ch = s.container.offsetHeight;
+  zoomAt(id, factor, cw / 2, ch / 2);
+}
+
+function resetMap(id) {
+  const s = mapState[id];
+  if (!s) return;
+  s.rotation = 0;
+  fitMap(id);
+}
+
+function fitMap(id) {
+  const s = mapState[id];
+  if (!s) return;
+  const cw = s.container.offsetWidth, ch = s.container.offsetHeight;
+  const iw = s.img.naturalWidth  || s.img.offsetWidth  || 800;
+  const ih = s.img.naturalHeight || s.img.offsetHeight || 600;
+
+  const rot = ((s.rotation % 360) + 360) % 360;
+  // When 90 or 270, image footprint is transposed
+  const effectW = (rot === 90 || rot === 270) ? ih : iw;
+  const effectH = (rot === 90 || rot === 270) ? iw : ih;
+
+  const scale = Math.min(cw / effectW, ch / effectH) * 0.96;
+  s.scale = scale;
+
+  // Re-centre accounting for CSS rotate origin at image top-left (0,0)
+  if (rot === 0) {
+    s.tx = (cw - iw * scale) / 2;
+    s.ty = (ch - ih * scale) / 2;
+  } else if (rot === 90) {
+    // After rotate(90deg) the image top-right corner lands at origin
+    s.tx = (cw + iw * scale) / 2;
+    s.ty = (ch - ih * scale) / 2;
+  } else if (rot === 180) {
+    s.tx = (cw + iw * scale) / 2;
+    s.ty = (ch + ih * scale) / 2;
+  } else if (rot === 270) {
+    s.tx = (cw - iw * scale) / 2;
+    s.ty = (ch + ih * scale) / 2;
+  }
+
+  applyTransform(id);
+}
+
+/* ── Rotation helpers ── */
+function rotateMap(id, deg) {
+  const s = mapState[id];
+  if (!s) return;
+  s.rotation = ((s.rotation + deg) % 360 + 360) % 360;
+  fitMap(id);
+}
+
+function resetRotate(id) {
+  const s = mapState[id];
+  if (!s) return;
+  s.rotation = 0;
+  fitMap(id);
+}
+
+function onWheel(id, e) {
+  const s = mapState[id];
+  if (!s) return;
+  const rect = s.container.getBoundingClientRect();
+  const cx = e.clientX - rect.left;
+  const cy = e.clientY - rect.top;
+  const factor = e.deltaY < 0 ? 1.15 : 1 / 1.15;
+  zoomAt(id, factor, cx, cy);
+}
+
+function onMouseDown(id, e) {
+  const s = mapState[id];
+  if (!s) return;
+  s.isDragging = true;
+  s.lastX = e.clientX; s.lastY = e.clientY;
+  s.container.style.cursor = 'grabbing';
+}
+
+function onMouseMove(id, e) {
+  const s = mapState[id];
+  if (!s || !s.isDragging) return;
+  s.tx += e.clientX - s.lastX;
+  s.ty += e.clientY - s.lastY;
+  s.lastX = e.clientX; s.lastY = e.clientY;
+  applyTransform(id);
+}
+
+function onMouseUp(id) {
+  const s = mapState[id];
+  if (!s) return;
+  s.isDragging = false;
+  s.container.style.cursor = 'grab';
+}
+
+function onDblClick(id, e) {
+  const s = mapState[id];
+  if (!s) return;
+  const rect = s.container.getBoundingClientRect();
+  zoomAt(id, 2, e.clientX - rect.left, e.clientY - rect.top);
+}
+
+let touchStartDist = 0, touchStartScale = 1, touchMidX = 0, touchMidY = 0;
+
+function onTouchStart(id, e) {
+  const s = mapState[id];
+  if (!s) return;
+  if (e.touches.length === 1) {
+    s.isDragging = true;
+    s.lastX = e.touches[0].clientX;
+    s.lastY = e.touches[0].clientY;
+  } else if (e.touches.length === 2) {
+    touchStartDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    touchStartScale = s.scale;
+    touchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+    touchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+  }
+}
+
+function onTouchMove(id, e) {
+  const s = mapState[id];
+  if (!s) return;
+  if (e.touches.length === 1 && s.isDragging) {
+    s.tx += e.touches[0].clientX - s.lastX;
+    s.ty += e.touches[0].clientY - s.lastY;
+    s.lastX = e.touches[0].clientX;
+    s.lastY = e.touches[0].clientY;
+    applyTransform(id);
+    e.preventDefault();
+  } else if (e.touches.length === 2) {
+    const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    const rect = s.container.getBoundingClientRect();
+    zoomAt(id, dist / touchStartDist, touchMidX - rect.left, touchMidY - rect.top);
+    touchStartDist = dist;
+    e.preventDefault();
+  }
+}
+
+/* ═══ INIT ALL MAPS ═══ */
+const mapIds = ['local','zone','hist1','hist2','decliv','apphi','appdecl','app','geo','pedo','hidro','susc','pnm','uc','vias','restr','ideal','master'];
+
+document.addEventListener('DOMContentLoaded', () => {
+  mapIds.forEach(id => initMap(id));
+});
+
+/* ═══ AOS SCROLL ANIMATION ═══ */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Re-fit map on first visibility
+      const mc = e.target.querySelector('[id^="mc-"]');
+      if (mc) {
+        const mid = mc.id.replace('mc-','');
+        setTimeout(() => fitMap(mid), 100);
+      }
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.aos').forEach(el => observer.observe(el));
+
+/* ═══ NAV ACTIVE ═══ */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+  });
+  navLinks.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+
+/* ═══ WINDOW RESIZE ═══ */
+window.addEventListener('resize', () => {
+  mapIds.forEach(id => {
+    if (mapState[id]) fitMap(id);
+  });
+});
+</script>
+</body>
+</html>
