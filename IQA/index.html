@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IQA Calculator — VIVA Assessoria Ambiental</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --navy-950: #021B3A;
+  --navy-900: #062A5E;
+  --navy-800: #0B3A75;
+  --navy-700: #104B8C;
+  --accent: #00E5B0;
+  --accent-dim: #00C99A;
+  --accent-glow: rgba(0,229,176,0.15);
+  --ice-50: #F6F8FB;
+  --ice-100: #E8ECF3;
+  --ice-200: #D1D8E6;
+  --text-muted: #B6BFD3;
+  --red: #FF4D6A;
+  --orange: #FF9F43;
+  --yellow: #FFDA6B;
+  --green: #2ED47A;
+  --blue-light: #5B9BF5;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Outfit',sans-serif;background:var(--navy-950);color:var(--ice-50);min-height:100vh;line-height:1.5;}
+.mono{font-family:'JetBrains Mono',monospace;}
+
+/* HEADER */
+header{background:linear-gradient(135deg,var(--navy-950) 0%,var(--navy-900) 100%);border-bottom:1px solid rgba(255,255,255,0.06);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+header img{height:32px;}
+header h1{font-size:1.05rem;font-weight:600;letter-spacing:-0.02em;}
+header h1 span{color:var(--accent);}
+
+.container{max-width:1200px;margin:0 auto;padding:1.5rem;}
+
+/* STEPS */
+.steps{display:flex;gap:0.5rem;margin-bottom:2rem;flex-wrap:wrap;}
+.step-pill{display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:100px;font-size:0.85rem;font-weight:500;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);color:var(--text-muted);transition:all 0.3s;}
+.step-pill.active{background:var(--accent-glow);border-color:var(--accent);color:var(--accent);}
+.step-pill.done{background:rgba(46,212,122,0.1);border-color:var(--green);color:var(--green);}
+.step-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;background:rgba(255,255,255,0.1);}
+.step-pill.active .step-num{background:var(--accent);color:var(--navy-950);}
+.step-pill.done .step-num{background:var(--green);color:var(--navy-950);}
+
+/* CARDS */
+.card{background:linear-gradient(145deg,rgba(255,255,255,0.04) 0%,rgba(255,255,255,0.01) 100%);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem;}
+.card-title{font-size:1rem;font-weight:600;margin-bottom:0.25rem;}
+.card-subtitle{font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;}
+
+/* UPLOAD */
+.upload-zone{border:2px dashed rgba(0,229,176,0.3);border-radius:12px;padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all 0.3s;background:rgba(0,229,176,0.03);}
+.upload-zone:hover,.upload-zone.dragover{border-color:var(--accent);background:rgba(0,229,176,0.08);}
+.upload-zone .main-text{font-size:1rem;font-weight:600;margin-top:0.75rem;}
+.upload-zone .sub-text{font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem;}
+.upload-zone input{display:none;}
+
+.template-bar{display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;background:rgba(0,229,176,0.06);border:1px solid rgba(0,229,176,0.15);border-radius:10px;margin-bottom:1rem;flex-wrap:wrap;}
+.template-bar .icon{width:32px;height:32px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.template-bar .info{flex:1;min-width:200px;}
+.template-bar .info strong{font-size:0.85rem;display:block;}
+.template-bar .info span{font-size:0.75rem;color:var(--text-muted);}
+
+/* PROMPT BOX */
+.prompt-box{background:rgba(91,155,245,0.06);border:1px solid rgba(91,155,245,0.15);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;position:relative;}
+.prompt-box pre{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--ice-200);white-space:pre-wrap;word-break:break-word;line-height:1.6;max-height:180px;overflow-y:auto;}
+.prompt-box .copy-btn{position:absolute;top:0.5rem;right:0.5rem;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:var(--ice-50);border-radius:6px;padding:0.3rem 0.6rem;font-size:0.7rem;cursor:pointer;font-family:'Outfit',sans-serif;}
+.prompt-box .copy-btn:hover{background:var(--accent);color:var(--navy-950);}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.6rem 1.2rem;border-radius:8px;font-family:'Outfit',sans-serif;font-size:0.85rem;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;text-decoration:none;}
+.btn-accent{background:var(--accent);color:var(--navy-950);}
+.btn-accent:hover{background:var(--accent-dim);transform:translateY(-1px);}
+.btn-outline{background:transparent;color:var(--accent);border:1px solid rgba(0,229,176,0.3);}
+.btn-outline:hover{background:rgba(0,229,176,0.08);}
+.btn-ghost{background:rgba(255,255,255,0.06);color:var(--ice-50);}
+.btn-ghost:hover{background:rgba(255,255,255,0.1);}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;border-radius:10px;border:1px solid rgba(255,255,255,0.06);}
+table{width:100%;border-collapse:collapse;font-size:0.8rem;}
+thead th{background:var(--navy-900);padding:0.6rem 0.75rem;text-align:left;font-weight:600;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-muted);white-space:nowrap;border-bottom:1px solid rgba(255,255,255,0.08);}
+tbody td{padding:0.55rem 0.75rem;border-bottom:1px solid rgba(255,255,255,0.04);white-space:nowrap;}
+tbody tr:hover{background:rgba(255,255,255,0.02);}
+tbody td input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:6px;color:var(--ice-50);padding:0.35rem 0.5rem;font-family:'JetBrains Mono',monospace;font-size:0.8rem;width:90px;text-align:right;}
+tbody td input:focus{outline:none;border-color:var(--accent);background:rgba(0,229,176,0.06);}
+.ponto-label{font-weight:600;color:var(--accent);}
+
+/* RESULTS */
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem;}
+.result-card{background:linear-gradient(145deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.02) 100%);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:1.25rem;transition:all 0.3s;}
+.result-card:hover{border-color:rgba(255,255,255,0.15);}
+.result-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.result-ponto{font-size:0.85rem;font-weight:700;}
+.result-badge{padding:0.25rem 0.75rem;border-radius:100px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;}
+.badge-excelente{background:rgba(46,212,122,0.15);color:var(--green);border:1px solid rgba(46,212,122,0.3);}
+.badge-bom{background:rgba(91,155,245,0.15);color:var(--blue-light);border:1px solid rgba(91,155,245,0.3);}
+.badge-medio{background:rgba(255,218,107,0.15);color:var(--yellow);border:1px solid rgba(255,218,107,0.3);}
+.badge-ruim{background:rgba(255,159,67,0.15);color:var(--orange);border:1px solid rgba(255,159,67,0.3);}
+.badge-mruim{background:rgba(255,77,106,0.15);color:var(--red);border:1px solid rgba(255,77,106,0.3);}
+
+.iqa-score{font-family:'JetBrains Mono',monospace;font-size:2.2rem;font-weight:700;line-height:1;margin-bottom:0.75rem;}
+.iqa-bar-track{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:1rem;overflow:hidden;}
+.iqa-bar-fill{height:100%;border-radius:3px;transition:width 0.8s ease;}
+.param-list{list-style:none;}
+.param-item{display:flex;align-items:center;justify-content:space-between;padding:0.3rem 0;font-size:0.75rem;border-bottom:1px solid rgba(255,255,255,0.03);}
+.param-item:last-child{border-bottom:none;}
+.param-name{color:var(--text-muted);}
+.param-qi{font-family:'JetBrains Mono',monospace;font-weight:500;}
+.param-pct{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text-muted);margin-left:0.5rem;}
+
+/* COMPARISON */
+.bar-row{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;}
+.bar-label{width:40px;font-weight:600;font-size:0.8rem;color:var(--text-muted);text-align:right;flex-shrink:0;}
+.bar-track{flex:1;height:28px;background:rgba(255,255,255,0.04);border-radius:6px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:0.5rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:600;color:var(--navy-950);transition:width 1s ease;min-width:fit-content;}
+
+.legend{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1rem;padding-top:0.75rem;border-top:1px solid rgba(255,255,255,0.06);}
+.legend-item{display:flex;align-items:center;gap:0.35rem;font-size:0.7rem;color:var(--text-muted);}
+.legend-dot{width:10px;height:10px;border-radius:3px;}
+
+/* MEMORIAL */
+.memorial-card{background:linear-gradient(145deg,rgba(255,255,255,0.03) 0%,rgba(255,255,255,0.01) 100%);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:1.5rem;margin-bottom:1rem;page-break-inside:avoid;}
+.memorial-title{font-size:0.95rem;font-weight:700;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.5rem;}
+.memorial-title .dot{width:8px;height:8px;border-radius:50%;}
+.mem-section{margin-bottom:0.75rem;}
+.mem-section h4{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:0.35rem;font-weight:600;}
+.mem-table{width:100%;border-collapse:collapse;font-size:0.75rem;font-family:'JetBrains Mono',monospace;}
+.mem-table th{text-align:left;padding:0.3rem 0.5rem;color:var(--text-muted);font-weight:500;border-bottom:1px solid rgba(255,255,255,0.08);font-size:0.68rem;text-transform:uppercase;}
+.mem-table td{padding:0.3rem 0.5rem;border-bottom:1px solid rgba(255,255,255,0.03);}
+.mem-table .formula-cell{font-size:0.68rem;color:var(--ice-200);word-break:break-all;}
+.mem-table .value-cell{text-align:right;font-weight:600;}
+.mem-iqa-final{background:rgba(255,255,255,0.04);border-radius:8px;padding:0.75rem 1rem;margin-top:0.5rem;display:flex;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',monospace;}
+.mem-iqa-label{font-size:0.8rem;color:var(--text-muted);}
+.mem-iqa-value{font-size:1.5rem;font-weight:700;}
+
+.section-hidden{display:none;}
+
+.info-box{background:rgba(91,155,245,0.08);border:1px solid rgba(91,155,245,0.2);border-radius:10px;padding:1rem 1.25rem;font-size:0.8rem;color:var(--ice-200);margin-bottom:1rem;line-height:1.6;}
+.info-box strong{color:var(--ice-50);}
+.alert-box{background:rgba(255,77,106,0.08);border:1px solid rgba(255,77,106,0.2);border-radius:10px;padding:0.75rem 1rem;font-size:0.8rem;color:var(--red);margin-bottom:1rem;display:none;}
+
+.help-tip{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.08);font-size:0.6rem;font-weight:700;color:var(--text-muted);cursor:help;vertical-align:middle;margin-left:0.25rem;position:relative;}
+.help-tip:hover::after{content:attr(data-tip);position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:var(--navy-800);color:var(--ice-50);padding:0.5rem 0.75rem;border-radius:8px;font-size:0.7rem;font-weight:400;max-width:280px;white-space:normal;z-index:100;border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+
+.actions-bar{display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:1rem;}
+
+@media(max-width:768px){
+  .container{padding:1rem;}
+  .card{padding:1rem;}
+  .results-grid{grid-template-columns:1fr;}
+  .upload-zone{padding:1.5rem 1rem;}
+  header{padding:0.75rem 1rem;}
+  header h1{font-size:0.9rem;}
+  .steps{gap:0.35rem;}
+  .step-pill{padding:0.4rem 0.75rem;font-size:0.75rem;}
+  tbody td input{width:72px;font-size:0.75rem;}
+  .prompt-box pre{font-size:0.65rem;}
+}
+
+@media print{
+  body{background:white;color:#111;font-size:9pt;}
+  header{background:white;border-bottom:2px solid #021B3A;padding:0.5rem 1rem;}
+  header h1{color:#021B3A;}
+  header h1 span{color:#0B3A75;}
+  .card,.result-card,.memorial-card{border:1px solid #ccc;background:#fafafa;box-shadow:none;}
+  .btn,.upload-zone,.template-bar,.steps,.prompt-box,.info-box{display:none !important;}
+  .section-hidden{display:none !important;}
+  .iqa-score{color:#111 !important;}
+  .param-name,.bar-label,.mem-iqa-label{color:#555;}
+  .result-badge{border-width:2px;}
+  .memorial-card{page-break-inside:avoid;}
+  .actions-bar{display:none !important;}
+  .legend-dot{border:1px solid #999;}
+  .accent-print{color:#0B3A75 !important;}
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp 0.4s ease forwards;}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="https://static.wixstatic.com/media/9c5691_126c696fafa040d7bec9dd823b499482~mv2.png/v1/fill/w_212,h_62,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/logo_viva_final_transparencia.png" alt="VIVA Assessoria Ambiental" onerror="this.outerHTML='<span style=font-weight:800;font-size:1.1rem;color:var(--accent)>[V] VIVA</span>'">
+  <h1>Calculadora <span>IQA</span> · Índice de Qualidade da Água</h1>
+</header>
+
+<div class="container">
+
+  <div class="steps">
+    <div class="step-pill active" id="step1-pill"><span class="step-num">1</span> Importar</div>
+    <div class="step-pill" id="step2-pill"><span class="step-num">2</span> Revisar</div>
+    <div class="step-pill" id="step3-pill"><span class="step-num">3</span> Resultados</div>
+  </div>
+
+  <!-- ========== SECTION 1: UPLOAD ========== -->
+  <div id="section-upload">
+    <div class="card fade-up">
+      <div class="card-title">Importar Dados de Análise</div>
+      <div class="card-subtitle">Carregue um CSV com os resultados laboratoriais de até 6 pontos de monitoramento</div>
+
+      <!-- PROMPT DE EXTRAÇÃO -->
+      <div class="card" style="margin-bottom:1rem;padding:1rem 1.25rem;">
+        <div class="card-title" style="font-size:0.85rem;">💡 Dica: extraia os dados do PDF automaticamente</div>
+        <div class="card-subtitle" style="margin-bottom:0.5rem;">Copie o prompt abaixo, suba os 6 PDFs dos relatórios de análise em qualquer LLM (ChatGPT, Claude, Gemini) e ela gerará o CSV pronto para importar aqui.</div>
+        <div class="prompt-box">
+          <button class="copy-btn" onclick="copyPrompt(this)">Copiar</button>
+          <pre id="extractPrompt">Analise os relatórios de ensaio laboratorial (PDF) anexados e extraia os dados para gerar um arquivo CSV.
+
+INSTRUÇÕES:
+1. Para cada relatório/ponto de coleta, extraia EXATAMENTE estes parâmetros da tabela "Resultados Analíticos":
+   - Coliformes Termotolerantes (NMP/100mL)
+   - pH In loco
+   - Demanda Bioquímica de Oxigênio - DBO5 (mg/L)
+   - Nitrogênio de Nitrato (mg/L) → este é o Nitrato como N
+   - Fósforo Total (mg/L) → este é o Fósforo como P
+   - Temperatura In loco (°C)
+   - Turbidez (UNT)
+   - Sólidos Totais (mg/L)
+   - Oxigênio Dissolvido In loco (mg/L)
+
+2. A altitude de cada ponto deve ser 0 (nível do mar), salvo se indicado diferente.
+
+3. Para valores com "<" (ex: "<1,00"), usar o valor numérico sem o símbolo (ex: 1.00).
+
+4. Usar PONTO como separador decimal (não vírgula).
+
+5. O nome do ponto está no campo "Descrição Ponto Coleta" (ex: P1, P2...).
+
+FORMATO DE SAÍDA (CSV com vírgula como separador de colunas):
+Ponto,Coliformes_Termotolerantes_NMP100mL,pH,DBO5_mgL,Nitrato_mgNL,Fosforo_Total_mgPL,Temperatura_Agua_oC,Turbidez_NTU,Solidos_Totais_mgL,OD_mgL,Altitude_m
+P1,940,6.18,8.1,1.8,0.25,24.9,100,138,3.15,0
+P2,...
+(uma linha por ponto, até P6)
+
+Responda APENAS com o conteúdo CSV, sem explicações.</pre>
+        </div>
+      </div>
+
+      <div class="template-bar">
+        <div class="icon">
+          <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 13h10" stroke="#021B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="info">
+          <strong>Baixar modelo CSV</strong>
+          <span>Colunas corretas + P1 preenchido como exemplo</span>
+        </div>
+        <button class="btn btn-accent" onclick="downloadTemplate()">Baixar modelo</button>
+      </div>
+
+      <div class="upload-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+        <svg width="40" height="40" fill="none" viewBox="0 0 40 40"><rect width="40" height="40" rx="10" fill="rgba(0,229,176,0.1)"/><path d="M20 14v8m0-8l-3 3m3-3l3 3M13 25h14" stroke="#00E5B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="main-text">Arraste seu CSV aqui ou clique para selecionar</div>
+        <div class="sub-text">Formato: .csv com separador vírgula ou ponto-e-vírgula</div>
+        <input type="file" id="fileInput" accept=".csv,.txt">
+      </div>
+      <div class="alert-box" id="uploadError"></div>
+      <div style="margin-top:1rem;text-align:center;">
+        <button class="btn btn-ghost" onclick="loadManual()">Ou preencher manualmente</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SECTION 2: REVIEW ========== -->
+  <div id="section-review" class="section-hidden">
+    <div class="card fade-up">
+      <div class="card-title">Revisar e Ajustar Valores</div>
+      <div class="card-subtitle">Confira os dados. Pode editar qualquer célula. Células em branco serão ignoradas.</div>
+      <div class="info-box">
+        <strong>Atenção:</strong> Nitrato deve ser informado como <strong>mgN/L</strong> (não mg NO₃/L). 
+        Fósforo como <strong>mgP/L</strong> (não mg PO₄/L). A conversão é feita internamente. 
+        A diferença de temperatura (ΔT) é fixada em 94 conforme padrão NSF.
+      </div>
+      <div class="table-wrap">
+        <table id="dataTable">
+          <thead><tr>
+            <th>Ponto</th>
+            <th>Coli Termo<span class="help-tip" data-tip="Coliformes Termotolerantes (NMP/100mL)">?</span></th>
+            <th>pH</th>
+            <th>DBO₅<span class="help-tip" data-tip="Demanda Bioquímica de Oxigênio (mg/L)">?</span></th>
+            <th>Nitrato<span class="help-tip" data-tip="Nitrogênio de Nitrato (mgN/L)">?</span></th>
+            <th>P Total<span class="help-tip" data-tip="Fósforo Total (mgP/L)">?</span></th>
+            <th>Temp.<span class="help-tip" data-tip="Temperatura da água (°C)">?</span></th>
+            <th>Turbidez<span class="help-tip" data-tip="Turbidez (NTU)">?</span></th>
+            <th>Sól. Totais<span class="help-tip" data-tip="Sólidos Totais (mg/L)">?</span></th>
+            <th>OD<span class="help-tip" data-tip="Oxigênio Dissolvido (mg/L)">?</span></th>
+            <th>Altitude<span class="help-tip" data-tip="Altitude do ponto (m). Use 0 se nível do mar.">?</span></th>
+          </tr></thead>
+          <tbody id="dataBody"></tbody>
+        </table>
+      </div>
+      <div class="actions-bar">
+        <button class="btn btn-ghost" onclick="goToStep(1)">← Voltar</button>
+        <button class="btn btn-accent" onclick="calcularIQA()">Calcular IQA →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== SECTION 3: RESULTS ========== -->
+  <div id="section-results" class="section-hidden">
+
+    <div class="card fade-up">
+      <div class="card-title">Comparativo — IQA por Ponto</div>
+      <div class="card-subtitle">Metodologia NSF · Curvas de qualidade CETESB · Classificação IGAM-MG e CETESB-SP</div>
+      <div id="comparisonChart"></div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Excelente (90–100)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--blue-light)"></div> Bom (70–90)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div> Médio (50–70)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div> Ruim (25–50)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Muito Ruim (0–25)</div>
+      </div>
+    </div>
+
+    <div class="results-grid" id="resultsGrid"></div>
+
+    <!-- MEMORIAL DE CÁLCULO -->
+    <div class="card fade-up" style="margin-top:1.5rem;">
+      <div class="card-title">Memorial de Cálculo</div>
+      <div class="card-subtitle">Detalhamento completo das equações, faixas e pesos utilizados em cada parâmetro</div>
+    </div>
+    <div id="memorialContainer"></div>
+
+    <div class="actions-bar" style="margin-top:1.5rem;">
+      <button class="btn btn-ghost" onclick="goToStep(2)">← Editar dados</button>
+      <button class="btn btn-outline" onclick="exportCSV()">Exportar resultados CSV</button>
+      <button class="btn btn-accent" onclick="window.print()">Imprimir relatório</button>
+    </div>
+
+    <div style="margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.06);font-size:0.7rem;color:var(--text-muted);text-align:center;">
+      Calculadora IQA — VIVA Assessoria Ambiental · Eng. Victor Valente Silvestre · CREA/SC 118978-4<br>
+      Metodologia NSF / Curvas CETESB · Ref.: CONAMA 357/2005 · Gerado em <span id="genDate"></span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================
+// DATA
+// ============================================
+const PARAMS=['Coliformes_Termotolerantes_NMP100mL','pH','DBO5_mgL','Nitrato_mgNL','Fosforo_Total_mgPL','Temperatura_Agua_oC','Turbidez_NTU','Solidos_Totais_mgL','OD_mgL','Altitude_m'];
+
+let pontos=[], results=[];
+
+// ============================================
+// TEMPLATE
+// ============================================
+function downloadTemplate(){
+  const h='Ponto,Coliformes_Termotolerantes_NMP100mL,pH,DBO5_mgL,Nitrato_mgNL,Fosforo_Total_mgPL,Temperatura_Agua_oC,Turbidez_NTU,Solidos_Totais_mgL,OD_mgL,Altitude_m';
+  const rows=[h,'P1,940,6.18,8.1,1.8,0.25,24.9,100,138,3.15,0'];
+  for(let i=2;i<=6;i++) rows.push(`P${i},,,,,,,,,,`);
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));
+  a.download='modelo_iqa_6pontos.csv'; a.click();
+}
+
+function copyPrompt(btn){
+  navigator.clipboard.writeText(document.getElementById('extractPrompt').textContent);
+  btn.textContent='Copiado!'; setTimeout(()=>btn.textContent='Copiar',2000);
+}
+
+// ============================================
+// FILE UPLOAD
+// ============================================
+const dropZone=document.getElementById('dropZone'),fileInput=document.getElementById('fileInput');
+dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('dragover');});
+dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop',e=>{e.preventDefault();dropZone.classList.remove('dragover');if(e.dataTransfer.files.length)handleFile(e.dataTransfer.files[0]);});
+fileInput.addEventListener('change',e=>{if(e.target.files.length)handleFile(e.target.files[0]);});
+
+function handleFile(f){
+  const r=new FileReader();
+  r.onload=e=>{try{parseCSV(e.target.result);goToStep(2);}catch(err){showError(err.message);}};
+  r.readAsText(f);
+}
+
+function parseCSV(text){
+  const sep=text.trim().split('\n')[0].includes(';')?';':',';
+  const lines=text.trim().split('\n').map(l=>l.split(sep).map(c=>c.trim().replace(/^[""]|[""]$/g,'')));
+  if(lines.length<2)throw new Error('Arquivo precisa ter cabeçalho + pelo menos 1 linha de dados.');
+  const header=lines[0];
+  const colMap={};
+  const expected=['Ponto',...PARAMS];
+  expected.forEach(exp=>{
+    let idx=header.findIndex(h=>h.replace(/[^a-zA-Z0-9]/g,'').toLowerCase()===exp.replace(/[^a-zA-Z0-9]/g,'').toLowerCase());
+    if(idx===-1) idx=header.findIndex(h=>h.toLowerCase().includes(exp.toLowerCase().slice(0,8)));
+    colMap[exp]=idx;
+  });
+  pontos=[];
+  for(let i=1;i<lines.length;i++){
+    const row=lines[i]; if(!row||row.length<2)continue;
+    const p={nome:colMap['Ponto']>=0?row[colMap['Ponto']]:`P${i}`};
+    PARAMS.forEach(par=>{
+      const ci=colMap[par]; let v=ci>=0&&ci<row.length?row[ci]:'';
+      v=v.replace(',','.').replace(/[<>]/g,'').trim();
+      p[par]=v===''?null:parseFloat(v);
+    });
+    pontos.push(p);
+  }
+  if(!pontos.length)throw new Error('Nenhuma linha de dados encontrada.');
+  buildTable();
+}
+
+function loadManual(){
+  pontos=[];
+  for(let i=1;i<=6;i++){const p={nome:`P${i}`};PARAMS.forEach(par=>p[par]=null);pontos.push(p);}
+  buildTable(); goToStep(2);
+}
+
+function showError(msg){const el=document.getElementById('uploadError');el.textContent=msg;el.style.display='block';setTimeout(()=>el.style.display='none',6000);}
+
+function buildTable(){
+  const tbody=document.getElementById('dataBody'); tbody.innerHTML='';
+  pontos.forEach((p,pi)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td class="ponto-label">${p.nome}</td>`+
+      PARAMS.map((par,ci)=>{
+        const v=p[par]!=null?p[par]:'';
+        return `<td><input type="text" value="${v}" data-pi="${pi}" data-par="${par}" placeholder="${ci===9?'0':'—'}" inputmode="decimal"></td>`;
+      }).join('');
+    tbody.appendChild(tr);
+  });
+  tbody.querySelectorAll('input').forEach(inp=>{
+    inp.addEventListener('change',()=>{
+      const v=inp.value.replace(',','.').replace(/[<>]/g,'').trim();
+      pontos[parseInt(inp.dataset.pi)][inp.dataset.par]=v===''?null:parseFloat(v);
+    });
+  });
+}
+
+// ============================================
+// IQA ENGINE — CURVAS CETESB (verificadas contra planilha)
+// ============================================
+function qi_coli(coli){
+  if(coli==null||coli<=0) return {qi:100,faixa:'Coli=0 → qi=100',formula:'qi = 100 (sem coliformes)'};
+  const log=Math.log10(coli);
+  let qi,faixa,formula;
+  if(log<=1){
+    qi=100-33*log; faixa=`0 ≤ log₁₀ ≤ 1`; formula=`qi = 100 − 33 × ${log.toFixed(4)} = ${qi.toFixed(4)}`;
+  } else if(log<=5){
+    qi=100-37.2*log+3.60743*log*log; faixa=`1 < log₁₀ ≤ 5`;
+    formula=`qi = 100 − 37,2 × ${log.toFixed(4)} + 3,60743 × ${log.toFixed(4)}² = ${qi.toFixed(4)}`;
+  } else {
+    qi=3; faixa=`log₁₀ > 5`; formula=`qi = 3 (valor mínimo)`;
+  }
+  return {qi:Math.max(3,qi),faixa,formula,log};
+}
+
+function qi_ph(ph){
+  if(ph==null) return null;
+  let qi,faixa,formula;
+  if(ph<=2){qi=2;faixa='pH ≤ 2';formula='qi = 2';}
+  else if(ph<=4){qi=13.6-10.6*ph+2.4364*ph*ph;faixa='2 < pH ≤ 4';formula=`qi = 13,6 − 10,6×${ph} + 2,4364×${ph}² = ${qi.toFixed(4)}`;}
+  else if(ph<=6.2){qi=155.5-77.36*ph+10.2481*ph*ph;faixa='4 < pH ≤ 6,2';formula=`qi = 155,5 − 77,36×${ph} + 10,2481×${ph}² = ${qi.toFixed(4)}`;}
+  else if(ph<=7){qi=-657.2+197.38*ph-12.9167*ph*ph;faixa='6,2 < pH ≤ 7';formula=`qi = −657,2 + 197,38×${ph} − 12,9167×${ph}² = ${qi.toFixed(4)}`;}
+  else if(ph<=8){qi=-427.8+142.05*ph-9.695*ph*ph;faixa='7 < pH ≤ 8';formula=`qi = −427,8 + 142,05×${ph} − 9,695×${ph}² = ${qi.toFixed(4)}`;}
+  else if(ph<=8.5){qi=216-16*ph;faixa='8 < pH ≤ 8,5';formula=`qi = 216 − 16×${ph} = ${qi.toFixed(4)}`;}
+  else if(ph<=9){qi=1415823*Math.exp(-1.1507*ph);faixa='8,5 < pH ≤ 9';formula=`qi = 1.415.823 × e^(−1,1507×${ph}) = ${qi.toFixed(4)}`;}
+  else if(ph<=10){qi=228-27*ph;faixa='9 < pH ≤ 10';formula=`qi = 228 − 27×${ph} = ${qi.toFixed(4)}`;}
+  else if(ph<=12){qi=633-106.5*ph+4.5*ph*ph;faixa='10 < pH ≤ 12';formula=`qi = 633 − 106,5×${ph} + 4,5×${ph}² = ${qi.toFixed(4)}`;}
+  else{qi=3;faixa='pH > 12';formula='qi = 3';}
+  return {qi,faixa,formula};
+}
+
+function qi_dbo(dbo){
+  if(dbo==null) return null;
+  let qi,faixa,formula;
+  if(dbo<=5){qi=99.96*Math.exp(-0.1232728*dbo);faixa='0 ≤ DBO ≤ 5';formula=`qi = 99,96 × e^(−0,1232728×${dbo}) = ${qi.toFixed(4)}`;}
+  else if(dbo<=15){qi=104.67-31.5463*Math.log10(dbo);faixa='5 < DBO ≤ 15';formula=`qi = 104,67 − 31,5463 × log₁₀(${dbo}) = ${qi.toFixed(4)}`;}
+  else if(dbo<=30){qi=4394.91*Math.pow(dbo,-1.99809);faixa='15 < DBO ≤ 30';formula=`qi = 4.394,91 × ${dbo}^(−1,99809) = ${qi.toFixed(4)}`;}
+  else{qi=2;faixa='DBO > 30';formula='qi = 2';}
+  return {qi:Math.max(2,qi),faixa,formula};
+}
+
+function qi_nitrato(nit){
+  if(nit==null) return null;
+  const no3=nit/0.2259;
+  let qi,faixa,formula;
+  if(no3<=10){qi=(-5.1*no3)+100.17;faixa='0 ≤ NO₃ ≤ 10';formula=`NO₃ = ${nit}/0,2259 = ${no3.toFixed(4)}; qi = −5,1×${no3.toFixed(4)} + 100,17 = ${qi.toFixed(4)}`;}
+  else if(no3<=60){qi=(-22.853*Math.log(no3))+101.18;faixa='10 < NO₃ ≤ 60';formula=`NO₃ = ${no3.toFixed(4)}; qi = −22,853×ln(${no3.toFixed(4)}) + 101,18 = ${qi.toFixed(4)}`;}
+  else if(no3<=90){qi=1e10*Math.pow(no3,-5.1161);faixa='60 < NO₃ ≤ 90';formula=`NO₃ = ${no3.toFixed(4)}; qi = 10¹⁰×${no3.toFixed(4)}^(−5,1161) = ${qi.toFixed(4)}`;}
+  else{qi=1;faixa='NO₃ > 90';formula='qi = 1';}
+  return {qi:Math.max(1,qi),faixa,formula,no3};
+}
+
+function qi_fosforo(p){
+  if(p==null) return null;
+  const po4=p*3.066;
+  let qi,faixa,formula;
+  if(po4<=1){qi=99*Math.exp(-0.91629*po4);faixa='0 ≤ PO₄ ≤ 1';formula=`PO₄ = ${p}×3,066 = ${po4.toFixed(4)}; qi = 99×e^(−0,91629×${po4.toFixed(4)}) = ${qi.toFixed(4)}`;}
+  else if(po4<=5){qi=57.6-20.178*po4+2.1326*po4*po4;faixa='1 < PO₄ ≤ 5';formula=`PO₄ = ${po4.toFixed(4)}; qi = 57,6 − 20,178×${po4.toFixed(4)} + 2,1326×${po4.toFixed(4)}² = ${qi.toFixed(4)}`;}
+  else if(po4<=10){qi=19.8*Math.exp(-0.13544*po4);faixa='5 < PO₄ ≤ 10';formula=`PO₄ = ${po4.toFixed(4)}; qi = 19,8×e^(−0,13544×${po4.toFixed(4)}) = ${qi.toFixed(4)}`;}
+  else{qi=5;faixa='PO₄ > 10';formula='qi = 5';}
+  return {qi:Math.max(5,qi),faixa,formula,po4};
+}
+
+function qi_turbidez(turb){
+  if(turb==null) return null;
+  let qi,faixa,formula;
+  if(turb<=25){qi=100.17-2.67*turb+0.03775*turb*turb;faixa='0 ≤ Turb ≤ 25';formula=`qi = 100,17 − 2,67×${turb} + 0,03775×${turb}² = ${qi.toFixed(4)}`;}
+  else if(turb<=100){qi=84.76*Math.exp(-0.016206*turb);faixa='25 < Turb ≤ 100';formula=`qi = 84,76×e^(−0,016206×${turb}) = ${qi.toFixed(4)}`;}
+  else{qi=5;faixa='Turb > 100';formula='qi = 5';}
+  return {qi:Math.max(5,qi),faixa,formula};
+}
+
+function qi_st(st){
+  if(st==null) return null;
+  let qi,faixa,formula;
+  if(st<=150){qi=79.75+0.166*st-0.001088*st*st;faixa='0 ≤ ST ≤ 150';formula=`qi = 79,75 + 0,166×${st} − 0,001088×${st}² = ${qi.toFixed(4)}`;}
+  else if(st<=500){qi=101.67-0.13917*st;faixa='150 < ST ≤ 500';formula=`qi = 101,67 − 0,13917×${st} = ${qi.toFixed(4)}`;}
+  else{qi=32;faixa='ST > 500';formula='qi = 32';}
+  return {qi:Math.max(32,qi),faixa,formula};
+}
+
+function qi_od(od,temp,alt){
+  if(od==null||temp==null) return null;
+  alt=alt||0;
+  const cs=(14.62-0.3898*temp+0.006969*temp*temp-0.00005896*temp*temp*temp)*Math.pow((1-0.0000228675*alt),5.167);
+  const pctSat=(od*100)/cs;
+  let qi,faixa,formula;
+  if(pctSat<=50){qi=3+0.34*pctSat+0.008095*pctSat*pctSat+1.35252e-5*pctSat*pctSat*pctSat;faixa='0 ≤ %sat ≤ 50';formula=`Cs=${cs.toFixed(4)}; %sat=${pctSat.toFixed(4)}; qi = 3 + 0,34×%sat + 0,008095×%sat² + 1,35252E-5×%sat³ = ${qi.toFixed(4)}`;}
+  else if(pctSat<=85){qi=3-1.166*pctSat+0.058*pctSat*pctSat-3.803435e-4*pctSat*pctSat*pctSat;faixa='50 < %sat ≤ 85';formula=`Cs=${cs.toFixed(4)}; %sat=${pctSat.toFixed(4)}; qi = 3 − 1,166×%sat + 0,058×%sat² − 3,803435E-4×%sat³ = ${qi.toFixed(4)}`;}
+  else if(pctSat<=100){qi=3+3.7745*Math.pow(pctSat,0.704889);faixa='85 < %sat ≤ 100';formula=`Cs=${cs.toFixed(4)}; %sat=${pctSat.toFixed(4)}; qi = 3 + 3,7745×%sat^0,704889 = ${qi.toFixed(4)}`;}
+  else if(pctSat<=140){qi=3+2.9*pctSat-0.02496*pctSat*pctSat+5.60919e-5*pctSat*pctSat*pctSat;faixa='100 < %sat ≤ 140';formula=`Cs=${cs.toFixed(4)}; %sat=${pctSat.toFixed(4)}; qi = 3 + 2,9×%sat − 0,02496×%sat² + 5,60919E-5×%sat³ = ${qi.toFixed(4)}`;}
+  else{qi=50;faixa='%sat > 140';formula='qi = 50';}
+  return {qi:Math.max(0,Math.min(qi,100)),faixa,formula,cs,pctSat};
+}
+
+// WEIGHTS (NSF)
+const W={coli:0.15,ph:0.12,dbo:0.10,nitrato:0.10,fosforo:0.10,difT:0.10,turbidez:0.08,st:0.08,od:0.17};
+const WNAMES={coli:'Coliformes Termotolerantes',ph:'pH',dbo:'DBO₅',nitrato:'Nitrato',fosforo:'Fósforo Total',difT:'Diferença de Temperatura',turbidez:'Turbidez',st:'Sólidos Totais',od:'Oxigênio Dissolvido'};
+const WUNITS={coli:'NMP/100mL',ph:'—',dbo:'mg/L',nitrato:'mgN/L',fosforo:'mgP/L',difT:'°C',turbidez:'NTU',st:'mg/L',od:'mg/L'};
+
+function classify(iqa){
+  if(iqa>90) return {nsf:'Excelente',cetesb:'Ótima',badge:'badge-excelente'};
+  if(iqa>70) return {nsf:'Bom',cetesb:iqa>79?'Ótima':'Boa',badge:'badge-bom'};
+  if(iqa>50) return {nsf:'Médio',cetesb:iqa>79?'Ótima':'Boa',badge:'badge-medio'};
+  if(iqa>25) return {nsf:'Ruim',cetesb:iqa>51?'Boa':iqa>36?'Aceitável':'Ruim',badge:'badge-ruim'};
+  return {nsf:'Muito Ruim',cetesb:iqa>19?'Ruim':'Péssima',badge:'badge-mruim'};
+}
+
+function calcPonto(p){
+  const detail={};
+  detail.coli=qi_coli(p.Coliformes_Termotolerantes_NMP100mL);
+  detail.ph=qi_ph(p.pH);
+  detail.dbo=qi_dbo(p.DBO5_mgL);
+  detail.nitrato=qi_nitrato(p.Nitrato_mgNL);
+  detail.fosforo=qi_fosforo(p.Fosforo_Total_mgPL);
+  detail.difT={qi:94,faixa:'Valor fixo NSF',formula:'qi = 94 (diferença de temperatura padrão NSF)'};
+  detail.turbidez=qi_turbidez(p.Turbidez_NTU);
+  detail.st=qi_st(p.Solidos_Totais_mgL);
+  detail.od=qi_od(p.OD_mgL,p.Temperatura_Agua_oC,p.Altitude_m);
+
+  const valid=Object.entries(detail).filter(([k,v])=>v&&v.qi!=null);
+  if(valid.length<7) return null;
+
+  // Clamp
+  valid.forEach(([k,v])=>{detail[k].qi=Math.max(2,Math.min(v.qi,100));});
+
+  // Product
+  let iqa=1;
+  const steps=[];
+  for(const [param,w] of Object.entries(W)){
+    if(detail[param]&&detail[param].qi!=null){
+      const qiw=Math.pow(detail[param].qi,w);
+      const maxw=Math.pow(100,w);
+      const pct=(qiw/maxw)*100;
+      iqa*=qiw;
+      steps.push({param,name:WNAMES[param],qi:detail[param].qi,w,qiw,maxw,pct,faixa:detail[param].faixa,formula:detail[param].formula});
+    }
+  }
+
+  const cls=classify(iqa);
+  return {iqa,detail,steps,cls,inputData:p};
+}
+
+function calcularIQA(){
+  document.querySelectorAll('#dataBody input').forEach(inp=>{
+    const v=inp.value.replace(',','.').replace(/[<>]/g,'').trim();
+    pontos[parseInt(inp.dataset.pi)][inp.dataset.par]=v===''?null:parseFloat(v);
+  });
+  results=pontos.map(p=>({nome:p.nome,result:calcPonto(p)}));
+  renderResults();
+  renderMemorial();
+  goToStep(3);
+}
+
+// ============================================
+// RENDER RESULTS
+// ============================================
+function barColor(iqa){
+  if(iqa>90)return'var(--green)';if(iqa>70)return'var(--blue-light)';if(iqa>50)return'var(--yellow)';if(iqa>25)return'var(--orange)';return'var(--red)';
+}
+
+function renderResults(){
+  const grid=document.getElementById('resultsGrid'),chart=document.getElementById('comparisonChart');
+  grid.innerHTML='';chart.innerHTML='';
+  const vr=results.filter(r=>r.result);
+
+  // Bars
+  if(vr.length){
+    let h='';
+    vr.forEach(r=>{const iqa=r.result.iqa,c=barColor(iqa);
+      h+=`<div class="bar-row"><div class="bar-label">${r.nome}</div><div class="bar-track"><div class="bar-fill" style="width:${iqa}%;background:${c}">${iqa.toFixed(1)}</div></div></div>`;
+    });
+    chart.innerHTML=h;
+  }
+
+  // Cards
+  results.forEach(r=>{
+    if(!r.result){
+      grid.innerHTML+=`<div class="result-card" style="opacity:0.5"><div class="result-header"><div class="result-ponto">${r.nome}</div><div class="result-badge" style="background:rgba(255,255,255,0.06);color:var(--text-muted);border:1px solid rgba(255,255,255,0.1)">SEM DADOS</div></div><div style="color:var(--text-muted);font-size:0.8rem;">Dados insuficientes (mínimo 7 de 9 parâmetros).</div></div>`;
+      return;
+    }
+    const {iqa,steps,cls}=r.result, c=barColor(iqa);
+    let paramHTML='';
+    steps.forEach(s=>{
+      const qc=s.qi>=70?'var(--green)':s.qi>=50?'var(--yellow)':s.qi>=25?'var(--orange)':'var(--red)';
+      paramHTML+=`<li class="param-item"><span class="param-name">${s.name} <span style="opacity:0.5">(w=${s.w})</span></span><span><span class="param-qi" style="color:${qc}">${s.qi.toFixed(1)}</span><span class="param-pct">${s.pct.toFixed(1)}%</span></span></li>`;
+    });
+    grid.innerHTML+=`<div class="result-card fade-up"><div class="result-header"><div class="result-ponto">${r.nome}</div><div class="result-badge ${cls.badge}">${cls.nsf}</div></div><div class="iqa-score" style="color:${c}">${iqa.toFixed(2)}</div><div class="iqa-bar-track"><div class="iqa-bar-fill" style="width:${iqa}%;background:${c}"></div></div><div style="display:flex;gap:1rem;margin-bottom:0.75rem;font-size:0.7rem;"><span style="color:var(--text-muted)">NSF: <strong style="color:var(--ice-50)">${cls.nsf}</strong></span><span style="color:var(--text-muted)">CETESB: <strong style="color:var(--ice-50)">${cls.cetesb}</strong></span></div><ul class="param-list">${paramHTML}</ul></div>`;
+  });
+
+  document.getElementById('genDate').textContent=new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+// ============================================
+// MEMORIAL DE CÁLCULO
+// ============================================
+function renderMemorial(){
+  const container=document.getElementById('memorialContainer');
+  container.innerHTML='';
+
+  results.forEach(r=>{
+    if(!r.result) return;
+    const {iqa,steps,cls,inputData}=r.result;
+    const c=barColor(iqa);
+
+    let inputRows='';
+    const inputLabels={coli:'Coliformes Termotolerantes',ph:'pH',dbo:'DBO₅',nitrato:'Nitrato (como N)',fosforo:'Fósforo Total (como P)',difT:'ΔT (fixo NSF)',turbidez:'Turbidez',st:'Sólidos Totais',od:'Oxigênio Dissolvido'};
+    const inputVals={coli:inputData.Coliformes_Termotolerantes_NMP100mL,ph:inputData.pH,dbo:inputData.DBO5_mgL,nitrato:inputData.Nitrato_mgNL,fosforo:inputData.Fosforo_Total_mgPL,difT:'—',turbidez:inputData.Turbidez_NTU,st:inputData.Solidos_Totais_mgL,od:inputData.OD_mgL};
+    const inputUnits={coli:'NMP/100mL',ph:'—',dbo:'mg/L',nitrato:'mgN/L',fosforo:'mgP/L',difT:'—',turbidez:'NTU',st:'mg/L',od:'mg/L'};
+
+    inputRows=`<tr><td>Temperatura</td><td class="value-cell">${inputData.Temperatura_Agua_oC??'—'}</td><td>°C</td></tr><tr><td>Altitude</td><td class="value-cell">${inputData.Altitude_m??0}</td><td>m</td></tr>`;
+    for(const [k,label] of Object.entries(inputLabels)){
+      const v=inputVals[k]; inputRows+=`<tr><td>${label}</td><td class="value-cell">${v!=null?v:'—'}</td><td>${inputUnits[k]}</td></tr>`;
+    }
+
+    let calcRows='';
+    let productParts=[];
+    steps.forEach(s=>{
+      calcRows+=`<tr><td style="font-weight:600;color:var(--ice-50)">${s.name}</td><td>${s.faixa}</td><td class="formula-cell">${s.formula}</td><td class="value-cell" style="color:var(--accent)">${s.qi.toFixed(4)}</td><td class="value-cell">${s.w}</td><td class="value-cell">${s.qiw.toFixed(6)}</td><td class="value-cell">${s.pct.toFixed(2)}%</td></tr>`;
+      productParts.push(`${s.qi.toFixed(2)}^${s.w}`);
+    });
+
+    const html=`
+    <div class="memorial-card fade-up">
+      <div class="memorial-title"><div class="dot" style="background:${c}"></div> Memorial de Cálculo — ${r.nome}</div>
+
+      <div class="mem-section">
+        <h4>Dados de entrada</h4>
+        <table class="mem-table"><thead><tr><th>Parâmetro</th><th>Valor</th><th>Unidade</th></tr></thead><tbody>${inputRows}</tbody></table>
+      </div>
+
+      <div class="mem-section">
+        <h4>Cálculo dos sub-índices (qi) e produtório</h4>
+        <div style="overflow-x:auto;">
+        <table class="mem-table"><thead><tr><th>Parâmetro</th><th>Faixa</th><th>Fórmula aplicada</th><th>qi</th><th>Peso (w)</th><th>qi^w</th><th>% do máx.</th></tr></thead><tbody>${calcRows}</tbody></table>
+        </div>
+      </div>
+
+      <div class="mem-section">
+        <h4>Fórmula final</h4>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--ice-200);padding:0.5rem;background:rgba(255,255,255,0.03);border-radius:6px;overflow-x:auto;white-space:nowrap;">
+          IQA = ∏(qi<sup>w</sup>) = ${productParts.join(' × ')} = <strong style="color:${c}">${iqa.toFixed(4)}</strong>
+        </div>
+      </div>
+
+      <div class="mem-iqa-final">
+        <div>
+          <div class="mem-iqa-label">IQA Final</div>
+          <div style="font-size:0.7rem;color:var(--text-muted);margin-top:0.15rem;">NSF: ${cls.nsf} · CETESB: ${cls.cetesb}</div>
+        </div>
+        <div class="mem-iqa-value" style="color:${c}">${iqa.toFixed(2)}</div>
+      </div>
+    </div>`;
+    container.innerHTML+=html;
+  });
+}
+
+// ============================================
+// EXPORT
+// ============================================
+function exportCSV(){
+  const h=['Ponto','IQA','Class_NSF','Class_CETESB','qi_Coli','qi_pH','qi_DBO','qi_Nitrato','qi_Fosforo','qi_DifT','qi_Turbidez','qi_ST','qi_OD'];
+  let csv=h.join(',')+'\n';
+  results.forEach(r=>{
+    if(!r.result){csv+=`${r.nome},,,,,,,,,,,,\n`;return;}
+    const s=r.result.steps,m={};s.forEach(x=>m[x.param]=x.qi);
+    csv+=[r.nome,r.result.iqa.toFixed(2),r.result.cls.nsf,r.result.cls.cetesb,
+      m.coli?.toFixed(2)||'',m.ph?.toFixed(2)||'',m.dbo?.toFixed(2)||'',m.nitrato?.toFixed(2)||'',
+      m.fosforo?.toFixed(2)||'',m.difT?.toFixed(2)||'',m.turbidez?.toFixed(2)||'',m.st?.toFixed(2)||'',m.od?.toFixed(2)||''
+    ].join(',')+'\n';
+  });
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=`resultados_iqa_${new Date().toISOString().slice(0,10)}.csv`;a.click();
+}
+
+// ============================================
+// NAVIGATION
+// ============================================
+function goToStep(n){
+  ['section-upload','section-review','section-results'].forEach((id,i)=>{
+    document.getElementById(id).classList.toggle('section-hidden',i!==n-1);
+  });
+  ['step1-pill','step2-pill','step3-pill'].forEach((id,i)=>{
+    const el=document.getElementById(id);el.classList.remove('active','done');
+    if(i<n-1)el.classList.add('done');if(i===n-1)el.classList.add('active');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
